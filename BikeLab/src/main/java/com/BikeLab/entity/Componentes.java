@@ -4,10 +4,13 @@
  */
 package com.BikeLab.entity;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jorge Hernandez Araya | jorge09ha
  */
-public class Componentes {
+
+public class Componentes implements Serializable{
     
 }
