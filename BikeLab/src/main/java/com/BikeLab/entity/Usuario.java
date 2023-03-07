@@ -18,25 +18,22 @@ public class Usuario implements Serializable {
     private int edad;
     private String cedula;
     private String direccion;
-    
-    
+
     @OneToOne
-      @JoinColumn(name="idLogin")
-    private int idLogin;
-    
+    @JoinColumn(name = "idLogin")
+    private Datos_Login idLogin;
+
     @ManyToOne
-    @JoinColumn(name="IdProvincia")
-    private int IdProvincia;
-    
+    @JoinColumn(name = "IdProvincia")
+    private Provincia IdProvincia;
+
     @ManyToOne
-    @JoinColumn(name="idCanton")
-    private int idCanton;
-    
+    @JoinColumn(name = "idCanton")
+    private Canton idCanton;
+
     @ManyToOne
-    @JoinColumn(name="idDistrito")
-    private int idDistrito;
-    
-        
+    @JoinColumn(name = "idDistrito")
+    private Distrito idDistrito;
 
     public Long getIdUsuario() {
         return idUsuario;
@@ -86,38 +83,36 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public int getIdLogin() {
+    public Datos_Login getIdLogin() {
         return idLogin;
     }
 
-    public void setIdLogin(int idLogin) {
+    public void setIdLogin(Datos_Login idLogin) {
         this.idLogin = idLogin;
     }
 
-        
-    public int getIdProvincia() {
+    public Provincia getIdProvincia() {
         return IdProvincia;
     }
 
-    public void setIdProvincia(int IdProvincia) {
+    public void setIdProvincia(Provincia IdProvincia) {
         this.IdProvincia = IdProvincia;
     }
 
-    public int getIdCanton() {
+    public Canton getIdCanton() {
         return idCanton;
     }
 
-    public void setIdCanton(int idCanton) {
+    public void setIdCanton(Canton idCanton) {
         this.idCanton = idCanton;
     }
 
-    public int getIdDistrito() {
+    public Distrito getIdDistrito() {
         return idDistrito;
     }
 
-    public void setIdDistrito(int idDistrito) {
+    public void setIdDistrito(Distrito idDistrito) {
         this.idDistrito = idDistrito;
     }
-    
-    
+  
 }

@@ -19,7 +19,7 @@ public class Canton implements Serializable {
  
  @ManyToOne
  @JoinColumn(name="idProvincia")
-    private String idProvincia;
+    private Provincia idProvincia;
 
     public Long getIdCanton() {
         return idCanton;
@@ -37,12 +37,14 @@ public class Canton implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getIdProvincia() {
+    public Provincia getIdProvincia() {
         return idProvincia;
     }
 
-    public void setIdProvincia(String idProvincia) {
+    public void setIdProvincia(Provincia idProvincia) {
         this.idProvincia = idProvincia;
     }
+
+
  
  }
