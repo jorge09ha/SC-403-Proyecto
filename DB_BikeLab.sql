@@ -146,7 +146,7 @@ idUsuario INT(11) NOT NULL AUTO_INCREMENT,
 nombre varchar(30) NOT NULL,
 apellido1 varchar(30) NOT NULL,
 apellido2 varchar(30) NOT NULL,
-edad INT,
+telefono int NOT NULL,
 cedula varchar(30) NOT NULL,
 direccion varchar(500) NOT NULL,
 idlogin INT NOT NULL,
@@ -155,14 +155,14 @@ idCanton INT NOT NULL,
 idDistrito INT NOT NULL,
 PRIMARY KEY (idUsuario),
 CONSTRAINT `fk_Usuario_Login` FOREIGN KEY (`idlogin`) REFERENCES `datosLogin` (`idlogin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_Usuario_Provincia` FOREIGN KEY (`idProvincia`) REFERENCES `Provincia` (`idProvincia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT `fk_Usuario_provincia` FOREIGN KEY (`idProvincia`) REFERENCES `provincia` (`idProvincia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT `fk_Usuario_Canton` FOREIGN KEY (`idCanton`) REFERENCES `canton` (`idCanton`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT `fk_Usuario_Distrito` FOREIGN KEY (`idDistrito`) REFERENCES `distrito` (`idDistrito`) ON DELETE NO ACTION ON UPDATE NO ACTION
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `usuario` VALUES 
-(1,'Jorge','Hernández','Araya','30','202220222','200 metros sur Hotel Villas de la Colina',2,2,212,162),
-(2,'Luis','Mora','Alvarado','25','303330333','Costado este de la Iglesia',3,3,302,250);
+(1,'Jorge','Hernández','Araya','24469998','202220222','200 metros sur Hotel Villas de la Colina',2,2,212,162),
+(2,'Luis','Mora','Alvarado','88888888','303330333','Costado este de la Iglesia',3,3,302,250);
  
 CREATE TABLE proveedor(
  idProveedor INT(11) NOT NULL AUTO_INCREMENT,
@@ -267,13 +267,15 @@ INSERT INTO `tipoProducto` VALUES
   idTipo INT NOT NULL,
   idMarca INT NOT NULL,
   PRIMARY KEY (idProducto),
-  CONSTRAINT `fk_producto_tipoProducto` FOREIGN KEY (`idTipo`) REFERENCES `tipoProducto` (`idTipo`) 
+  CONSTRAINT `fk_producto_tipoProducto` FOREIGN KEY (`idTipo`) REFERENCES `tipoProducto` (`idTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_producto_marca` FOREIGN KEY (`idMarca`) REFERENCES `marca` (`idMarca`) ON DELETE NO ACTION ON UPDATE NO ACTION  
   )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 INSERT INTO `producto` VALUES
-(1,'Fuji Nevada','Nevada','M',27.5,'Un elemento básico en la línea de bicicletas de montaña Fuji, disponible en tamaños de rueda de 29″ o 27,5″, la Nevada combina un cuadro rígido probado y verdadero y componentes sólidos para llevar tus aventuras todoterreno al siguiente nivel.',2023,250000,5,1,15),
-(2,'GIANT XTC SLR 2 2022','XTC SLR 2','S',29,'Perfecto como su primera bicicleta de montaña, el cuadro de aluminio de grado ALUXX es liviano, capaz y duradero Versátil. La geometría cómoda pero orientada al rendimiento de Tempt le da la versatilidad tanto para los viajes alrededor del campus como para los paseos fuera de la carretera.',2022,520000,2,1,1);
+(1,'Fuji Nevada','Nevada','M',27.5,'todoterreno al siguiente nivel.',2023,250000,5,1,15),
+(2,'GIANT XTC SLR 2 2022','XTC SLR 2','S',29,'Perfecto como su primera bicicleta de montaña.',2022,520000,2,1,1);
 
+ 
 CREATE TABLE proveedorProducto (
   idProveedorProducto INT NOT NULL AUTO_INCREMENT,
   idProveedor INT NOT NULL,
@@ -308,13 +310,13 @@ INSERT INTO `evento` VALUES
 (1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,1,5,504,340),
 (2,'2023-06-18','Vuelta a la Península de Nicoya',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,1,2,212,160);
 
-CREATE TABLE metodopago(
+CREATE TABLE metodoPago(
  idMetodo INT(11) NOT NULL AUTO_INCREMENT,
- metodopago VARCHAR(50) NOT NULL,
+ metodoPago VARCHAR(50) NOT NULL,
  PRIMARY KEY (idMetodo)
  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
  
-INSERT INTO metodopago VALUES (1, 'Tarjeta de crédito'),(2, 'Tarjeta de débito'),(3, 'PayPal'),(4, 'Transferencia bancaria'),
+INSERT INTO metodoPago VALUES (1, 'Tarjeta de crédito'),(2, 'Tarjeta de débito'),(3, 'PayPal'),(4, 'Transferencia bancaria'),
 (5, 'Cheque'),(6, 'Efectivo'),(7, 'SINPE móvil'); 
 
 CREATE TABLE carrito(
@@ -359,7 +361,7 @@ CREATE TABLE orden(
   idCarrito INT,
   PRIMARY KEY (idOrden),
 CONSTRAINT `fk_orden_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
-CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`idMetodo`) REFERENCES `metodopago` (`idMetodo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+CONSTRAINT `fk_orden_metodoPago` FOREIGN KEY (`idMetodo`) REFERENCES `metodoPago` (`idMetodo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT `fk_orden_datosLogin` FOREIGN KEY (`idLogin`) REFERENCES `datosLogin` (`idLogin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
 CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`idCarrito`) REFERENCES `carrito` (`idCarrito`) ON DELETE NO ACTION ON UPDATE NO ACTION
   )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
