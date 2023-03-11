@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "carrito")
-public class Carrito implements Serializable {
+@Table(name = "orden")
+public class Orden implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
