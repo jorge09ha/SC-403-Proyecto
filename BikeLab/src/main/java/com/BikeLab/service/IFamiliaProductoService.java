@@ -9,7 +9,7 @@ public interface IFamiliaProductoService {
 
     public List<FamiliaProducto> getAllFamiliaProducto();
 
-    public FamiliaProducto getFamiliaProductooById(long id);
+    public FamiliaProducto getFamiliaProductoById(long id);
 
     public void saveFamiliaProducto(FamiliaProducto familiaProducto);
 

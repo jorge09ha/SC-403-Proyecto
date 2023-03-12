@@ -18,7 +18,7 @@ public class FamiliaProductoService implements IFamiliaProductoService {
     }
 
     @Override
-    public FamiliaProducto getFamiliaProductooById(long id) {
+    public FamiliaProducto getFamiliaProductoById(long id) {
         return familiaProductoRepository.findById(id).orElse(null);
     }
 
