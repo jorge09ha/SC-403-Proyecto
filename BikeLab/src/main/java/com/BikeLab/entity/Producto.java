@@ -27,11 +27,11 @@ public class Producto implements Serializable {
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "tipoProducto_id")
+    @JoinColumn(name = "idTipo")
     private TipoProducto tipoProducto;
 
     @ManyToOne
-    @JoinColumn(name = "marca_id")
+    @JoinColumn(name = "idMarca")
     private Marca marca;
 
     public long getId() {

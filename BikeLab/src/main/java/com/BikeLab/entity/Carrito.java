@@ -21,15 +21,15 @@ public class Carrito implements Serializable {
     private int cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id")
+    @JoinColumn(name = "idProducto")
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name = "evento_id")
+    @JoinColumn(name = "idEvento")
     private Evento evento;
 
     public long getId() {

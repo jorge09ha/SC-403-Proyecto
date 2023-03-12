@@ -19,11 +19,11 @@ public class RoleDatosLogin implements Serializable {
     private long id;
 
     @ManyToMany
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "idRole")
     private Role role;
 
     @ManyToMany
-    @JoinColumn(name = "datosLogin_id")
+    @JoinColumn(name = "idLogin")
     private DatosLogin datosLogin;
 
     public long getId() {

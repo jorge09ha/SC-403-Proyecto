@@ -20,7 +20,7 @@ public class TipoProducto implements Serializable {
     private String detalle;
 
     @ManyToOne
-    @JoinColumn(name = "familiaProducto_id")
+    @JoinColumn(name = "idFamilia")
     private FamiliaProducto familiaProducto;
 
     public long getId() {

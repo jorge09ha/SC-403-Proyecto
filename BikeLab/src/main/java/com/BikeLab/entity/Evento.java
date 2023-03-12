@@ -26,19 +26,19 @@ public class Evento implements Serializable {
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "tipoProducto_id")
+    @JoinColumn(name = "idTipo")
     private TipoProducto tipoProducto;
 
     @ManyToOne
-    @JoinColumn(name = "provincia_id")
+    @JoinColumn(name = "idProvincia")
     private Provincia provincia;
 
     @ManyToOne
-    @JoinColumn(name = "canton_id")
+    @JoinColumn(name = "idCanton")
     private Canton canton;
 
     @ManyToOne
-    @JoinColumn(name = "distrito_id")
+    @JoinColumn(name = "idDistrito")
     private Distrito distrito;
 
     public long getId() {

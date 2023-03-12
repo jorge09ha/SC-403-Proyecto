@@ -19,7 +19,7 @@ public class Distrito implements Serializable {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "canton_id")
+    @JoinColumn(name = "idCanton")
     private Canton canton;
 
     public long getId() {

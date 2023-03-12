@@ -24,19 +24,19 @@ public class Usuario implements Serializable {
     private String direccion;
 
     @ManyToOne
-    @JoinColumn(name = "datosLogin_id")
+    @JoinColumn(name = "idLogin")
     private DatosLogin datosLogin;
 
     @ManyToOne
-    @JoinColumn(name = "provincia_id")
+    @JoinColumn(name = "idProvincia")
     private Provincia provincia;
 
     @ManyToOne
-    @JoinColumn(name = "canton_id")
+    @JoinColumn(name = "idCanton")
     private Canton canton;
 
     @ManyToOne
-    @JoinColumn(name = "distrito_id")
+    @JoinColumn(name = "idDistrito")
     private Distrito distrito;
 
     public long getId() {

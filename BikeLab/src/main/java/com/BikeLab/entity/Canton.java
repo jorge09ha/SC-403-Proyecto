@@ -19,7 +19,7 @@ public class Canton implements Serializable {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "provincia_id")
+    @JoinColumn(name = "idProvincia")
     private Provincia provincia;
 
     public long getId() {

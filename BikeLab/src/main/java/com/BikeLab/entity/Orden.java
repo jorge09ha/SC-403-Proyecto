@@ -23,19 +23,19 @@ public class Orden implements Serializable {
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "metodoPago_id")
+    @JoinColumn(name = "idMetodo")
     private MetodoPago metodoPago;
 
     @ManyToOne
-    @JoinColumn(name = "datosLogin_id")
+    @JoinColumn(name = "idLogin")
     private DatosLogin datosLogin;
 
     @ManyToOne
-    @JoinColumn(name = "carrito_id")
+    @JoinColumn(name = "idCarrito")
     private Carrito carrito;
 
     public long getId() {
