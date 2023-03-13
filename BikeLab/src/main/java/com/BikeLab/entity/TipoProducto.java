@@ -20,7 +20,7 @@ public class TipoProducto implements Serializable {
     private String detalle;
 
     @ManyToOne
-    @JoinColumn(name = "idFamilia")
+    @JoinColumn(name = "familia_id")
     private FamiliaProducto familiaProducto;
 
     public long getId() {
@@ -54,5 +54,6 @@ public class TipoProducto implements Serializable {
     public void setFamiliaProducto(FamiliaProducto familiaProducto) {
         this.familiaProducto = familiaProducto;
     }
+
 
 }

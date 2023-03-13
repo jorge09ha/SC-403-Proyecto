@@ -6,24 +6,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "roleDatosLogin")
-public class RoleDatosLogin implements Serializable {
+public class RolDatosLogin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany
-    @JoinColumn(name = "idRole")
-    private Role role;
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
 
-    @ManyToMany
-    @JoinColumn(name = "idLogin")
+    @ManyToOne
+    @JoinColumn(name = "login_id")
     private DatosLogin datosLogin;
 
     public long getId() {
@@ -34,12 +33,12 @@ public class RoleDatosLogin implements Serializable {
         this.id = id;
     }
 
-    public Role getRole() {
-        return role;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public DatosLogin getDatosLogin() {

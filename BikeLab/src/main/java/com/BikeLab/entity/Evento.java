@@ -20,25 +20,25 @@ public class Evento implements Serializable {
     private long id;
     private Date fecha;
     private String nombre;
-    private java.math.BigDecimal precio;
+    private float precio;
     private String detalle;
     private String direccion;
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "idTipo")
+    @JoinColumn(name = "tipo_id")
     private TipoProducto tipoProducto;
 
     @ManyToOne
-    @JoinColumn(name = "idProvincia")
+    @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 
     @ManyToOne
-    @JoinColumn(name = "idCanton")
+    @JoinColumn(name = "canton_id")
     private Canton canton;
 
     @ManyToOne
-    @JoinColumn(name = "idDistrito")
+    @JoinColumn(name = "distrito_id")
     private Distrito distrito;
 
     public long getId() {
@@ -65,11 +65,11 @@ public class Evento implements Serializable {
         this.nombre = nombre;
     }
 
-    public BigDecimal getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(BigDecimal precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 

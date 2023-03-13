@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,9 +19,9 @@ public class DatosLogin implements Serializable {
     private String correoElectronico;
     private String contrasenia;
 
-    @ManyToMany
-    @JoinColumn(name = "idRole")
-    private Role role;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Rol rol;
 
     public long getId() {
         return id;
@@ -48,12 +47,12 @@ public class DatosLogin implements Serializable {
         this.contrasenia = contrasenia;
     }
 
-    public Role getRole() {
-        return role;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRol(Rol role) {
+        this.rol = rol;
     }
 
 }

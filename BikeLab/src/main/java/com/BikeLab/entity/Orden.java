@@ -19,23 +19,23 @@ public class Orden implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String detalle;
-    private java.math.BigDecimal montoTotal;
+    private float montoTotal;
     private Date fecha;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idMetodo")
+    @JoinColumn(name = "metodo_id")
     private MetodoPago metodoPago;
 
     @ManyToOne
-    @JoinColumn(name = "idLogin")
+    @JoinColumn(name = "login_id")
     private DatosLogin datosLogin;
 
     @ManyToOne
-    @JoinColumn(name = "idCarrito")
+    @JoinColumn(name = "carrito_id")
     private Carrito carrito;
 
     public long getId() {
@@ -54,11 +54,11 @@ public class Orden implements Serializable {
         this.detalle = detalle;
     }
 
-    public BigDecimal getMontoTotal() {
+    public float getMontoTotal() {
         return montoTotal;
     }
 
-    public void setMontoTotal(BigDecimal montoTotal) {
+    public void setMontoTotal(float montoTotal) {
         this.montoTotal = montoTotal;
     }
 
