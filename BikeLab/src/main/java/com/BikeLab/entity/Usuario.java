@@ -24,7 +24,7 @@ public class Usuario implements Serializable {
     private String direccion;
 
     @ManyToOne
-    @JoinColumn(name = "datosLogin_id")
+    @JoinColumn(name = "login_id")
     private DatosLogin datosLogin;
 
     @ManyToOne

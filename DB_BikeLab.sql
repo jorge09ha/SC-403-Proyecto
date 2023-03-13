@@ -1,55 +1,64 @@
 CREATE DATABASE bikeLab;
-
 Use bikeLab;
 
-Create table role(
- idRole INT NOT NULL AUTO_INCREMENT,
- role VARCHAR(15) NOT NULL, 
- PRIMARY KEY (idRole)
+Create table rol(
+  id INT NOT NULL AUTO_INCREMENT,
+  rol VARCHAR(15) NOT NULL, 
+  PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO `rol` VALUES (1,'Admin'),(2,'User');
 
-INSERT INTO `role` VALUES (1,'Admin'),(2,'User');
+
+
 
 CREATE TABLE datosLogin (
-  idLogin INT NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   correoElectronico VARCHAR(30) NOT NULL,
   contrasenia VARCHAR(30) NOT NULL,
-  idRole INT NOT NULL,
-  PRIMARY KEY (idLogin),
-CONSTRAINT `fk_datosLogin_role` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+  rol_id INT NOT NULL,
+  PRIMARY KEY (id,rol_id),
+  KEY `fk_datosLogin_rol_idx` (`rol_id`),
+  CONSTRAINT `fk_datosLogin_rol` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `datosLogin` VALUES 
 (1,'admin@email.com','admin123',1),(2,'jorgeh@email.com','pass123',2),(3,'luism@email.com','pass123',2);
 
-CREATE TABLE roleDatosLogin (
-  idRoleDatosLogin INT NOT NULL AUTO_INCREMENT,
-  idRole INT NOT NULL,
-  idLogin INT NOT NULL,
-  PRIMARY KEY (idRoleDatosLogin),
-CONSTRAINT `fk_roleDatosLogin_role` FOREIGN KEY (`idRole`) REFERENCES `role` (`idRole`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_roleDatosLogin_datosLogin` FOREIGN KEY (`idlogin`) REFERENCES `datosLogin` (`idlogin`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `roleDatosLogin` VALUES (1,1,1),(2,2,2);
-   
+
+
+CREATE TABLE rolDatosLogin (
+  id INT NOT NULL AUTO_INCREMENT,
+  rol_id INT NOT NULL,
+  login_id INT NOT NULL,
+  PRIMARY KEY (id,rol_id,login_id),
+  KEY `fk_rolDatosLogin_rol_idx` (`rol_id`),
+  KEY `fk_rolDatosLogin_login_idx` (`login_id`),
+  CONSTRAINT `fk_rolDatosLogin_rol` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_rolDatosLogin_datosLogin` FOREIGN KEY (`login_id`) REFERENCES `datosLogin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+INSERT INTO `rolDatosLogin` VALUES (1,1,1),(2,2,2);
+
+
+
+
 CREATE TABLE provincia(
-idProvincia INT(11) NOT NULL AUTO_INCREMENT,
-nombre VARCHAR(50) not null,
-PRIMARY KEY (idProvincia)
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(15) not null,
+  PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
 INSERT INTO `provincia` VALUES 
 (1,'San José'),(2,'Alajuela'),(3,'Cartago'),(4,'Heredia'),(5,'Guanacaste'),(6,'Puntarenas'),(7,'Limón');
 
-CREATE TABLE canton(
-idCanton INT(11) NOT NULL AUTO_INCREMENT,
-nombre VARCHAR(50) not null,
-idProvincia INT not null,
-PRIMARY KEY (idCanton),
-CONSTRAINT `fk_canton_Provincia` FOREIGN KEY (`idProvincia`) REFERENCES `Provincia` (`idProvincia`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+
+CREATE TABLE canton(
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50) not null,
+  provincia_id INT not null,
+  PRIMARY KEY (id,provincia_id),
+  KEY `fk_rolDatosLogin_provincia_idx` (`provincia_id`),
+  CONSTRAINT `fk_canton_Provincia` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `canton` VALUES 
 (101,'San José',1),(102,'Alajuelita',1),(103,'Vázquez de Coronado',1),(104,'Acosta',1),(105,'Tibás',1),(106,'Moravia',1),(107,'Montes de Oca',1),(108,'Turrubares',1),(109,'Dota',1),
 (110,'Curridabat',1),(111,'Pérez Zeledón',1),(112,'Escazú',1),(113,'León Cortés',1),(114,'Desamparados',1),(115,'Puriscal',1),(116,'Tarrazú',1),(117,'Aserrí',1),(118,'Mora',1),(119,'Goicoechea',1),
@@ -70,14 +79,17 @@ INSERT INTO `canton` VALUES
 
 (701,'Limón',7),(702,'Pococí',7),(703,'Siquirres',7),(704,'Talamanca',7),(705,'Matina',7),(706,'Guácimo',7);
 
-CREATE TABLE distrito(
-idDistrito INT(30) NOT NULL AUTO_INCREMENT,
-nombre VARCHAR(50) not null,
-idCanton INT not null,
-PRIMARY KEY (idDistrito),
-CONSTRAINT `fk_Distrito_Canton` FOREIGN KEY (`idCanton`) REFERENCES `canton` (`idCanton`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+
+
+CREATE TABLE distrito(
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  canton_id INT NOT NULL,
+  PRIMARY KEY (id,canton_id),
+  KEY `fk_distrito_canton_idx` (`canton_id`),
+  CONSTRAINT `fk_distrito_canton` FOREIGN KEY (`canton_id`) REFERENCES `canton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `distrito` VALUES
 (1,'El Carmen',101),(2,'Merced',101),(3,'Hospital',101),(4,'Catedral',101),(5,'Zapote',101),(6,'San Francisco de Dos Ríos',101),(7,'Uruca',101),(8,'Mata Redonda',101),(9,'Pavas',101),
 (10,'Hatillo',101),(11,'San Sebastián',101),(12,'Escazú',112),(13,'San Antonio',112),(14,'San Rafael',112),(15,'Desamparados',114),(16,'San Miguel',114),(17,'San Juan de Dios',114),(18,'San Rafael Arriba',114),(19,'San Antonio',114),
@@ -141,74 +153,87 @@ INSERT INTO `distrito` VALUES
 (470,'Florida',703),(471,'Germania',703),(472,'El Cairo',703),(473,'Alegría',703),(474,'Reventazón',703),(475,'Bratsi',704),(476,'Sixaola',704),(477,'Cahuita',704),(478,'Telire',704),(479,'Matina',705),
 (480,'Batán',705),(481,'Carrandi',705),(482,'Guácimo',706),(483,'Mercedes',706),(484,'Pocora',706),(485,'Río Jiménez',706),(486,'Duacarí',706);
 
-CREATE TABLE usuario(
-idUsuario INT(11) NOT NULL AUTO_INCREMENT,
-nombre varchar(30) NOT NULL,
-apellido1 varchar(30) NOT NULL,
-apellido2 varchar(30) NOT NULL,
-edad INT,
-cedula varchar(30) NOT NULL,
-direccion varchar(500) NOT NULL,
-idlogin INT NOT NULL,
-idProvincia INT NOT NULL,
-idCanton INT NOT NULL,
-idDistrito INT NOT NULL,
-PRIMARY KEY (idUsuario),
-CONSTRAINT `fk_Usuario_Login` FOREIGN KEY (`idlogin`) REFERENCES `datosLogin` (`idlogin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_Usuario_Provincia` FOREIGN KEY (`idProvincia`) REFERENCES `Provincia` (`idProvincia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_Usuario_Canton` FOREIGN KEY (`idCanton`) REFERENCES `canton` (`idCanton`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_Usuario_Distrito` FOREIGN KEY (`idDistrito`) REFERENCES `distrito` (`idDistrito`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE usuario(
+  id INT NOT NULL AUTO_INCREMENT,
+  nombre varchar(30) NOT NULL,
+  apellido1 varchar(30) NOT NULL,
+  apellido2 varchar(30) NOT NULL,
+  telefono INT,
+  cedula varchar(30) NOT NULL,
+  direccion varchar(500) NOT NULL,
+  login_id INT NOT NULL,
+  provincia_id INT NOT NULL,
+  canton_id INT NOT NULL,
+  distrito_id INT NOT NULL,
+  PRIMARY KEY (id,login_id,provincia_id,canton_id,distrito_id),
+  KEY `fk_usuario_login_idx` (`login_id`),
+  KEY `fk_usuario_provincia_idx` (`provincia_id`),
+  KEY `fk_usuario_canton_idx` (`canton_id`),
+  KEY `fk_usuario_distrito_idx` (`distrito_id`),
+  CONSTRAINT `fk_usuario_login` FOREIGN KEY (`login_id`) REFERENCES `datosLogin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_povincia` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_canton` FOREIGN KEY (`canton_id`) REFERENCES `canton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `usuario` VALUES 
-(1,'Jorge','Hernández','Araya','30','202220222','200 metros sur Hotel Villas de la Colina',2,2,212,162),
-(2,'Luis','Mora','Alvarado','25','303330333','Costado este de la Iglesia',3,3,302,250);
- 
+(1,'Jorge','Hernández','Araya','22223333','202220222','200 metros sur Hotel Villas de la Colina',2,2,212,162),
+(2,'Luis','Mora','Alvarado','66665555','303330333','Costado este de la Iglesia',3,3,302,250);
+
+
+
+
 CREATE TABLE proveedor(
- idProveedor INT(11) NOT NULL AUTO_INCREMENT,
+ id INT NOT NULL AUTO_INCREMENT,
  nombre VARCHAR(50) NOT NULL,
  correoElectronico VARCHAR(50) NOT NULL,
  telefono int NOT NULL, 
- PRIMARY KEY (idProveedor)
- )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
- 
+ PRIMARY KEY (id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 INSERT INTO proveedor VALUES (1, 'Bicimax', 'bicimax@email.com', 12345678),(2, 'Cyclomundo', 'cyclomundo@email.com', 23456789),(3, 'Pedaltech', 'pedaltech@email.com', 34567890),(4, 'Bikepro', 'bikepro@email.com', 45678901),
 (5, 'Accesobike', 'accesobike@email.com', 56789012),(6, 'Velozone', 'velozone@email.com', 67890123),(7, 'Bicicentro', 'bicicentro@email.com', 78901234),(8, 'Cyclotech', 'cyclotech@email.com', 89012345),
 (9, 'Biciexpress', 'biciexpress@email.com', 90123456),(10, 'Accesoriosbike', 'accesoriosbike@email.com', 12345678),(11, 'Pedalpower', 'pedalpower@email.com', 23456789),(12, 'Veloarte', 'veloarte@email.com', 34567890),
 (13, 'Biciworld', 'biciworld@email.com', 45678901),(14, 'Cycloworks', 'cycloworks@email.com', 56789012),(15, 'Bikestyle', 'bikestyle@email.com', 67890123),(16, 'Accesovelo', 'accesovelo@email.com', 78901234),
 (17, 'Pedalmaster', 'pedalmaster@email.com', 89012345),(18, 'Velopro', 'velopro@email.com', 90123456),(19, 'Biciclismo', 'biciclismo@email.com', 12345678),(20, 'Cyclotrek', 'cyclotrek@email.com', 23456789);
- 
+
+
+
+
  CREATE TABLE marca(
- idMarca INT(11) NOT NULL AUTO_INCREMENT,
- nombre VARCHAR(50) NOT NULL,
- PRIMARY KEY (idMarca)
+   id INT NOT NULL AUTO_INCREMENT,
+   nombre VARCHAR(50) NOT NULL,
+   PRIMARY KEY (id)
  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
- 
  INSERT INTO `marca` VALUES (1, 'Giant'),(2, 'Trek'),(3, 'Specialized'),(4, 'Cannondale'),(5, 'Scott'),(6, 'Santa Cruz'),(7, 'Bianchi'),(8, 'Colnago'),(9, 'Pinarello'),
  (10, 'Canyon'),(11, 'Orbea'),(12, 'Merida'),(13, 'Kona'),(14, 'Cube'),(15, 'Fuji'),(16, 'Raleigh'),(17, 'Diamondback'),(18, 'Felt'),(19, 'BMC'),(20, 'Cervelo'); 
 
+
+
+
  CREATE TABLE familiaProducto(
- idFamilia INT(11) NOT NULL AUTO_INCREMENT,
- familia VARCHAR(50) NOT NULL,
- detalle varchar(100),
- PRIMARY KEY (idFamilia)
+   id INT NOT NULL AUTO_INCREMENT,
+   familia VARCHAR(50) NOT NULL,
+   detalle varchar(100),
+   PRIMARY KEY (id)
  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
- 
 INSERT INTO `familiaProducto` VALUES
 (1, 'Bicicletas', 'Bicicletas de distintos tipos'),
 (2, 'Accesorios', 'Accesorios para todo tipo de bicicletas'),
 (3, 'Componentes', 'Componentes o repuestos para bicicletas'),
 (4, 'Vestimenta', 'Indumentaria para todo tipo de ciclista');
 
+
+
+
  CREATE TABLE tipoProducto(
- idTipo INT(11) NOT NULL AUTO_INCREMENT,
- tipoProducto VARCHAR(50) NOT NULL,
- detalle VARCHAR(100),
- idFamilia INT NOT NULL,
- PRIMARY KEY (idTipo),
- CONSTRAINT `fk_tipoProducto_familiaProducto` FOREIGN KEY (`idFamilia`) REFERENCES `familiaProducto` (`idFamilia`) 
- )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
- 
+  id INT NOT NULL AUTO_INCREMENT,
+  tipoProducto VARCHAR(50) NOT NULL,
+  detalle VARCHAR(100),
+  familia_id INT NOT NULL,
+  PRIMARY KEY (id,familia_id),
+  KEY `fk_tipoProducto_familia_idx` (`familia_id`),
+  CONSTRAINT `fk_tipoProducto_familiaProducto` FOREIGN KEY (`familia_id`) REFERENCES `familiaProducto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `tipoProducto` VALUES
 (1, 'MTB', 'Ideal para terrenos montañosos', 1),
 (2, 'RUTA', 'Perfecta para viajes largos', 1),
@@ -217,7 +242,6 @@ INSERT INTO `tipoProducto` VALUES
 (5, 'GRAVEL', 'Bicicletas diseñadas para competiciones de ciclocross', 1),
 (6, 'BMX', 'Ideal para saltos y acrobacias', 1),
 (7, 'KIDS', 'Bicicleta de tamaño reducido para que los niños', 1),
-
 (11, 'Luces', 'Recargables y de alta luminosidad', 2),
 (12, 'Bolsas de viaje', 'Lleva todo lo que necesitas contigo', 2),
 (13, 'Infladores', 'Mantén tus neumáticos en óptimas condiciones', 2),
@@ -225,141 +249,182 @@ INSERT INTO `tipoProducto` VALUES
 (15, 'Soporte para celular', 'Accesorio para bicicletas que permite sostener un celular mientras se anda en la bicicleta', 2),
 (16, 'Candados', 'Accesorio para bicicletas que permite asegurar la bicicleta para evitar robos', 2),
 (17, 'Bombas de aire', 'Accesorio para bicicletas que permite inflar las ruedas de la bicicleta', 2),
-(18,'Portaequipajes', 'Soporte para transportar objetos en la bicicleta', 2),
-(19,'Timbre', 'Campanilla para señalizar al peatón', 2),
-(20,'Cargador de celular', 'Dispositivo para cargar el celular mientras se pedalea', 2),
-(21,'Espejo retrovisor', 'Espejo para tener visión de la parte trasera', 2),
-
+(18, 'Portaequipajes', 'Soporte para transportar objetos en la bicicleta', 2),
+(19, 'Timbre', 'Campanilla para señalizar al peatón', 2),
+(20, 'Cargador de celular', 'Dispositivo para cargar el celular mientras se pedalea', 2),
+(21, 'Espejo retrovisor', 'Espejo para tener visión de la parte trasera', 2),
 (22, 'Neumáticos MTB', 'Con dibujo agresivo para mayor tracción en terrenos difíciles', 3),
 (23, 'Neumáticos de Ruta', 'Con banda de rodadura lisa para mayor eficiencia en pavimento', 3),
 (24, 'Sillín de Gel', 'Confortable y suave en terrenos largos', 3),
-(25,'Frenos de disco', 'Sistema de frenado para bicicletas', 3),
-(26,'Cadenas', 'Componente de transmisión de la bicicleta', 3),
-(27,'Desviadores', 'Componente para cambiar de marcha en la bicicleta', 3),
-(28,'Manubrios', 'Parte de la bicicleta que se utiliza para guiar', 3),
-(29,'Pedales', 'Componente de la bicicleta que se utiliza para pedalear', 3),
-(30,'Ruedas', 'Componente para el movimiento de la bicicleta', 3),
-(31,'Asientos', 'Parte de la bicicleta donde se sienta el ciclista', 3),
-(32,'Amortiguadores', 'Componente para la absorción de impactos en la bicicleta', 3),
-
-(33,'Camiseta', 'Camisetas técnicas para ciclistas', 4),
-(34,'Short', 'Shorts para ciclistas', 4),
-(35,'Medias', 'Medias deportivas para ciclistas', 4),
-(36,'Guantes', 'Guantes deportivos para ciclistas', 4),
-(37,'Pantalón', 'Pantalones para ciclistas', 4),
-(38,'Licra', 'Licra deportivas para ciclistas', 4),
-(39,'Gafas', 'Gafas deportivas para ciclistas', 4),
+(25, 'Frenos de disco', 'Sistema de frenado para bicicletas', 3),
+(26, 'Cadenas', 'Componente de transmisión de la bicicleta', 3),
+(27, 'Desviadores', 'Componente para cambiar de marcha en la bicicleta', 3),
+(28, 'Manubrios', 'Parte de la bicicleta que se utiliza para guiar', 3),
+(29, 'Pedales', 'Componente de la bicicleta que se utiliza para pedalear', 3),
+(30, 'Ruedas', 'Componente para el movimiento de la bicicleta', 3),
+(31, 'Asientos', 'Parte de la bicicleta donde se sienta el ciclista', 3),
+(32, 'Amortiguadores', 'Componente para la absorción de impactos en la bicicleta', 3),
+(33, 'Camiseta', 'Camisetas técnicas para ciclistas', 4),
+(34, 'Short', 'Shorts para ciclistas', 4),
+(35, 'Medias', 'Medias deportivas para ciclistas', 4),
+(36, 'Guantes', 'Guantes deportivos para ciclistas', 4),
+(37, 'Pantalón', 'Pantalones para ciclistas', 4),
+(38, 'Licra', 'Licra deportivas para ciclistas', 4),
+(39, 'Gafas', 'Gafas deportivas para ciclistas', 4),
 (40, 'Zapatos de MTB', 'Con suela de agarre para terrenos difíciles', 4),
 (41, 'Zapatos de Ruta', 'Con suela rígida para mayor eficiencia en pedaleo', 4),
 (42, 'Casco de MTB', 'Con visera y mayor protección en la parte trasera', 4),
 (43, 'Casco de Ruta', 'Con aerodinámica optimizada para mayor velocidad', 4);
 
+
+
+
  CREATE TABLE producto(
-  idProducto INT(11) NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   nombre varchar(50) NOT NULL,
   modelo varchar(50),  
-  talla char(5),
-  tamanio DECIMAL(10,1),
+  talla char,
+  tamanio FLOAT,
   detalle varchar(500),
-  anio INT(4),
-  precio decimal(10,2) NOT NULL,
+  anio INT,
+  precio FLOAT NOT NULL,
   stock INT NOT NULL,
-  idTipo INT NOT NULL,
-  idMarca INT NOT NULL,
-  PRIMARY KEY (idProducto),
-  CONSTRAINT `fk_producto_tipoProducto` FOREIGN KEY (`idTipo`) REFERENCES `tipoProducto` (`idTipo`) 
-  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+  tipo_id INT NOT NULL,
+  marca_id INT NOT NULL,
+  PRIMARY KEY (id,tipo_id,marca_id),
+  KEY `fk_producto_tipo_idx` (`tipo_id`),
+  KEY `fk_producto_marca_idx` (`marca_id`),
+  CONSTRAINT `fk_producto_tipoProducto` FOREIGN KEY (`tipo_id`) REFERENCES `tipoProducto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_producto_marca` FOREIGN KEY (`marca_id`) REFERENCES `marca` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `producto` VALUES
 (1,'Fuji Nevada','Nevada','M',27.5,'Un elemento básico en la línea de bicicletas de montaña Fuji, disponible en tamaños de rueda de 29″ o 27,5″, la Nevada combina un cuadro rígido probado y verdadero y componentes sólidos para llevar tus aventuras todoterreno al siguiente nivel.',2023,250000,5,1,15),
 (2,'GIANT XTC SLR 2 2022','XTC SLR 2','S',29,'Perfecto como su primera bicicleta de montaña, el cuadro de aluminio de grado ALUXX es liviano, capaz y duradero Versátil. La geometría cómoda pero orientada al rendimiento de Tempt le da la versatilidad tanto para los viajes alrededor del campus como para los paseos fuera de la carretera.',2022,520000,2,1,1);
 
-CREATE TABLE proveedorProducto (
-  idProveedorProducto INT NOT NULL AUTO_INCREMENT,
-  idProveedor INT NOT NULL,
-  idProducto INT NOT NULL,
-  PRIMARY KEY (idProveedorProducto),
-CONSTRAINT `fk_proveedorProducto_proveedor` FOREIGN KEY (`idProveedor`) REFERENCES `proveedor` (`idProveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_proveedorProducto_producto` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+
+
+CREATE TABLE proveedorProducto (
+  id INT NOT NULL AUTO_INCREMENT,
+  proveedor_id INT NOT NULL,
+  producto_id INT NOT NULL,
+  PRIMARY KEY (id,proveedor_id,producto_id),
+  KEY `fk_proveedorProducto_proveedor_idx` (`proveedor_id`),
+  KEY `fk_proveedorProducto_producto_idx` (`producto_id`),
+  CONSTRAINT `fk_proveedorProducto_proveedor` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_proveedorProducto_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `proveedorProducto` VALUES (1,1,1),(2,2,2);
 
+
+
+
+
 CREATE TABLE evento(
-  idEvento INT(11) NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
   nombre varchar(50) NOT NULL,
-  precio decimal(10,2) NOT NULL,
+  precio FLOAT NOT NULL,
   detalle varchar(500),
-  direccion varchar(200),
-  stock INT,
-  idTipo INT,
-  idProvincia INT,
-  idCanton INT,
-  idDistrito INT,
-  PRIMARY KEY (idEvento),
-CONSTRAINT `fk_evento_tipoProducto` FOREIGN KEY (`idTipo`) REFERENCES `tipoProducto` (`idTipo`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
-CONSTRAINT `fk_evento_provincia` FOREIGN KEY (`idProvincia`) REFERENCES `provincia` (`idProvincia`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_evento_canton` FOREIGN KEY (`idCanton`) REFERENCES `canton` (`idCanton`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_evento_distrito` FOREIGN KEY (`idDistrito`) REFERENCES `distrito` (`idDistrito`) ON DELETE NO ACTION ON UPDATE NO ACTION
-  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-  
+  direccion varchar(200) NOT NULL,
+  stock INT NOT NULL,
+  tipo_id INT NOT NULL,
+  provincia_id INT NOT NULL,
+  canton_id INT NOT NULL,
+  distrito_id INT NOT NULL,
+  PRIMARY KEY (id,tipo_id,provincia_id,canton_id,distrito_id),
+  KEY `fk_evento_tipo_idx` (`tipo_id`),
+  KEY `fk_evento_provincia_idx` (`provincia_id`),
+  KEY `fk_evento_canton_idx` (`canton_id`),
+  KEY `fk_evento_distrito_idx` (`distrito_id`),
+  CONSTRAINT `fk_evento_tipoProducto` FOREIGN KEY (`tipo_id`) REFERENCES `tipoProducto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
+  CONSTRAINT `fk_evento_provincia` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_evento_canton` FOREIGN KEY (`canton_id`) REFERENCES `canton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_evento_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 INSERT INTO `evento` VALUES 
 (1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,1,5,504,340),
 (2,'2023-06-18','Vuelta a la Península de Nicoya',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,1,2,212,160);
 
+
+
+
 CREATE TABLE metodopago(
- idMetodo INT(11) NOT NULL AUTO_INCREMENT,
+ id INT NOT NULL AUTO_INCREMENT,
  metodopago VARCHAR(50) NOT NULL,
- PRIMARY KEY (idMetodo)
- )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
- 
-INSERT INTO metodopago VALUES (1, 'Tarjeta de crédito'),(2, 'Tarjeta de débito'),(3, 'PayPal'),(4, 'Transferencia bancaria'),
-(5, 'Cheque'),(6, 'Efectivo'),(7, 'SINPE móvil'); 
+ PRIMARY KEY (id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+INSERT INTO metodopago VALUES 
+(1, 'Tarjeta de crédito'),(2, 'Tarjeta de débito'),(3, 'PayPal'),(4, 'Transferencia bancaria'),(5, 'Cheque'),(6, 'Efectivo'),(7, 'SINPE móvil'); 
+
+
+
 
 CREATE TABLE carrito(
-  idCarrito INT(11) NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   fecha DATE NOT NULL,
-  cantidad INT,
-  idUsuario INT NOT NULL,
-  idProducto INT,
-  idEvento INT,
-  PRIMARY KEY (idCarrito),
-  CONSTRAINT `fk_carrito_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
-  CONSTRAINT `fk_carrito_producto` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_carrito_evento` FOREIGN KEY (`idEvento`) REFERENCES `evento` (`idEvento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  cantidad INT NOT NULL,
+  usuario_id INT NOT NULL,
+  producto_id INT,
+  evento_id INT,
+  PRIMARY KEY (id,usuario_id,producto_id,evento_id),
+  KEY `fk_conciertos_usuario_idx` (`usuario_id`),
+  KEY `fk_conciertos_producto_idx` (`producto_id`),
+  KEY `fk_conciertos_evento_idx` (`evento_id`),
+  CONSTRAINT `fk_carrito_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
+  CONSTRAINT `fk_carrito_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_carrito_evento` FOREIGN KEY (`evento_id`) REFERENCES `evento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+
+
+
 
 CREATE TABLE carritoProducto (
-  idCarritoProducto INT NOT NULL AUTO_INCREMENT,
-  idCarrito INT NOT NULL,
-  idProducto INT NOT NULL,
-  PRIMARY KEY (idCarritoProducto),
-CONSTRAINT `fk_carritoProducto_carrito` FOREIGN KEY (`idCarrito`) REFERENCES `carrito` (`idCarrito`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_carritoProducto_producto` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`idProducto`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  id INT NOT NULL AUTO_INCREMENT,
+  carrito_id INT NOT NULL,
+  producto_id INT NOT NULL,
+  PRIMARY KEY (id,carrito_id,producto_id),
+  KEY `fk_carritoProducto_carrito_idx` (`carrito_id`),
+  KEY `fk_carritoProducto_producto_idx` (`producto_id`),
+  CONSTRAINT `fk_carritoProducto_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_carritoProducto_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+
+
 
 CREATE TABLE carritoEvento (
-  idCarritoEvento INT NOT NULL AUTO_INCREMENT,
-  idCarrito INT NOT NULL,
-  idEvento INT NOT NULL,
-  PRIMARY KEY (idCarritoEvento),
-CONSTRAINT `fk_carritoEvento_carrito` FOREIGN KEY (`idCarrito`) REFERENCES `carrito` (`idCarrito`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_carritoEvento_evento` FOREIGN KEY (`idEvento`) REFERENCES `evento` (`idEvento`) ON DELETE NO ACTION ON UPDATE NO ACTION
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  id INT NOT NULL AUTO_INCREMENT,
+  carrito_id INT NOT NULL,
+  evento_id INT NOT NULL,
+  PRIMARY KEY (id,carrito_id,evento_id),
+  KEY `fk_carritoEvento_carrito_idx` (`carrito_id`),
+  KEY `fk_carritoEvento_evento_idx` (`evento_id`),
+  CONSTRAINT `fk_carritoEvento_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_carritoEvento_evento` FOREIGN KEY (`evento_id`) REFERENCES `evento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+
+
+
 
 CREATE TABLE orden(
-  idOrden INT(11) NOT NULL AUTO_INCREMENT,
+  id INT NOT NULL AUTO_INCREMENT,
   detalle varchar(500),
-  montoTotal decimal(10,2) NOT NULL,
+  montoTotal FLOAT NOT NULL,
   fecha DATE NOT NULL,
-  idUsuario INT,
-  idMetodo INT,
-  idLogin INT,
-  idCarrito INT,
-  PRIMARY KEY (idOrden),
-CONSTRAINT `fk_orden_usuario` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
-CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`idMetodo`) REFERENCES `metodopago` (`idMetodo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_orden_datosLogin` FOREIGN KEY (`idLogin`) REFERENCES `datosLogin` (`idLogin`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`idCarrito`) REFERENCES `carrito` (`idCarrito`) ON DELETE NO ACTION ON UPDATE NO ACTION
-  )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  usuario_id INT,
+  metodo_id INT,
+  login_id INT,
+  carrito_id INT,
+  PRIMARY KEY (id,usuario_id,metodo_id,login_id,carrito_id),
+  KEY `fk_orden_usuario_idx` (`usuario_id`),
+  KEY `fk_orden_metodo_idx` (`metodo_id`),
+  KEY `fk_orden_login_idx` (`login_id`),
+  KEY `fk_orden_carrito_idx` (`carrito_id`),
+  CONSTRAINT `fk_orden_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
+  CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`metodo_id`) REFERENCES `metodopago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orden_datosLogin` FOREIGN KEY (`login_id`) REFERENCES `datosLogin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);

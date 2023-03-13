@@ -1,29 +1,29 @@
 package com.BikeLab.service;
 
-import com.BikeLab.entity.RoleDatosLogin;
-import com.BikeLab.repository.RoleDatosLoginRepository;
+import com.BikeLab.entity.RolDatosLogin;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.BikeLab.repository.RolDatosLoginRepository;
 
 @Service
-public class RoleDatosLoginService implements IRoleDatosLoginService {
+public class RolDatosLoginService implements IRolDatosLoginService {
 
     @Autowired
-    private RoleDatosLoginRepository roleDatosLoginRepository;
+    private RolDatosLoginRepository roleDatosLoginRepository;
 
     @Override
-    public List<RoleDatosLogin> getAllRoleDatosLogin() {
-        return (List<RoleDatosLogin>) roleDatosLoginRepository.findAll();
+    public List<RolDatosLogin> getAllRoleDatosLogin() {
+        return (List<RolDatosLogin>) roleDatosLoginRepository.findAll();
     }
 
     @Override
-    public RoleDatosLogin getRoleDatosLoginById(long id) {
+    public RolDatosLogin getRoleDatosLoginById(long id) {
         return roleDatosLoginRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void saveRoleDatosLogin(RoleDatosLogin roleDatosLogin) {
+    public void saveRoleDatosLogin(RolDatosLogin roleDatosLogin) {
         roleDatosLoginRepository.save(roleDatosLogin);
     }
 

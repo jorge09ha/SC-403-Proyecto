@@ -20,14 +20,14 @@ public class Producto implements Serializable {
     private String nombre;
     private String modelo;
     private String talla;
-    private java.math.BigDecimal tamanio;
+    private float tamanio;
     private String detalle;
     private int anio;
-    private java.math.BigDecimal precio;
+    private float precio;
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "tipoProducto_id")
+    @JoinColumn(name = "tipo_id")
     private TipoProducto tipoProducto;
 
     @ManyToOne
@@ -66,11 +66,11 @@ public class Producto implements Serializable {
         this.talla = talla;
     }
 
-    public BigDecimal getTamanio() {
+    public float getTamanio() {
         return tamanio;
     }
 
-    public void setTamanio(BigDecimal tamanio) {
+    public void setTamanio(float tamanio) {
         this.tamanio = tamanio;
     }
 
@@ -90,11 +90,11 @@ public class Producto implements Serializable {
         this.anio = anio;
     }
 
-    public BigDecimal getPrecio() {
+    public float getPrecio() {
         return precio;
     }
 
-    public void setPrecio(BigDecimal precio) {
+    public void setPrecio(float precio) {
         this.precio = precio;
     }
 
