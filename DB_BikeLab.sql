@@ -427,4 +427,4 @@ CREATE TABLE orden(
   CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`metodo_id`) REFERENCES `metodopago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_datosLogin` FOREIGN KEY (`login_id`) REFERENCES `datosLogin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
+); 
