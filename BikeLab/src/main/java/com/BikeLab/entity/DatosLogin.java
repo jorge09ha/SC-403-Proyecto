@@ -20,7 +20,7 @@ public class DatosLogin implements Serializable {
     private String contrasenia;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "rol_id")
     private Rol rol;
 
     public long getId() {

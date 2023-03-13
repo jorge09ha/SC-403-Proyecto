@@ -18,11 +18,11 @@ public class CarritoProducto implements Serializable {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "idCarrito")
+    @JoinColumn(name = "carrito_id")
     private Carrito carrito;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     public long getId() {

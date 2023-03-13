@@ -18,11 +18,11 @@ public class ProveedorProducto implements Serializable {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "idProveedor")
+    @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     public long getId() {
