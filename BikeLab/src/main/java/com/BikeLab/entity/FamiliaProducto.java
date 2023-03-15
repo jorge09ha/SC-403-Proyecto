@@ -1,4 +1,3 @@
-
 package com.BikeLab.entity;
 
 import java.io.Serializable;
@@ -6,30 +5,32 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "familiaProducto")
 public class FamiliaProducto implements Serializable {
-    
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idFamilia;
-   private String Familia;
-   private String detalle;
 
-    public Long getIdFamilia() {
-        return idFamilia;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String familia;
+    private String detalle;
+
+    public long getId() {
+        return id;
     }
 
-    public void setIdFamilia(Long idFamilia) {
-        this.idFamilia = idFamilia;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFamilia() {
-        return Familia;
+        return familia;
     }
 
-    public void setFamilia(String Familia) {
-        this.Familia = Familia;
+    public void setFamilia(String familia) {
+        this.familia = familia;
     }
 
     public String getDetalle() {
@@ -39,6 +40,5 @@ public class FamiliaProducto implements Serializable {
     public void setDetalle(String detalle) {
         this.detalle = detalle;
     }
-   
-      
+
 }

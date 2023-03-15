@@ -1,4 +1,3 @@
-
 package com.BikeLab.entity;
 
 import java.io.Serializable;
@@ -8,25 +7,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "canton")
 public class Canton implements Serializable {
-    
- @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)   
- private Long idCanton;
- private String nombre;
- 
- @ManyToOne
- @JoinColumn(name="idProvincia")
-    private Provincia idProvincia;
 
-    public Long getIdCanton() {
-        return idCanton;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String nombre;
+
+    @ManyToOne
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
+
+    public long getId() {
+        return id;
     }
 
-    public void setIdCanton(Long idCanton) {
-        this.idCanton = idCanton;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -37,14 +38,12 @@ public class Canton implements Serializable {
         this.nombre = nombre;
     }
 
-    public Provincia getIdProvincia() {
-        return idProvincia;
+    public Provincia getProvincia() {
+        return provincia;
     }
 
-    public void setIdProvincia(Provincia idProvincia) {
-        this.idProvincia = idProvincia;
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
-
- 
- }
+}

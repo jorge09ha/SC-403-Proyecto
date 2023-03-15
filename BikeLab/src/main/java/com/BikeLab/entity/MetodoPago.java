@@ -8,13 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "provincia")
-public class Provincia implements Serializable {
+@Table(name = "metodoPago")
+public class MetodoPago implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nombre;
+    private String metodoPago;
 
     public long getId() {
         return id;
@@ -24,12 +24,12 @@ public class Provincia implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getMetodoPago() {
+        return metodoPago;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
     }
 
 }

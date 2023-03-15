@@ -1,42 +1,45 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "producto")
 public class Producto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idProducto;
+    private long id;
     private String nombre;
     private String modelo;
     private String talla;
-    private String tamanio;
+    private float tamanio;
     private String detalle;
-    private String anio;
+    private int anio;
     private float precio;
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "idTipo")
-    private TipoProducto idTipo;
+    @JoinColumn(name = "tipo_id")
+    private TipoProducto tipoProducto;
 
     @ManyToOne
-    @JoinColumn(name = "idMarca")
-    private Marca idMarca;
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
 
-    public Long getIdProducto() {
-        return idProducto;
+    public long getId() {
+        return id;
     }
 
-    public void setIdProducto(Long idProducto) {
-        this.idProducto = idProducto;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -63,11 +66,11 @@ public class Producto implements Serializable {
         this.talla = talla;
     }
 
-    public String getTamanio() {
+    public float getTamanio() {
         return tamanio;
     }
 
-    public void setTamanio(String tamanio) {
+    public void setTamanio(float tamanio) {
         this.tamanio = tamanio;
     }
 
@@ -79,11 +82,11 @@ public class Producto implements Serializable {
         this.detalle = detalle;
     }
 
-    public String getAnio() {
+    public int getAnio() {
         return anio;
     }
 
-    public void setAnio(String anio) {
+    public void setAnio(int anio) {
         this.anio = anio;
     }
 
@@ -103,23 +106,20 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-    public TipoProducto getIdTipo() {
-        return idTipo;
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
     }
 
-    public void setIdTipo(TipoProducto idTipo) {
-        this.idTipo = idTipo;
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
-    public Marca getIdMarca() {
-        return idMarca;
+    public Marca getMarca() {
+        return marca;
     }
 
-    public void setIdMarca(Marca idMarca) {
-        this.idMarca = idMarca;
+    public void setMarca(Marca marca) {
+        this.marca = marca;
     }
-    
-    
-    
 
 }

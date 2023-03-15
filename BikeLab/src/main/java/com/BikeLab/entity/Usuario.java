@@ -1,46 +1,58 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "usuario")
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUsuario;
+    private long id;
+    private String nombre;
     private String apellido1;
     private String apellido2;
-    private int edad;
+    private int telefono;
     private String cedula;
     private String direccion;
 
-    @OneToOne
-    @JoinColumn(name = "idLogin")
-    private Datos_Login idLogin;
+    @ManyToOne
+    @JoinColumn(name = "login_id")
+    private DatosLogin datosLogin;
 
     @ManyToOne
-    @JoinColumn(name = "IdProvincia")
-    private Provincia IdProvincia;
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
 
     @ManyToOne
-    @JoinColumn(name = "idCanton")
-    private Canton idCanton;
+    @JoinColumn(name = "canton_id")
+    private Canton canton;
 
     @ManyToOne
-    @JoinColumn(name = "idDistrito")
-    private Distrito idDistrito;
+    @JoinColumn(name = "distrito_id")
+    private Distrito distrito;
 
-    public Long getIdUsuario() {
-        return idUsuario;
+    public long getId() {
+        return id;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getApellido1() {
@@ -59,12 +71,12 @@ public class Usuario implements Serializable {
         this.apellido2 = apellido2;
     }
 
-    public int getEdad() {
-        return edad;
+    public int getTelefono() {
+        return telefono;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
     public String getCedula() {
@@ -83,36 +95,36 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public Datos_Login getIdLogin() {
-        return idLogin;
+    public DatosLogin getDatosLogin() {
+        return datosLogin;
     }
 
-    public void setIdLogin(Datos_Login idLogin) {
-        this.idLogin = idLogin;
+    public void setDatosLogin(DatosLogin datosLogin) {
+        this.datosLogin = datosLogin;
     }
 
-    public Provincia getIdProvincia() {
-        return IdProvincia;
+    public Provincia getProvincia() {
+        return provincia;
     }
 
-    public void setIdProvincia(Provincia IdProvincia) {
-        this.IdProvincia = IdProvincia;
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
-    public Canton getIdCanton() {
-        return idCanton;
+    public Canton getCanton() {
+        return canton;
     }
 
-    public void setIdCanton(Canton idCanton) {
-        this.idCanton = idCanton;
+    public void setCanton(Canton canton) {
+        this.canton = canton;
     }
 
-    public Distrito getIdDistrito() {
-        return idDistrito;
+    public Distrito getDistrito() {
+        return distrito;
     }
 
-    public void setIdDistrito(Distrito idDistrito) {
-        this.idDistrito = idDistrito;
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
-  
+
 }

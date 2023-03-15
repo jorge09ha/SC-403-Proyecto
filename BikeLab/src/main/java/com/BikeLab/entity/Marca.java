@@ -5,21 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "marca")
 public class Marca implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMarca;
+    private long id;
     private String nombre;
 
-    public Long getIdMarca() {
-        return idMarca;
+    public long getId() {
+        return id;
     }
 
-    public void setIdMarca(Long idMarca) {
-        this.idMarca = idMarca;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombre() {

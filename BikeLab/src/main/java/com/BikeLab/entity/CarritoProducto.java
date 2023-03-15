@@ -10,17 +10,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "distrito")
-public class Distrito implements Serializable {
+@Table(name = "carritoProducto")
+public class CarritoProducto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "canton_id")
-    private Canton canton;
+    @JoinColumn(name = "carrito_id")
+    private Carrito carrito;
+
+    @ManyToOne
+    @JoinColumn(name = "producto_id")
+    private Producto producto;
 
     public long getId() {
         return id;
@@ -30,20 +33,20 @@ public class Distrito implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Carrito getCarrito() {
+        return carrito;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
     }
 
-    public Canton getCanton() {
-        return canton;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void setCanton(Canton canton) {
-        this.canton = canton;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
 }

@@ -1,25 +1,24 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "evento")
 public class Evento implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEvento;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private long id;
     private Date fecha;
-
     private String nombre;
     private float precio;
     private String detalle;
@@ -27,27 +26,27 @@ public class Evento implements Serializable {
     private int stock;
 
     @ManyToOne
-    @JoinColumn(name = "idTipo")
-    private TipoProducto idTipo;
+    @JoinColumn(name = "tipo_id")
+    private TipoProducto tipoProducto;
 
     @ManyToOne
-    @JoinColumn(name = "idProvincia")
-    private Provincia idProvincia;
+    @JoinColumn(name = "provincia_id")
+    private Provincia provincia;
 
     @ManyToOne
-    @JoinColumn(name = "idCanton")
-    private Canton idCanton;
+    @JoinColumn(name = "canton_id")
+    private Canton canton;
 
     @ManyToOne
-    @JoinColumn(name = "idDistrito")
-    private Distrito idDistrito;
+    @JoinColumn(name = "distrito_id")
+    private Distrito distrito;
 
-    public Long getIdEvento() {
-        return idEvento;
+    public long getId() {
+        return id;
     }
 
-    public void setIdEvento(Long idEvento) {
-        this.idEvento = idEvento;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Date getFecha() {
@@ -98,36 +97,36 @@ public class Evento implements Serializable {
         this.stock = stock;
     }
 
-    public TipoProducto getIdTipo() {
-        return idTipo;
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
     }
 
-    public void setIdTipo(TipoProducto idTipo) {
-        this.idTipo = idTipo;
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
-    public Provincia getIdProvincia() {
-        return idProvincia;
+    public Provincia getProvincia() {
+        return provincia;
     }
 
-    public void setIdProvincia(Provincia idProvincia) {
-        this.idProvincia = idProvincia;
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 
-    public Canton getIdCanton() {
-        return idCanton;
+    public Canton getCanton() {
+        return canton;
     }
 
-    public void setIdCanton(Canton idCanton) {
-        this.idCanton = idCanton;
+    public void setCanton(Canton canton) {
+        this.canton = canton;
     }
 
-    public Distrito getIdDistrito() {
-        return idDistrito;
+    public Distrito getDistrito() {
+        return distrito;
     }
 
-    public void setIdDistrito(Distrito idDistrito) {
-        this.idDistrito = idDistrito;
+    public void setDistrito(Distrito distrito) {
+        this.distrito = distrito;
     }
 
 }
