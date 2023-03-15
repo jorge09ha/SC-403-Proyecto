@@ -1,5 +1,6 @@
 package com.BikeLab.entity;
 
+
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
