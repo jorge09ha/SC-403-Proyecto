@@ -16,7 +16,7 @@ CREATE TABLE datoslogin (
   correo VARCHAR(30) NOT NULL,
   contrasenia VARCHAR(30) NOT NULL,
   rol_id INT NOT NULL,
-  PRIMARY KEY (id,rol_id),
+  PRIMARY KEY (id),
   KEY `fk_datoslogin_rol_idx` (`rol_id`),
   CONSTRAINT `fk_datoslogin_rol` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
@@ -27,16 +27,15 @@ INSERT INTO `datoslogin` VALUES
 
 
 CREATE TABLE roldatoslogin (
-  id INT NOT NULL AUTO_INCREMENT,
   rol_id INT NOT NULL,
   login_id INT NOT NULL,
-  PRIMARY KEY (id,rol_id,login_id),
+  PRIMARY KEY (rol_id,login_id),
   KEY `fk_roldatoslogin_rol_idx` (`rol_id`),
   KEY `fk_roldatoslogin_login_idx` (`login_id`),
   CONSTRAINT `fk_roldatoslogin_rol` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_roldatoslogin_datoslogin` FOREIGN KEY (`login_id`) REFERENCES `datoslogin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
-INSERT INTO `roldatoslogin` VALUES (1,1,1),(2,2,2);
+INSERT INTO `roldatoslogin` VALUES (1,1),(2,2);
 
 
 
@@ -55,7 +54,7 @@ CREATE TABLE canton(
   id INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(50) not null,
   provincia_id INT not null,
-  PRIMARY KEY (id,provincia_id),
+  PRIMARY KEY (id),
   KEY `fk_canton_provincia_idx` (`provincia_id`),
   CONSTRAINT `fk_canton_provincia` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
@@ -86,7 +85,7 @@ CREATE TABLE distrito(
   id INT NOT NULL AUTO_INCREMENT,
   nombre VARCHAR(50) NOT NULL,
   canton_id INT NOT NULL,
-  PRIMARY KEY (id,canton_id),
+  PRIMARY KEY (id),
   KEY `fk_distrito_canton_idx` (`canton_id`),
   CONSTRAINT `fk_distrito_canton` FOREIGN KEY (`canton_id`) REFERENCES `canton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
@@ -166,7 +165,7 @@ CREATE TABLE usuario(
   provincia_id INT NOT NULL,
   canton_id INT NOT NULL,
   distrito_id INT NOT NULL,
-  PRIMARY KEY (id,login_id,provincia_id,canton_id,distrito_id),
+  PRIMARY KEY (id),
   KEY `fk_usuario_login_idx` (`login_id`),
   KEY `fk_usuario_provincia_idx` (`provincia_id`),
   KEY `fk_usuario_canton_idx` (`canton_id`),
@@ -230,7 +229,7 @@ INSERT INTO `familiaproducto` VALUES
   tipo VARCHAR(50) NOT NULL,
   detalle VARCHAR(100),
   familia_id INT NOT NULL,
-  PRIMARY KEY (id,familia_id),
+  PRIMARY KEY (id),
   KEY `fk_tipo_familia_idx` (`familia_id`),
   CONSTRAINT `fk_tipo_familiaproducto` FOREIGN KEY (`familia_id`) REFERENCES `familiaproducto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
@@ -291,7 +290,7 @@ INSERT INTO `tipoproducto` VALUES
   stock INT NOT NULL,
   tipo_id INT NOT NULL,
   marca_id INT NOT NULL,
-  PRIMARY KEY (id,tipo_id,marca_id),
+  PRIMARY KEY (id),
   KEY `fk_producto_tipo_idx` (`tipo_id`),
   KEY `fk_producto_marca_idx` (`marca_id`),
   CONSTRAINT `fk_producto_tipoproducto` FOREIGN KEY (`tipo_id`) REFERENCES `tipoproducto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -305,16 +304,15 @@ INSERT INTO `producto` VALUES
 
 
 CREATE TABLE proveedorproducto (
-  id INT NOT NULL AUTO_INCREMENT,
   proveedor_id INT NOT NULL,
   producto_id INT NOT NULL,
-  PRIMARY KEY (id,proveedor_id,producto_id),
+  PRIMARY KEY (proveedor_id,producto_id),
   KEY `fk_proveedorproducto_proveedor_idx` (`proveedor_id`),
   KEY `fk_proveedorproducto_producto_idx` (`producto_id`),
   CONSTRAINT `fk_proveedorproducto_proveedor` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_proveedorproducto_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
-INSERT INTO `proveedorProducto` VALUES (1,1,1),(2,2,2);
+INSERT INTO `proveedorProducto` VALUES (1,1),(2,2);
 
 
 
@@ -332,7 +330,7 @@ CREATE TABLE evento(
   provincia_id INT NOT NULL,
   canton_id INT NOT NULL,
   distrito_id INT NOT NULL,
-  PRIMARY KEY (id,tipo_id,provincia_id,canton_id,distrito_id),
+  PRIMARY KEY (id),
   KEY `fk_evento_tipo_idx` (`tipo_id`),
   KEY `fk_evento_provincia_idx` (`provincia_id`),
   KEY `fk_evento_canton_idx` (`canton_id`),
@@ -367,7 +365,7 @@ CREATE TABLE carrito(
   usuario_id INT NOT NULL,
   producto_id INT,
   evento_id INT,
-  PRIMARY KEY (id,usuario_id,producto_id,evento_id),
+  PRIMARY KEY (id,usuario_id),
   KEY `fk_conciertos_usuario_idx` (`usuario_id`),
   KEY `fk_conciertos_producto_idx` (`producto_id`),
   KEY `fk_conciertos_evento_idx` (`evento_id`),
@@ -381,10 +379,9 @@ CREATE TABLE carrito(
 
 
 CREATE TABLE carritoproducto (
-  id INT NOT NULL AUTO_INCREMENT,
   carrito_id INT NOT NULL,
   producto_id INT NOT NULL,
-  PRIMARY KEY (id,carrito_id,producto_id),
+  PRIMARY KEY (carrito_id,producto_id),
   KEY `fk_carritoproducto_carrito_idx` (`carrito_id`),
   KEY `fk_carritoproducto_producto_idx` (`producto_id`),
   CONSTRAINT `fk_carritoproducto_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -395,10 +392,9 @@ CREATE TABLE carritoproducto (
 
 
 CREATE TABLE carritoevento (
-  id INT NOT NULL AUTO_INCREMENT,
   carrito_id INT NOT NULL,
   evento_id INT NOT NULL,
-  PRIMARY KEY (id,carrito_id,evento_id),
+  PRIMARY KEY (carrito_id,evento_id),
   KEY `fk_carritoevento_carrito_idx` (`carrito_id`),
   KEY `fk_carritoevento_evento_idx` (`evento_id`),
   CONSTRAINT `fk_carritoevento_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -418,7 +414,8 @@ CREATE TABLE orden(
   metodo_id INT,
   login_id INT,
   carrito_id INT,
-  PRIMARY KEY (id,usuario_id,metodo_id,login_id,carrito_id),
+  PRIMARY KEY (id),
+  UNIQUE KEY (usuario_id,carrito_id),
   KEY `fk_orden_usuario_idx` (`usuario_id`),
   KEY `fk_orden_metodo_idx` (`metodo_id`),
   KEY `fk_orden_login_idx` (`login_id`),
