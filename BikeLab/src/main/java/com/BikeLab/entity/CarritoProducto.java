@@ -25,6 +25,7 @@ public class CarritoProducto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
+    
 
     public long getId() {
         return id;
