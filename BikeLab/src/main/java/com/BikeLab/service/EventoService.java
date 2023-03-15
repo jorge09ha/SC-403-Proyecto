@@ -2,6 +2,7 @@ package com.BikeLab.service;
 
 import com.BikeLab.entity.Evento;
 import com.BikeLab.repository.EventoRepository;
+import com.BikeLab.service.IEventoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

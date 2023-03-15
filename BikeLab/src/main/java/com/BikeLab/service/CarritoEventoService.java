@@ -2,6 +2,7 @@ package com.BikeLab.service;
 
 import com.BikeLab.entity.CarritoEvento;
 import com.BikeLab.repository.CarritoEventoRepository;
+import com.BikeLab.service.ICarritoEventoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

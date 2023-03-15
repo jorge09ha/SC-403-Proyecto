@@ -1,6 +1,7 @@
 package com.BikeLab.service;
 
 import com.BikeLab.entity.Marca;
+import com.BikeLab.service.IMarcaService;
 import com.BikeLab.repository.MarcaRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

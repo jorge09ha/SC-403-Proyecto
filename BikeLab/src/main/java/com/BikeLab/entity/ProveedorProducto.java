@@ -1,5 +1,7 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Proveedor;
+import com.BikeLab.entity.Producto;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "proveedorProducto")
+@Table(name = "proveedorproducto")
 public class ProveedorProducto implements Serializable {
 
     @Id
@@ -18,11 +20,11 @@ public class ProveedorProducto implements Serializable {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "idProveedor")
+    @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     public long getId() {

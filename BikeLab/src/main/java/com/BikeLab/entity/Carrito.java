@@ -1,5 +1,8 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Evento;
+import com.BikeLab.entity.Producto;
+import com.BikeLab.entity.Usuario;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Entity;
@@ -21,15 +24,15 @@ public class Carrito implements Serializable {
     private int cantidad;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario")
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "producto_id")
     private Producto producto;
 
     @ManyToOne
-    @JoinColumn(name = "idEvento")
+    @JoinColumn(name = "evento_id")
     private Evento evento;
 
     public long getId() {

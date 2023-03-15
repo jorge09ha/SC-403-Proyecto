@@ -10,17 +10,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "datosLogin")
+@Table(name = "datoslogin")
 public class DatosLogin implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String correoElectronico;
+    private String correo;
     private String contrasenia;
 
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "rol_id")
     private Rol rol;
 
     public long getId() {
@@ -31,12 +31,12 @@ public class DatosLogin implements Serializable {
         this.id = id;
     }
 
-    public String getCorreoElectronico() {
-        return correoElectronico;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getContrasenia() {
@@ -51,7 +51,7 @@ public class DatosLogin implements Serializable {
         return rol;
     }
 
-    public void setRol(Rol role) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 

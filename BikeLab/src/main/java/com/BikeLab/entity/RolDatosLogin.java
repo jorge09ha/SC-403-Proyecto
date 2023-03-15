@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "roleDatosLogin")
+@Table(name = "roldatoslogin")
 public class RolDatosLogin implements Serializable {
 
     @Id
