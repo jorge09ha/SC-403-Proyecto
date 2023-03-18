@@ -158,7 +158,7 @@ CREATE TABLE usuario(
   nombre varchar(30) NOT NULL,
   apellido1 varchar(30) NOT NULL,
   apellido2 varchar(30) NOT NULL,
-  telefono INT,
+  telefono varchar(20),
   cedula varchar(30) NOT NULL,
   direccion varchar(500) NOT NULL,
   login_id INT NOT NULL,
@@ -288,6 +288,7 @@ INSERT INTO `tipoproducto` VALUES
   anio INT,
   precio FLOAT NOT NULL,
   stock INT NOT NULL,
+  imagen BLOB,
   tipo_id INT NOT NULL,
   marca_id INT NOT NULL,
   PRIMARY KEY (id),
@@ -297,8 +298,8 @@ INSERT INTO `tipoproducto` VALUES
   CONSTRAINT `fk_producto_marca` FOREIGN KEY (`marca_id`) REFERENCES `marca` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 INSERT INTO `producto` VALUES
-(1,'Fuji Nevada','Nevada','M',27.5,'Un elemento básico en la línea de bicicletas de montaña Fuji, disponible en tamaños de rueda de 29″ o 27,5″, la Nevada combina un cuadro rígido probado y verdadero y componentes sólidos para llevar tus aventuras todoterreno al siguiente nivel.',2023,250000,5,1,15),
-(2,'GIANT XTC SLR 2 2022','XTC SLR 2','S',29,'Perfecto como su primera bicicleta de montaña, el cuadro de aluminio de grado ALUXX es liviano, capaz y duradero Versátil. La geometría cómoda pero orientada al rendimiento de Tempt le da la versatilidad tanto para los viajes alrededor del campus como para los paseos fuera de la carretera.',2022,520000,2,1,1);
+(1,'Fuji Nevada','Nevada','M',27.5,'Un elemento básico en la línea de bicicletas de montaña Fuji, disponible en tamaños de rueda de 29″ o 27,5″, la Nevada combina un cuadro rígido probado y verdadero y componentes sólidos para llevar tus aventuras todoterreno al siguiente nivel.',2023,250000,5,NULL,1,15),
+(2,'GIANT XTC SLR 2 2022','XTC SLR 2','S',29,'Perfecto como su primera bicicleta de montaña, el cuadro de aluminio de grado ALUXX es liviano, capaz y duradero Versátil. La geometría cómoda pero orientada al rendimiento de Tempt le da la versatilidad tanto para los viajes alrededor del campus como para los paseos fuera de la carretera.',2022,520000,2,NULL,1,1);
 
 
 
