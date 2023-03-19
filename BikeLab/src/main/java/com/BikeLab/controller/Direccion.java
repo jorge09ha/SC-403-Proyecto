@@ -28,12 +28,12 @@ public class Direccion {
     private IDistritoService distritoService;
 
 //-------------------------- List --------------------------
-    @GetMapping("/distrito")
+    @GetMapping("/dashboard")
     public String indexDistrito(Model model) {
         List<Distrito> lista = distritoService.getAllDistrito();
         model.addAttribute("titulo", "Tabla distritos");
         model.addAttribute("distritos", lista);
-        return "distrito";
+        return "dashboard";
     }
 
     @GetMapping("/canton")
