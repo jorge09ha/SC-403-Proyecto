@@ -1,5 +1,6 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Evento;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "funcion")
+@Table(name = "carritoevento")
 public class CarritoEvento implements Serializable {
 
     @Id

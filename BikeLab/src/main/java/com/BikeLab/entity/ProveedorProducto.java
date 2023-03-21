@@ -1,5 +1,7 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Proveedor;
+import com.BikeLab.entity.Producto;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "proveedorProducto")
+@Table(name = "proveedorproducto")
 public class ProveedorProducto implements Serializable {
 
     @Id

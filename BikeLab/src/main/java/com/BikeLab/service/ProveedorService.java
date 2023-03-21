@@ -1,5 +1,6 @@
 package com.BikeLab.service;
 
+import com.BikeLab.service.IProveedorService;
 import com.BikeLab.entity.Proveedor;
 import com.BikeLab.repository.ProveedorRepository;
 import java.util.List;

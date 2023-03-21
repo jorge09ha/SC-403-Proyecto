@@ -1,5 +1,6 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Producto;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "carritoProducto")
+@Table(name = "carritoproducto")
 public class CarritoProducto implements Serializable {
 
     @Id
@@ -24,6 +25,7 @@ public class CarritoProducto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
+    
 
     public long getId() {
         return id;

@@ -1,5 +1,8 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Evento;
+import com.BikeLab.entity.Producto;
+import com.BikeLab.entity.Usuario;
 import java.io.Serializable;
 import java.sql.Date;
 import javax.persistence.Entity;

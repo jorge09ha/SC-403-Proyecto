@@ -1,5 +1,9 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.Canton;
+import com.BikeLab.entity.Distrito;
+import com.BikeLab.entity.Provincia;
+import com.BikeLab.entity.TipoProducto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;

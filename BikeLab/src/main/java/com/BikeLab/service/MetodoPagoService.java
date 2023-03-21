@@ -1,6 +1,7 @@
 package com.BikeLab.service;
 
 import com.BikeLab.entity.MetodoPago;
+import com.BikeLab.service.IMetodoPagoService;
 import com.BikeLab.repository.MetodoPagoRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

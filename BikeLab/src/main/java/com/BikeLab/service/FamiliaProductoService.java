@@ -1,5 +1,6 @@
 package com.BikeLab.service;
 
+import com.BikeLab.service.IFamiliaProductoService;
 import com.BikeLab.entity.FamiliaProducto;
 import com.BikeLab.repository.FamiliaProductoRepository;
 import java.util.List;

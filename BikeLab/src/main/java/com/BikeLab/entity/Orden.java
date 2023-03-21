@@ -1,5 +1,8 @@
 package com.BikeLab.entity;
 
+import com.BikeLab.entity.DatosLogin;
+import com.BikeLab.entity.Usuario;
+import com.BikeLab.entity.Carrito;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -19,7 +22,7 @@ public class Orden implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String detalle;
-    private float montoTotal;
+    private float montototal;
     private Date fecha;
 
     @ManyToOne
@@ -28,11 +31,11 @@ public class Orden implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "metodo_id")
-    private MetodoPago metodoPago;
+    private MetodoPago metodopago;
 
     @ManyToOne
     @JoinColumn(name = "login_id")
-    private DatosLogin datosLogin;
+    private DatosLogin datoslogin;
 
     @ManyToOne
     @JoinColumn(name = "carrito_id")
@@ -54,12 +57,12 @@ public class Orden implements Serializable {
         this.detalle = detalle;
     }
 
-    public float getMontoTotal() {
-        return montoTotal;
+    public float getMontototal() {
+        return montototal;
     }
 
-    public void setMontoTotal(float montoTotal) {
-        this.montoTotal = montoTotal;
+    public void setMontototal(float montototal) {
+        this.montototal = montototal;
     }
 
     public Date getFecha() {
@@ -78,20 +81,20 @@ public class Orden implements Serializable {
         this.usuario = usuario;
     }
 
-    public MetodoPago getMetodoPago() {
-        return metodoPago;
+    public MetodoPago getMetodopago() {
+        return metodopago;
     }
 
-    public void setMetodoPago(MetodoPago metodoPago) {
-        this.metodoPago = metodoPago;
+    public void setMetodopago(MetodoPago metodopago) {
+        this.metodopago = metodopago;
     }
 
-    public DatosLogin getDatosLogin() {
-        return datosLogin;
+    public DatosLogin getDatoslogin() {
+        return datoslogin;
     }
 
-    public void setDatosLogin(DatosLogin datosLogin) {
-        this.datosLogin = datosLogin;
+    public void setDatoslogin(DatosLogin datoslogin) {
+        this.datoslogin = datoslogin;
     }
 
     public Carrito getCarrito() {

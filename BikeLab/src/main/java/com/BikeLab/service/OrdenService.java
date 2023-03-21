@@ -2,6 +2,7 @@ package com.BikeLab.service;
 
 import com.BikeLab.entity.Orden;
 import com.BikeLab.repository.OrdenRepository;
+import com.BikeLab.service.IOrdenService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
