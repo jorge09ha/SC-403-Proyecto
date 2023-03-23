@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
  * @author Jorge Hernandez Araya | jorge09ha
  */
 @Controller
-public class AdmController {
+public class AdminDireccion {
 
     @Autowired
     private IProvinciaService provinciaService;
@@ -32,145 +32,152 @@ public class AdmController {
     private IDistritoService distritoService;
 
     //-------------------------- List --------------------------
-    @GetMapping("/admLugarD")
+    @GetMapping("/admin/direccion_distrito")
     public String indexDistrito(Model model) {
         List<Distrito> lista = distritoService.getAllDistrito();
         model.addAttribute("titulo", "DISTRITOS");
         model.addAttribute("distritos", lista);
-        return "admLugarD";
+        return "adm_distrito";
     }
 
-    @GetMapping("/admLugarC")
+    @GetMapping("/admin/direccion_canton")
     public String indexCanton(Model model) {
         List<Canton> lista = cantonService.getAllCanton();
         model.addAttribute("titulo", "CANTONES");
         model.addAttribute("cantones", lista);
-        return "admLugarC";
+        return "adm_canton";
     }
 
-    @GetMapping("/admLugarP")
+    @GetMapping("/admin/direccion_provincia")
     public String indexProvincia(Model model) {
         List<Provincia> lista = provinciaService.getAllProvincia();
         model.addAttribute("titulo", "PROVINCIAS");
         model.addAttribute("provincias", lista);
-        return "admLugarP";
+        return "adm_provincia";
     }
-     //-------------------------- New --------------------------
-    @GetMapping("/distrito/nuevo")
+    //-------------------------- New --------------------------
+
+    @GetMapping("/admin/direccion_distrito/nuevo")
     public String crearDistrito(Model model) {
-        Distrito distrito = new Distrito();
+        List<Canton> listaCanton = cantonService.getAllCanton();
         model.addAttribute("titulo", "Distrito Nuevo");
-        model.addAttribute("distrito", distrito);
-        return "crearDistrito";
+        model.addAttribute("distrito", new Distrito());
+        model.addAttribute("canton", listaCanton);
+        return "adm_crearDistrito";
     }
 
-    @GetMapping("/canton/nuevo")
+    @GetMapping("/admin/direccion_canton/nuevo")
     public String crearCanton(Model model) {
-        Canton canton = new Canton();
+        List<Provincia> listaProvincias = provinciaService.getAllProvincia();
         model.addAttribute("titulo", "Canton Nuevo");
-        model.addAttribute("canton", canton);
-        return "crearCanton";
+        model.addAttribute("canton", new Canton());
+        model.addAttribute("provincia", listaProvincias);
+        return "adm_crearCanton";
     }
 
-    @GetMapping("/provincia/nuevo")
+    @GetMapping("/admin/direccion_provincia/nuevo")
     public String crearProvincia(Model model) {
         Provincia provincia = new Provincia();
         model.addAttribute("titulo", "Provincia Nueva");
         model.addAttribute("provincia", provincia);
-        return "crearProvincia";
+        return "adm_crearProvincia";
     }
 
     //-------------------------- Save --------------------------
     @PostMapping("/save/distrito")
     public String guardarDistrito(@ModelAttribute Distrito distrito) {
         distritoService.saveDistrito(distrito);
-        return "redirect:/distrito";
+        return "redirect:/admin/direccion_distrito";
     }
 
     @PostMapping("/save/canton")
     public String guardarCanton(@ModelAttribute Canton canton) {
         cantonService.saveCanton(canton);
-        return "redirect:/canton";
+        return "redirect:/admin/direccion_canton";
     }
 
     @PostMapping("/save/provincia")
     public String guardarProvincia(@ModelAttribute Provincia provincia) {
         provinciaService.saveProvincia(provincia);
-        return "redirect:/provincia";
+        return "redirect:/admin/direccion_provincia";
     }
 
     //-------------------------- Delete --------------------------
     @GetMapping("/eliminar/distrito/{id}")
     public String eliminarDistrito(@PathVariable Long id) {
         distritoService.deleteDistrito(id);
-        return "redirect:/distrito";
+        return "redirect:/admin/direccion_distrito";
     }
 
     @GetMapping("/eliminar/canton/{id}")
     public String eliminarCanton(@PathVariable Long id) {
         cantonService.deleteCanton(id);
-        return "redirect:/canton";
+        return "redirect:/admin/direccion_canton";
     }
 
     @GetMapping("/eliminar/provincia/{id}")
     public String eliminarProvincia(@PathVariable Long id) {
         provinciaService.deleteProvincia(id);
-        return "redirect:/provincia";
+        return "redirect:/admin/direccion_provincia";
     }
 
     //-------------------------- UpDate --------------------------
+    //* Distrito
     @GetMapping("/editar/distrito/{id}")
-    public String editarDistrito(@PathVariable("id") Long id, Model model) {
-        Distrito a = distritoService.getDistritoById(id);
-        model.addAttribute("titulo", "Editar distrito");
-        model.addAttribute("distrito", a);
-        return "editarDistrito";
+    public String editarFuncion(@PathVariable("id") Long id, Model model) {
+        Distrito distrito = distritoService.getDistritoById(id);
+        List<Canton> listaCanton = cantonService.getAllCanton();
+        model.addAttribute("titulo", "Editar Distrito");
+        model.addAttribute("distrito", distrito);
+        model.addAttribute("canton", listaCanton);
+        return "adm_editarDistrito";
     }
-
     @PostMapping("/editar/distrito/{id}")
-    public String actualizarDistrito(@PathVariable Long id, @ModelAttribute("Distrito") Distrito distrito) {
+    public String actualizarFuncion(@PathVariable Long id, @ModelAttribute("Distrito") Distrito distrito) {
         Distrito distritoEditar = distritoService.getDistritoById(id);
         distritoEditar.setId(id);
         distritoEditar.setNombre(distrito.getNombre());
+        distritoEditar.setCanton(distrito.getCanton());
         distritoService.saveDistrito(distritoEditar);
-        return "redirect:/distrito";
+        return "redirect:/admin/direccion_distrito";
     }
-
-    //*END Distrito
-    @GetMapping("/editar/canton/{id}")
+    
+//* Canton
+        @GetMapping("/editar/canton/{id}")
     public String editarCanton(@PathVariable("id") Long id, Model model) {
-        Canton a = cantonService.getCantonById(id);
-        model.addAttribute("titulo", "Editar canton");
-        model.addAttribute("canton", a);
-        return "editarCanton";
+        Canton canton = cantonService.getCantonById(id);
+        List<Provincia> listaProvincia = provinciaService.getAllProvincia();
+        model.addAttribute("titulo", "Editar Canton");
+        model.addAttribute("canton", canton);
+        model.addAttribute("provincia", listaProvincia);
+        return "adm_editarCanton";
     }
-
     @PostMapping("/editar/canton/{id}")
-    public String actualizarCanton(@PathVariable Long id, @ModelAttribute("Canton") Canton a) {
-        Canton editar = cantonService.getCantonById(id);
-        editar.setId(id);
-        editar.setNombre(a.getNombre());
-        cantonService.saveCanton(editar);
-        return "redirect:/canton";
+    public String actualizarCanton(@PathVariable Long id, @ModelAttribute("Canton") Canton canton) {
+        Canton cantonEditar = cantonService.getCantonById(id);
+        cantonEditar.setId(id);
+        cantonEditar.setNombre(canton.getNombre());
+        cantonEditar.setProvincia(canton.getProvincia());
+        cantonService.saveCanton(cantonEditar);
+        return "redirect:/admin/direccion_distrito";
     }
+    
 
-    //*END Canton
+    //*Provincia
     @GetMapping("/editar/provincia/{id}")
     public String editarProvincia(@PathVariable("id") Long id, Model model) {
         Provincia a = provinciaService.getProvinciaById(id);
         model.addAttribute("titulo", "Editar provincia");
         model.addAttribute("provincia", a);
-        return "editarProvincia";
+        return "adm_editarProvincia";
     }
-
     @PostMapping("/editar/provincia/{id}")
     public String actualizarProvincia(@PathVariable Long id, @ModelAttribute("Provincia") Provincia a) {
         Provincia editar = provinciaService.getProvinciaById(id);
         editar.setId(id);
         editar.setNombre(a.getNombre());
         provinciaService.saveProvincia(editar);
-        return "redirect:/provincia";
+        return "redirect:/admin/direccion_provincia";
     }
-    //*END Provincia
 
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="plantilla/AdminTemplate::head"></head>
+
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/AdminTemplate::header"></header>
+
+    <!---Contenido-->
+    <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
+        <div class="card-header bg-black text-white"></div>
+        <div class="card-body">
+            <div class="container">
+                <form th:object="${provincia}" th:action="@{/editar/provincia/{id}(id=${provincia.getId})}" method="POST">
+                    <!---Titulo-->
+                    <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+                    <div class="form-group mb-4 row   col-8 mx-auto">
+                        <label class="col-md-2 col-form-label" for="nombre">NOMBRE</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
+                                placeholder="Nombre" id="nombre" aria-describedby="emailHelp">
+                        </div>
+                    </div>
+                    <!---Botones-->
+                    <div class="d-grid gap-2 col-4 mx-auto">
+                        <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                        <a class="btn btn-danger " href="/admin/direccion_provincia">CANCELAR</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!---Footer-->
+    <footer th:replace="plantilla/AdminTemplate::footer"></footer>
+</body>
+
+</html>
