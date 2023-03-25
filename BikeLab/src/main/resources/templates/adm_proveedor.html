@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="plantilla/AdminTemplate::head"></head>
+
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/AdminTemplate::header"></header>
+
+    <!---Title-->
+    <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+
+    <!---Footer-->
+    <footer th:replace="plantilla/AdminTemplate::footer"></footer>
+</body>
+
+</html>
