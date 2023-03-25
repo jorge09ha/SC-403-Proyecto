@@ -3,9 +3,11 @@ package com.BikeLab.controller;
 import com.BikeLab.entity.Canton;
 import com.BikeLab.entity.Distrito;
 import com.BikeLab.entity.Provincia;
+import com.BikeLab.entity.Rol;
 import com.BikeLab.service.ICantonService;
 import com.BikeLab.service.IDistritoService;
 import com.BikeLab.service.IProvinciaService;
+import com.BikeLab.service.IRolService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +32,9 @@ public class AdminDireccion {
 
     @Autowired
     private IDistritoService distritoService;
+    
+    @Autowired
+    private IRolService rolesService;
 
     //-------------------------- List --------------------------
     @GetMapping("/admin/direccion_distrito")
@@ -55,6 +60,15 @@ public class AdminDireccion {
         model.addAttribute("provincias", lista);
         return "adm_provincia";
     }
+    
+     @GetMapping("/admin/roles")
+    public String indexRoles(Model model) {
+        List<Rol> lista = rolesService.getAllRole();
+        model.addAttribute("titulo", "Roles de Usuario");
+        model.addAttribute("roles", lista);
+        return "adm_roles";
+    }
+    
     //-------------------------- New --------------------------
 
     @GetMapping("/admin/direccion_distrito/nuevo")
@@ -82,6 +96,14 @@ public class AdminDireccion {
         model.addAttribute("provincia", provincia);
         return "adm_crearProvincia";
     }
+    
+     @GetMapping("/admin/roles/nuevo")
+    public String crearRole(Model model) {
+        Rol rol = new Rol();
+        model.addAttribute("titulo", "Rol Nuevo");
+        model.addAttribute("rol", rol);
+        return "adm_crearRole";
+    }
 
     //-------------------------- Save --------------------------
     @PostMapping("/save/distrito")
@@ -101,6 +123,12 @@ public class AdminDireccion {
         provinciaService.saveProvincia(provincia);
         return "redirect:/admin/direccion_provincia";
     }
+    
+     @PostMapping("/save/rol")
+    public String guardarRole(@ModelAttribute("rol") Rol rol) {
+        rolesService.saveRole(rol);
+        return "redirect:/admin/roles";
+    }
 
     //-------------------------- Delete --------------------------
     @GetMapping("/eliminar/distrito/{id}")
@@ -119,6 +147,12 @@ public class AdminDireccion {
     public String eliminarProvincia(@PathVariable Long id) {
         provinciaService.deleteProvincia(id);
         return "redirect:/admin/direccion_provincia";
+    }
+    
+    @GetMapping("/eliminar/rol/{id}")
+    public String eliminarRole(@PathVariable Long id) {
+        rolesService.deleteRole(id);
+        return "redirect:/admin/roles";
     }
 
     //-------------------------- UpDate --------------------------
@@ -179,5 +213,22 @@ public class AdminDireccion {
         provinciaService.saveProvincia(editar);
         return "redirect:/admin/direccion_provincia";
     }
-
+    
+     //*Roles
+    @GetMapping("/editar/rol/{id}")
+    public String editarRol(@PathVariable("id") Long id, Model model) {
+        Rol a = rolesService.getRoleById(id);
+        model.addAttribute("titulo", "Editar Rol");
+        model.addAttribute("rol", a);
+        return "adm_editarRol";
+    }
+    @PostMapping("/editar/rol/{id}")
+    public String actualizarRol(@PathVariable Long id, @ModelAttribute("Rol") Rol rol) {
+        Rol editar = rolesService.getRoleById(id);
+        editar.setId(id);
+        editar.setRolName(rol.getRolName());
+        rolesService.saveRole(editar);
+        return "redirect:/admin/roles";
+    }
+    
 }

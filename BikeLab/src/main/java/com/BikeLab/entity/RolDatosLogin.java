@@ -2,10 +2,12 @@ package com.BikeLab.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,14 +18,14 @@ public class RolDatosLogin implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
-    private Rol rol;
-
-    @ManyToOne
+ 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "login_id")
-    private DatosLogin datosLogin;
+    private DatosLogin datosLoginID;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rol_id")
+    private Rol roleId;
 
     public long getId() {
         return id;
@@ -33,20 +35,23 @@ public class RolDatosLogin implements Serializable {
         this.id = id;
     }
 
-    public Rol getRol() {
-        return rol;
+    public DatosLogin getDatosLoginID() {
+        return datosLoginID;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setDatosLoginID(DatosLogin datosLoginID) {
+        this.datosLoginID = datosLoginID;
     }
 
-    public DatosLogin getDatosLogin() {
-        return datosLogin;
+    public Rol getRoleId() {
+        return roleId;
     }
 
-    public void setDatosLogin(DatosLogin datosLogin) {
-        this.datosLogin = datosLogin;
+    public void setRoleId(Rol roleId) {
+        this.roleId = roleId;
     }
+    
+        
+  
 
 }

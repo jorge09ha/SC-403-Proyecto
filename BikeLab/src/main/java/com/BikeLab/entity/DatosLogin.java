@@ -1,12 +1,19 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,23 +21,31 @@ import javax.persistence.Table;
 public class DatosLogin implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
+    private long Id;
+    
     private String correo;
     private String contrasenia;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
-    private Rol rol;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "roldatoslogin",
+               joinColumns = @JoinColumn(name = "login_id"),
+               inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Rol> roles = new HashSet<>();
+    
+    @OneToOne
+    @JoinColumn(name = "id")   
+    private Usuario usuarioId;
 
     public long getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long Id) {
+        this.Id = Id;
     }
 
+      
     public String getCorreo() {
         return correo;
     }
@@ -47,12 +62,22 @@ public class DatosLogin implements Serializable {
         this.contrasenia = contrasenia;
     }
 
-    public Rol getRol() {
-        return rol;
+    public Set<Rol> getRoles() {
+        return roles;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 
+    public Usuario getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+    
+        
+    
 }

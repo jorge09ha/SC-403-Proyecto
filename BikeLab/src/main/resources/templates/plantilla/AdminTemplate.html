@@ -21,8 +21,7 @@
     <link th:href="@{/styles/adminTemplate.css}" rel="stylesheet" />
     <link rel="stylesheet" href="../static/css/adminTemplate.css" th:href="@{/css/adminTemplate.css}" media="screen" />
 </head>
-
-<body>
+<body >
     <header th:fragment="header">
         <div class="navbar">
             <nav class="navbar-links">
@@ -33,7 +32,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#">Usuarios</a>
                         <ul class="dropdown">
-                            <li><a href="#">Roles</a></li>
+                            <li><a href="/admin/roles">Roles</a></li>
                             <li><a href="#">Datos Login</a></li>
                         </ul>
                     </li>
@@ -71,9 +70,7 @@
     </header>
 
 
-
-    <footer th:fragment="footer">
-        <footer class="footContainer text-white text-center text-lg-start">
+    <footer th:fragment="footer" class="footContainer   text-white text-center text-lg-start">     
             <!-- Grid container -->
             <div class="footerRow p-4">
                 <!--Grid copyright-->
@@ -131,7 +128,6 @@
             </div>
             <!-- Copyright end-->
         </footer>
-    </footer>
 </body>
 
 </html>

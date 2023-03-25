@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,9 +23,8 @@ public class Usuario implements Serializable {
     private int telefono;
     private String cedula;
     private String direccion;
-
-    @ManyToOne
-    @JoinColumn(name = "login_id")
+    
+    @OneToOne(mappedBy = "usuarioId")
     private DatosLogin datosLogin;
 
     @ManyToOne

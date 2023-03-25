@@ -122,7 +122,7 @@ ul li:hover ul.dropdown {
 
 /*----------------------- Footer -----------------------*/
 .footContainer{
-    padding: 1em 0;
+    padding-top: 1em ;
     text-align: center;
     margin-top: auto;
     bottom: 0;
@@ -148,4 +148,15 @@ ul li:hover ul.dropdown {
     color: var(--color3);
     text-align: center;
     background: var(--color5);
+}
+
+@media screen and (min-width: 1000px) {
+  footContainer {
+   position: relative;
+    bottom: 0;
+    width: 100%; 
+    margin-top: 0;
+    height: 80px;
+  }
+  
 }
