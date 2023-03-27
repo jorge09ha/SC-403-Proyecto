@@ -5,3 +5,4 @@ BikeLab/src/main/resources/application.properties
 BikeLab/src/main/resources/application.properties
 BikeLab/nbactions.xml
 BikeLab/src/main/resources/application.properties
+*.properties
