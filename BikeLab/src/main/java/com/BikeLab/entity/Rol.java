@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,13 +19,9 @@ public class Rol implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; 
-    @Column(name="rol")
-    private String rolName;
-    
-        
-    @ManyToMany(mappedBy = "roles")
-    private Set<DatosLogin> roles = new HashSet<>();
+    private long id;
+    @Column(name = "rol")
+    private String rol;
 
     public long getId() {
         return id;
@@ -33,23 +31,12 @@ public class Rol implements Serializable {
         this.id = id;
     }
 
-    public String getRolName() {
-        return rolName;
+    public String getRol() {
+        return rol;
     }
 
-    public void setRolName(String rolName) {
-        this.rolName = rolName;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
-
-    public Set<DatosLogin> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<DatosLogin> roles) {
-        this.roles = roles;
-    }
-
-  
-    
 }

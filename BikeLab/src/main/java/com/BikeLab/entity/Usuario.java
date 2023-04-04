@@ -23,8 +23,9 @@ public class Usuario implements Serializable {
     private int telefono;
     private String cedula;
     private String direccion;
-    
-    @OneToOne(mappedBy = "usuarioId")
+
+    @ManyToOne
+    @JoinColumn(name = "login_id")
     private DatosLogin datosLogin;
 
     @ManyToOne

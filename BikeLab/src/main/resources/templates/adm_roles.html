@@ -47,7 +47,7 @@
             <tbody>
                 <th:block th:each="user : ${roles}">
                     <tr style="background-color: #24272B; color: white;">
-                        <td th:text="${user.getRolName}"></td>
+                        <td th:text="${user.getRol}"></td>
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
                             <a href="#!" style="color:yellow" th:href="@{/editar/rol/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
                             <a href="#!" style="color:red" th:href="@{/eliminar/rol/{id}(id=${user.getId})}"><ion-icon name="trash-sharp"></ion-icon></a>
