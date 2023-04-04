@@ -19,51 +19,40 @@
         rel="stylesheet">
     <!---CSS-->
     <link th:href="@{/styles/adminTemplate.css}" rel="stylesheet" />
-    <link rel="stylesheet" href="../static/css/adminTemplate.css" th:href="@{/css/adminTemplate.css}" media="screen" />
+    <link rel="stylesheet" href="/static/styles/Template.css" th:href="@{/css/adminTemplate.css}" media="screen" />
 </head>
 <body >
     <header th:fragment="header">
+
         <div class="navbar">
             <nav class="navbar-links">
                 <ul>
                     <li class="logo">
-                        <a class="navbar-logo" href="adm_home.html"><img src="../images/logo1.png" alt="BikeLab"></a>
+                        <a class="navbar-logo" href="adm_home.html"><img src="/static/images/logo1.png" alt="BikeLab"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Usuarios</a>
-                        <ul class="dropdown">
-                            <li><a href="/admin/roles">Roles</a></li>
-                            <li><a href="#">Datos Login</a></li>
-                        </ul>
+                        <a class="nav-link active" href="#">BICICLETAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Proveedores</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Productos</a></li>
-                        </ul>
+                        <a class="nav-link active" href="#">COMPONENTES</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Productos</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Marcas</a></li>
-                            <li><a href="#">Familia</a></li>
-                            <li><a href="#">Tipos</a></li>
-                        </ul>
+                        <a class="nav-link active" href="#">MARCAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Direccion</a>
-                        <ul class="dropdown">
-                            <li><a href="/admin/direccion_distrito">Distritos</a></li>
-                            <li><a href="/admin/direccion_canton">Cantones</a></li>
-                            <li><a href="/admin/direccion_provincia">Provincias</a></li>
-                        </ul>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Crear</a>
-                        <ul class="dropdown">
-                            <li><a href="#">Producto</a></li>
-                            <li><a href="#">Evento</a></li>
-                        </ul>
+                        <a class="nav-link active" href="#">VESTIMENTA</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">ACCESORIOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">EVENTOS</a>
+                    </li>
+                </ul>
+                <ul class="navIcon">
+                    <a href="#!" class="text-white"><ion-icon name="cart-sharp"></ion-icon></a>
+                    <button class="btn" style="color:white; background-color: #EB2546;" type="submit">Iniciar Sesión</button>
+                    <button class="btn" style="color:white; background-color: #EB2546;" type="submit">Registrarse</button> 
                 </ul>
             </nav>
         </div>
@@ -77,7 +66,7 @@
                 <div class="row">
                     <!--Grid 1-->
                     <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <img src="../images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
+                        <img src="/static/images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
                         <p>Lleva tu pedaleo al siguiente nivel.</p>
                     </div>
                     <!--Grid 2-->
