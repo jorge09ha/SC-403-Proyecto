@@ -19,7 +19,7 @@
         rel="stylesheet">
     <!---CSS-->
     <link th:href="@{/styles/adminTemplate.css}" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/styles/Template.css" th:href="@{/css/adminTemplate.css}" media="screen" />
+    <link rel="stylesheet" href="../static/styles/Template.css" th:href="@{/css/adminTemplate.css}" media="screen" />
 </head>
 <body >
     <header th:fragment="header">
@@ -28,25 +28,22 @@
             <nav class="navbar-links">
                 <ul>
                     <li class="logo">
-                        <a class="navbar-logo" href="adm_home.html"><img src="/static/images/logo1.png" alt="BikeLab"></a>
+                        <a class="navbar-logo" href="/"><img src="../images/logo1.png" alt="BikeLab"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">BICICLETAS</a>
+                        <a class="nav-link active" href="/bicicletas">BICICLETAS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">COMPONENTES</a>
+                        <a class="nav-link active" href="/componentes">COMPONENTES</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">MARCAS</a>
+                        <a class="nav-link active" href="/vestimenta">VESTIMENTA</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">VESTIMENTA</a>
+                        <a class="nav-link active" href="/accesorios">ACCESORIOS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">ACCESORIOS</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">EVENTOS</a>
+                        <a class="nav-link active" href="/eventos">EVENTOS</a>
                     </li>
                 </ul>
                 <ul class="navIcon">
@@ -66,7 +63,7 @@
                 <div class="row">
                     <!--Grid 1-->
                     <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <img src="/static/images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
+                         <img src="../images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
                         <p>Lleva tu pedaleo al siguiente nivel.</p>
                     </div>
                     <!--Grid 2-->

@@ -28,6 +28,7 @@ public class Evento implements Serializable {
     private String detalle;
     private String direccion;
     private int stock;
+    private String imagen;
 
     @ManyToOne
     @JoinColumn(name = "tipo_id")
@@ -99,6 +100,14 @@ public class Evento implements Serializable {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public TipoProducto getTipoProducto() {

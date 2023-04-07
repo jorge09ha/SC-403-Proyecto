@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head th:replace="plantilla/Template::head"></head>
+
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/Template::header"></header>
+
+        <!---Title-->
+        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+
+        <!---Elementos-->
+        <div class="elementos">
+            <div class="card" style="width: 15rem;">
+                <img src="../images/envento1.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Titulo</h5>
+                    <p class="card-text">Descripcion.</p>
+                    <a href="#" class="btn btn-primary">Agregar</a>
+                </div>
+            </div>
+            <div class="card" style="width: 15rem;">
+                <img src="../images/envento2.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Titulo</h5>
+                    <p class="card-text">Descripcion.</p>
+                    <a href="#" class="btn btn-primary">Agregar</a>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="plantilla/Template::footer"></footer>
+    </body>
+
+</html>

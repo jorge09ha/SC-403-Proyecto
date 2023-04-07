@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head th:replace="plantilla/AdminTemplate::head"></head>
+
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/AdminTemplate::header"></header>
+
+        <!---Contenido-->
+        <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
+            <div class="card-header bg-black text-white"></div>
+            <div class="card-body">
+                <div class="container">
+                    <form th:object="${producto}"
+                          th:action="@{/save/producto}"
+                          method="POST">
+                        <!---Titulo-->
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+                        <!---Nombre-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="nombre">NOMBRE</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
+                                       placeholder="Nombre" id="nombre" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Modelo-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="modelo">Modelo</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{modelo}"
+                                       placeholder="Modelo" id="modelo" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Talla-->
+                        <div class="form-group mb-4 row col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="talla">Talla</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-sm col-md-6" th:field="*{talla}" id="talla">
+                                    <option value="">Seleccionar talla</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!---Tamanio-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="tamanio">Tamaño</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{tamanio}"
+                                       placeholder="Tamanio" id="tamanio" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Detalle-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="detalle">Detalle</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{detalle}"
+                                       placeholder="Detalle" id="detalle" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Anio-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="anio">Año</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{anio}"
+                                       placeholder="Anio" id="anio" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Precio-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="precio">Precio</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{precio}"
+                                       placeholder="Precio" id="precio" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Stock-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="stock">Stock</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{stock}"
+                                       placeholder="Stock" id="stock" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Imagen-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="imagen">Imagen</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{imagen}"
+                                       placeholder="Imagen" id="imagen" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Tipo-->
+                        <div class="form-group mb-4 row  col-8 mx-auto">
+                            <label class="form-control-sm col-form-label col-md-2" for="tipo">Tipo</label>
+                            <div class="col-sm-10">
+                                <select th:field="*{tipo}" class="form-control form-control-sm col-md-6" id="tipo" aria-describedby="emailHelp">
+                                    <option th:each="x:${tipo}"
+                                            th:value="${x.id}"
+                                            th:text="${x.tipo}"/>
+                                </select>
+                            </div>
+                        </div>
+                        <!---Marca-->
+                        <div class="form-group mb-4 row  col-8 mx-auto">
+                            <label class="form-control-sm col-form-label col-md-2" for="marca">Marca</label>
+                            <div class="col-sm-10">
+                                <select th:field="*{marca}" class="form-control form-control-sm col-md-6" id="marca" aria-describedby="emailHelp">
+                                    <option th:each="x:${marca}"
+                                            th:value="${x.id}"
+                                            th:text="${x.marca}"/>
+                                </select>
+                            </div>
+                        </div>
+                        <!---Botones-->
+                        <div class="d-grid gap-2 col-4 mx-auto">
+                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a class="btn btn-danger " href="/admin/producto">CANCELAR</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!---Footer-->
+        <footer th:replace="plantilla/AdminTemplate::footer"></footer>
+    </body>
+
+</html>

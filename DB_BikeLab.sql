@@ -288,7 +288,7 @@ INSERT INTO `tipoproducto` VALUES
   anio INT,
   precio FLOAT NOT NULL,
   stock INT NOT NULL,
-  imagen BLOB,
+  imagen varchar(50),
   tipo_id INT NOT NULL,
   marca_id INT NOT NULL,
   PRIMARY KEY (id),
@@ -327,6 +327,7 @@ CREATE TABLE evento(
   detalle varchar(500),
   direccion varchar(200) NOT NULL,
   stock INT NOT NULL,
+  imagen varchar(50),
   tipo_id INT NOT NULL,
   provincia_id INT NOT NULL,
   canton_id INT NOT NULL,
@@ -342,9 +343,8 @@ CREATE TABLE evento(
   CONSTRAINT `fk_evento_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 INSERT INTO `evento` VALUES 
-(1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,1,5,504,340),
-(2,'2023-06-18','Vuelta a la Península de Nicoya',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,1,2,212,160);
-
+(1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,NULL,1,5,504,340),
+(2,'2023-06-18','Recreativa Atenas',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,NULL,1,2,212,160);
 
 
 

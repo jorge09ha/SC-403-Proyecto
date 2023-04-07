@@ -25,6 +25,7 @@ public class Producto implements Serializable {
     private int anio;
     private float precio;
     private int stock;
+    private String imagen;
 
     @ManyToOne
     @JoinColumn(name = "tipo_id")
@@ -104,6 +105,14 @@ public class Producto implements Serializable {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public TipoProducto getTipoProducto() {
