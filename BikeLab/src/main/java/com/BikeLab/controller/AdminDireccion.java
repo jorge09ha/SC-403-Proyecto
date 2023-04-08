@@ -39,7 +39,7 @@ public class AdminDireccion {
         List<Distrito> lista = distritoService.getAllDistrito();
         model.addAttribute("titulo", "DISTRITOS");
         model.addAttribute("distritos", lista);
-        return "adm_distrito";
+        return "adm_VerDistrito";
     }
 
     @GetMapping("/admin/direccion_canton")
@@ -47,7 +47,7 @@ public class AdminDireccion {
         List<Canton> lista = cantonService.getAllCanton();
         model.addAttribute("titulo", "CANTONES");
         model.addAttribute("cantones", lista);
-        return "adm_canton";
+        return "adm_VerCanton";
     }
 
     @GetMapping("/admin/direccion_provincia")
@@ -55,7 +55,7 @@ public class AdminDireccion {
         List<Provincia> lista = provinciaService.getAllProvincia();
         model.addAttribute("titulo", "PROVINCIAS");
         model.addAttribute("provincias", lista);
-        return "adm_provincia";
+        return "adm_VerProvincia";
     }
 
     //-------------------------- New --------------------------

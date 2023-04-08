@@ -15,37 +15,37 @@ public class Tienda {
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("titulo", "HOME");
-        return "home";
+        return "tienda_home";
     }
     
         @GetMapping("/bicicletas")
     public String bicicletas(Model model) {
         model.addAttribute("titulo", "BICICLETAS");
-        return "bicicletas";
+        return "tienda_bicicletas";
     }
     
         @GetMapping("/componentes")
     public String componentes(Model model) {
         model.addAttribute("titulo", "COMPONENTES");
-        return "componentes";
+        return "tienda_componentes";
     }
     
         @GetMapping("/vestimenta")
     public String vestimenta(Model model) {
         model.addAttribute("titulo", "VESTIMENTA");
-        return "vestimenta";
+        return "tienda_vestimenta";
     }
     
         @GetMapping("/accesorios")
     public String accesorios(Model model) {
         model.addAttribute("titulo", "ACCESORIOS");
-        return "accesorios";
+        return "tienda_accesorios";
     }
     
         @GetMapping("/eventos")
     public String eventos(Model model) {
         model.addAttribute("titulo", "EVENTOS");
-        return "eventos";
+        return "tienda_eventos";
     }
 
 }

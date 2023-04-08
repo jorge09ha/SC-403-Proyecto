@@ -24,7 +24,7 @@ public class AdminProveedor {
         List<Proveedor> lista = proveedorService.getAllProveedor();
         model.addAttribute("titulo", "PROVEEDORES");
         model.addAttribute("proveedores", lista);
-        return "adm_proveedor";
+        return "adm_VerProveedor";
     }
     //-------------------------- New --------------------------
         @GetMapping("/admin/proveedor/nuevo")

@@ -34,7 +34,7 @@ public class AdminProducto {
         List<Marca> lista = marcaService.getAllMarca();
         model.addAttribute("titulo", "MARCAS");
         model.addAttribute("marcas", lista);
-        return "adm_marcaP";
+        return "adm_VerMarcaP";
     }
 
     @GetMapping("/admin/familia_producto")
@@ -42,7 +42,7 @@ public class AdminProducto {
         List<FamiliaProducto> lista = familiaProductoService.getAllFamiliaProducto();
         model.addAttribute("titulo", "FAMILIA PRODUCTO");
         model.addAttribute("familias", lista);
-        return "adm_familiaP";
+        return "adm_VerFamiliaP";
     }
 
     @GetMapping("/admin/tipo_producto")
@@ -50,7 +50,7 @@ public class AdminProducto {
         List<TipoProducto> lista = tipoProductoService.getAllTipoProducto();
         model.addAttribute("titulo", "TIPO PRODUCTO");
         model.addAttribute("tipos", lista);
-        return "adm_tipoP";
+        return "adm_VerTipoP";
     }
     //-------------------------- New --------------------------
     //-------------------------- Save --------------------------
