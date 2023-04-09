@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head th:replace="plantilla/AdminTemplate::head"></head>
+
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/AdminTemplate::header"></header>
+
+        <!---Contenido-->
+        <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
+            <div class="card-header bg-black text-white"></div>
+            <div class="card-body">
+                <div class="container">
+                    <form th:object="${familia}" th:action="@{/save/familia}" method="POST">
+                        <!---Titulo-->
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+                        <!---Familia-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="familia">Familia</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{familia}"
+                                       placeholder="Familia" id="familia" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Detalle-->
+                        <div class="form-group mb-4 row   col-8 mx-auto">
+                            <label class="col-md-2 col-form-label" for="detalle">Detalle</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{detalle}"
+                                       placeholder="Detalle" id="detalle" aria-describedby="emailHelp">
+                            </div>
+                        </div>
+                        <!---Botones-->
+                        <div class="d-grid gap-2 col-4 mx-auto">
+                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a class="btn btn-danger " href="/admin/familia_producto">CANCELAR</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!---Footer-->
+        <footer th:replace="plantilla/AdminTemplate::footer"></footer>
+    </body>
+
+</html>

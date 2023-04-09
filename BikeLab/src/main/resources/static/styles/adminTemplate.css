@@ -151,12 +151,12 @@ ul li:hover ul.dropdown {
 }
 
 @media screen and (min-width: 1000px) {
-  footContainer {
-   position: relative;
-    bottom: 0;
-    width: 100%; 
-    margin-top: 0;
-    height: 80px;
-  }
-  
+    footContainer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin-top: 0;
+        height: 80px;
+    }
+
 }
