@@ -32,7 +32,7 @@
             <!---Agregar-->
             <div class="agregar">
                 <button class="btn btn-success" type="button"
-                        onclick="window.location.href = '/admin/direccion_distrito/nuevo'">Agregar</button>
+                        onclick="window.location.href = '/admin/usuario/nuevo'">Agregar</button>
             </div>
         </div>
 
@@ -44,11 +44,9 @@
                         <th scope="col">APELLIDO</th>
                         <th scope="col">TELEFONO</th>
                         <th scope="col">CEDULA</th>
-                        <th scope="col">DIRECCION</th>
-                        <th scope="col">POVINCIA</th>
+                        <th scope="col">CORREO</th>
                         <th scope="col">CANTON</th>
-                        <th scope="col">DISTRITO</th>
-                        <th scope="col">TIPO</th>
+                        <th scope="col">ROL</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -59,14 +57,12 @@
                         <td th:text="${user.getApellido1}"></td>
                         <td th:text="${user.getTelefono}"></td>
                         <td th:text="${user.getCedula}"></td>
-                        <td th:text="${user.getDireccion}"></td>
-                        <td th:text="${user.getProvincia.getNombre}"></td>
+                        <td th:text="${user.getCorreo}"></td>
                         <td th:text="${user.getCanton.getNombre}"></td>
-                        <td th:text="${user.getDistrito.getNombre}"></td>
-                        <td th:text="${user.getDatosLogin.getRol.getRol}"></td>
+                        <td th:text="${user.getRol.getRol}"></td>
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
-                            <a href="#!" style="color:yellow" th:href="@{/editar/tipo/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
-                            <a href="#!" style="color:red" th:href="@{/eliminar/tipo/{id}(id=${user.getId})}" id="eliminar-${
+                            <a href="#!" style="color:yellow" th:href="@{/editar/usuario/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
+                            <a href="#!" style="color:red" th:href="@{/eliminar/usuario/{id}(id=${user.getId})}" id="eliminar-${
                                    user.getId
                                }"><ion-icon name="trash-sharp"></ion-icon></a>
                         </td>

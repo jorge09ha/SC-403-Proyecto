@@ -1,9 +1,13 @@
 package com.BikeLab.controller;
 
-import com.BikeLab.entity.DatosLogin;
+import com.BikeLab.entity.Canton;
+import com.BikeLab.entity.Distrito;
+import com.BikeLab.entity.Provincia;
 import com.BikeLab.entity.Rol;
 import com.BikeLab.entity.Usuario;
-import com.BikeLab.service.IDatosLoginService;
+import com.BikeLab.service.ICantonService;
+import com.BikeLab.service.IDistritoService;
+import com.BikeLab.service.IProvinciaService;
 import com.BikeLab.service.IRolService;
 import com.BikeLab.service.IUsuarioService;
 import java.util.List;
@@ -26,10 +30,16 @@ public class AdminUsuario {
     private IRolService rolesService;
 
     @Autowired
-    private IDatosLoginService datosLoginService;
+    private IUsuarioService usuarioService;
 
     @Autowired
-    private IUsuarioService usuarioService;
+    private IProvinciaService provinciaService;
+
+    @Autowired
+    private ICantonService cantonService;
+
+    @Autowired
+    private IDistritoService distritoService;
 
     //-------------------------- List --------------------------
     @GetMapping("/admin/roles")
@@ -38,14 +48,6 @@ public class AdminUsuario {
         model.addAttribute("titulo", "Roles de Usuario");
         model.addAttribute("roles", lista);
         return "adm_VerRoles";
-    }
-
-    @GetMapping("/admin/datos_login")
-    public String indexDatosLogin(Model model) {
-        List<DatosLogin> lista = datosLoginService.getAllDatosLogin();
-        model.addAttribute("titulo", "Datos Login");
-        model.addAttribute("datosLogin", lista);
-        return "adm_VerDatosLogin";
     }
 
     @GetMapping("/admin/usuario")
@@ -65,14 +67,19 @@ public class AdminUsuario {
         return "adm_crearRole";
     }
 
-    @GetMapping("/admin/datos_login/nuevo")
-    public String crearDatosLogin(Model model) {
+    @GetMapping("/admin/usuario/nuevo")
+    public String crearUsuario(Model model) {
+        List<Distrito> listaD = distritoService.getAllDistrito();
+        List<Canton> listaC = cantonService.getAllCanton();
+        List<Provincia> listaP = provinciaService.getAllProvincia();
         List<Rol> rol = rolesService.getAllRole();
-        DatosLogin datosLogin = new DatosLogin();
-        model.addAttribute("titulo", "Nuevo Rol");
-        model.addAttribute("datosLogin", datosLogin);
+        model.addAttribute("titulo", "Nuevo Usuario");
+        model.addAttribute("usuario", new Usuario());
+        model.addAttribute("distrito", listaD);
+        model.addAttribute("canton", listaC);
+        model.addAttribute("provincia", listaP);
         model.addAttribute("rol", rol);
-        return "adm_crearDatosLogin";
+        return "adm_crearUsuario";
     }
 
     //-------------------------- Save --------------------------
@@ -82,10 +89,10 @@ public class AdminUsuario {
         return "redirect:/admin/roles";
     }
 
-    @PostMapping("/save/datosLogin")
-    public String guardarDatosLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin) {
-        datosLoginService.saveDatosLogin(datosLogin);
-        return "redirect:/admin/datos_login";
+    @PostMapping("/save/usuario")
+    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {
+        usuarioService.saveUsuario(usuario);
+        return "redirect:/admin/usuario";
     }
 
     //-------------------------- Delete --------------------------
@@ -95,10 +102,10 @@ public class AdminUsuario {
         return "redirect:/admin/roles";
     }
 
-    @GetMapping("/eliminar/datosLogin/{id}")
-    public String eliminarDatosLogin(@PathVariable Long id) {
-        datosLoginService.deleteDatosLogin(id);
-        return "redirect:/admin/datos_login";
+    @GetMapping("/eliminar/usuario/{id}")
+    public String eliminarUsuario(@PathVariable Long id) {
+        usuarioService.deleteUsuario(id);
+        return "redirect:/admin/usuario";
     }
 
     //-------------------------- UpDate --------------------------
@@ -119,26 +126,42 @@ public class AdminUsuario {
         rolesService.saveRole(editar);
         return "redirect:/admin/roles";
     }
-    
-        //*DatosLogin
-    @GetMapping("/editar/datosLogin/{id}")
-    public String editarDatosLogin(@PathVariable("id") Long id, Model model) {
-        DatosLogin a = datosLoginService.getDatosLoginById(id);
-        List<Rol> lista = rolesService.getAllRole();
-        model.addAttribute("titulo", "Editar Rol");
-        model.addAttribute("datosLogin", a);
-        model.addAttribute("rol", lista);
-        return "adm_editarDatosLogin";
+
+    //*Usuario
+    @GetMapping("/editar/usuario/{id}")
+    public String editarUsuario(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = usuarioService.getUsuarioById(id);
+        List<Rol> listRol = rolesService.getAllRole();
+        List<Distrito> listaD = distritoService.getAllDistrito();
+        List<Canton> listaC = cantonService.getAllCanton();
+        List<Provincia> listaP = provinciaService.getAllProvincia();
+        model.addAttribute("titulo", "Editar Usuario");
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("rol", listRol);
+        model.addAttribute("distrito", listaD);
+        model.addAttribute("canton", listaC);
+        model.addAttribute("provincia", listaP);
+        return "adm_editarUsuario";
     }
 
-    @PostMapping("/editar/datosLogin/{id}")
-    public String actualizarDatosLogin(@PathVariable Long id, @ModelAttribute("datosLogin") DatosLogin datosLogin) {
-        DatosLogin editar = datosLoginService.getDatosLoginById(id);
-        editar.setId(id);
-        editar.setCorreo(datosLogin.getCorreo());
-        editar.setContrasenia(datosLogin.getContrasenia());
-        editar.setRol(datosLogin.getRol());
-        datosLoginService.saveDatosLogin(editar);
-        return "redirect:/admin/datos_login";
+    @PostMapping("/editar/usuario/{id}")
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("Usuario") Usuario usuario) {
+        Usuario editarUsuario = usuarioService.getUsuarioById(id);
+        editarUsuario.setId(id);
+        editarUsuario.setNombre(usuario.getNombre());
+        editarUsuario.setApellido1(usuario.getApellido1());
+        editarUsuario.setApellido2(usuario.getApellido2());
+        editarUsuario.setTelefono(usuario.getTelefono());
+        editarUsuario.setCedula(usuario.getCedula());
+        editarUsuario.setDireccion(usuario.getDireccion());
+        editarUsuario.setCorreo(usuario.getCorreo());
+        editarUsuario.setContrasenia(usuario.getContrasenia());
+        editarUsuario.setRol(usuario.getRol());
+        editarUsuario.setProvincia(usuario.getProvincia());
+        editarUsuario.setCanton(usuario.getCanton());
+        editarUsuario.setDistrito(usuario.getDistrito());
+        usuarioService.saveUsuario(editarUsuario);
+        return "redirect:/admin/usuario";
     }
+
 }

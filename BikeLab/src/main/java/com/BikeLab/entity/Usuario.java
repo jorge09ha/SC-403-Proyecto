@@ -23,10 +23,12 @@ public class Usuario implements Serializable {
     private int telefono;
     private String cedula;
     private String direccion;
+    private String correo;
+    private String contrasenia;
 
     @ManyToOne
-    @JoinColumn(name = "login_id")
-    private DatosLogin datosLogin;
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
 
     @ManyToOne
     @JoinColumn(name = "provincia_id")
@@ -96,12 +98,28 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public DatosLogin getDatosLogin() {
-        return datosLogin;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setDatosLogin(DatosLogin datosLogin) {
-        this.datosLogin = datosLogin;
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public Provincia getProvincia() {
@@ -127,5 +145,6 @@ public class Usuario implements Serializable {
     public void setDistrito(Distrito distrito) {
         this.distrito = distrito;
     }
+
 
 }

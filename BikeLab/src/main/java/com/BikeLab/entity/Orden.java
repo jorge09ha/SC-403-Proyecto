@@ -1,6 +1,5 @@
 package com.BikeLab.entity;
 
-import com.BikeLab.entity.DatosLogin;
 import com.BikeLab.entity.Usuario;
 import com.BikeLab.entity.Carrito;
 import java.io.Serializable;
@@ -32,10 +31,6 @@ public class Orden implements Serializable {
     @ManyToOne
     @JoinColumn(name = "metodo_id")
     private MetodoPago metodopago;
-
-    @ManyToOne
-    @JoinColumn(name = "login_id")
-    private DatosLogin datoslogin;
 
     @ManyToOne
     @JoinColumn(name = "carrito_id")
@@ -87,14 +82,6 @@ public class Orden implements Serializable {
 
     public void setMetodopago(MetodoPago metodopago) {
         this.metodopago = metodopago;
-    }
-
-    public DatosLogin getDatoslogin() {
-        return datoslogin;
-    }
-
-    public void setDatoslogin(DatosLogin datoslogin) {
-        this.datoslogin = datoslogin;
     }
 
     public Carrito getCarrito() {
