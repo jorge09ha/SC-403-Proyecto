@@ -54,7 +54,6 @@ public class Tienda {
         List<Evento> lista = eventoService.getAllEvento();
         model.addAttribute("titulo", "EVENTOS");
         model.addAttribute("eventos", lista);
-        model.addAttribute("imagen", lista.get(7));
         return "tienda_eventos";
     }
 
