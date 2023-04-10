@@ -109,6 +109,78 @@ ul li:hover ul.dropdown {
     width: 200px;
 }
 
+/*----------------------- Cards -----------------------*/
+
+
+.card {
+    background-color: var(--color6);
+    border-radius: 20px;
+    color: var(--color4);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.card img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-body {
+    padding: 10px;
+
+    background-color: var(--color4);
+    color: var(--color6);
+}
+
+.card-title {
+    color: var(--color1);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-subtitle {
+    color: var(--color5);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: var(--color6);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.btn-1 {
+    background-color: var(--color5);
+    color: var(--color4);
+    border-color: #141617;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.btn-1:hover {
+    background-color: var(--color3);
+    color: var(--color5);
+}
+
+.btn-2 {
+    background-color: var(--color1);
+    color: var(--color4);
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.btn-2:hover {
+    background-color: var(--color2);
+    color: var(--color4);
+}
+
+
+
 /*----------------------- Content -----------------------*/
 .content {
     padding: 50px;
@@ -125,8 +197,8 @@ ul li:hover ul.dropdown {
 }
 
 /*----------------------- Footer -----------------------*/
-.footContainer{
-    padding-top: 1em ;
+.footContainer {
+    padding-top: 1em;
     text-align: center;
     margin-top: auto;
     bottom: 0;
@@ -155,12 +227,12 @@ ul li:hover ul.dropdown {
 }
 
 @media screen and (min-width: 1000px) {
-  footContainer {
-   position: relative;
-    bottom: 0;
-    width: 100%; 
-    margin-top: 0;
-    height: 80px;
-  }
-  
+    footContainer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin-top: 0;
+        height: 80px;
+    }
+
 }

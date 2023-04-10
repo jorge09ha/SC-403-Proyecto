@@ -1,5 +1,9 @@
 package com.BikeLab.controller;
 
+import com.BikeLab.entity.Evento;
+import com.BikeLab.service.IEventoService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class Tienda {
+    
+        @Autowired
+    private IEventoService eventoService;
 
     //-------------------------- List --------------------------
     @GetMapping("")
@@ -43,8 +50,11 @@ public class Tienda {
     }
     
         @GetMapping("/eventos")
-    public String eventos(Model model) {
+    public String indexEvento(Model model) {
+        List<Evento> lista = eventoService.getAllEvento();
         model.addAttribute("titulo", "EVENTOS");
+        model.addAttribute("eventos", lista);
+        model.addAttribute("imagen", lista.get(7));
         return "tienda_eventos";
     }
 

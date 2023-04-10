@@ -343,8 +343,20 @@ INSERT INTO `producto` VALUES
 INSERT INTO `proveedorProducto` VALUES (1,1),(2,2);
 
 INSERT INTO `evento` VALUES 
-(1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,NULL,1,5,502,50201),
-(2,'2023-06-18','Recreativa Atenas',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,NULL,1,2,205,20501);
+(1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,'../images/evento/evento1.jpg',1,5,502,50201),
+(2,'2023-06-18','Recreativa Atenas',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,'../images/evento/evento2.jpg',1,2,205,20501),
+(3,'2023-08-05','Carrera de Montaña en Orosi',25000,'¡Desafía tus límites y corre en una de las montañas más bellas de Costa Rica! Incluye: hidratación, asistencia mecánica, premios y medallas.','Orosi',300,'../images/evento/evento3.jpg',1,4,401,40102),
+(4,'2023-05-15','Paseo en bicicleta en Turrialba',15000,'Recorre los paisajes más hermosos del Valle de Turrialba en bicicleta. Incluye: desayuno, hidratación, asistencia mecánica y guía.','Turrialba',200,'../images/evento/evento4.jpg',1,5,503,50301),
+(5,'2023-09-10','Festival de Running en Cartago',20000,'¡Cletea por la ciudad de Cartago y vive una experiencia única en el Festival de Running! Incluye: hidratación, asistencia mecánica, premios y medallas.','Cartago',500,'../images/evento/evento5.jpg',1,2,201,20101),
+(6,'2023-05-08','Tour en bicicleta por Heredia',10000,'Recorre los lugares más interesantes de la ciudad de Heredia en bicicleta. Incluye: desayuno, hidratación y asistencia mecánica.','Heredia',150,'../images/evento/evento6.jpg',1,5,501,50101),
+(7,'2023-07-03','Carrera de obstáculos',30000,'Desafía tus límites y supera todos los obstáculos de la carrera. Incluye: hidratación, asistencia mecánica, premios y medallas.','Gimnasio Bodytech, San José',500,'../images/evento/evento7.jpg',1,2,203,20301),
+(8,'2023-08-20','Carrera nocturna',15000,'Corre bajo las estrellas y disfruta de la ciudad iluminada. Incluye: hidratación, asistencia mecánica, premios y medallas.','Parque de la Paz',300,'../images/evento/evento8.jpg',1,2,204,20401),
+(9,'2023-08-12','Rally de Montaña en Escazú',20000,'Disfruta de una emocionante carrera de ciclismo de montaña en Escazú. Incluye: hidratación, asistencia mecánica y premios.','Escazú',250,'../images/evento/evento9.jpg',1,5,504,50401),
+(10,'2023-06-04','Carrera de Ruta en Alajuela',15000,'Corre por las hermosas rutas de Alajuela en una carrera de ciclismo de ruta. Incluye: hidratación, asistencia mecánica y medalla.','Alajuela',300,'../images/evento/evento10.jpg',1,5,505,50501),
+(11,'2023-09-16','Carrera de Contrarreloj en Heredia',10000,'Participa en una emocionante carrera contrarreloj en la hermosa ciudad de Heredia. Incluye: hidratación, asistencia mecánica y premios.','Heredia',200,'../images/evento/evento11.jpg',1,5,506,50601),
+(12,'2023-07-09','Gran Fondo en Puntarenas',25000,'Únete a la Gran Fondo en Puntarenas y recorre las hermosas carreteras de la costa pacífica de Costa Rica. Incluye: hidratación, asistencia mecánica y medalla.','Puntarenas',500,'../images/evento/evento12.jpg',1,5,507,50701),
+(13,'2023-05-22','Carrera de BMX en Liberia',8000,'Participa en una emocionante carrera de BMX en la ciudad de Liberia. Incluye: hidratación, asistencia mecánica y premios.','Liberia',100,'../images/evento/evento13.jpg',1,5,508,50801);
+
 
 INSERT INTO metodopago VALUES 
 (1, 'Tarjeta de crédito'),(2, 'Tarjeta de débito'),(3, 'PayPal'),(4, 'Transferencia bancaria'),(5, 'Cheque'),(6, 'Efectivo'),(7, 'SINPE móvil'); 
