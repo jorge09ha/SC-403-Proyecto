@@ -56,4 +56,9 @@ public class TipoProducto implements Serializable {
         this.familiaproducto = familiaproducto;
     }
 
+    @Override
+    public String toString() {
+        return "TipoProducto{" + "id=" + id + ", tipo=" + tipo + ", detalle=" + detalle + ", familiaproducto=" + familiaproducto + '}';
+    }
+
 }

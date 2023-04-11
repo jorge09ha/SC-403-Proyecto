@@ -46,4 +46,9 @@ public class Canton implements Serializable {
         this.provincia = provincia;
     }
 
+    @Override
+    public String toString() {
+        return "Canton{" + "id=" + id + ", nombre=" + nombre + ", provincia=" + provincia + '}';
+    }
+
 }

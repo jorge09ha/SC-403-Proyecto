@@ -146,5 +146,9 @@ public class Usuario implements Serializable {
         this.distrito = distrito;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", cedula=" + cedula + ", direccion=" + direccion + ", correo=" + correo + ", contrasenia=" + contrasenia + ", rol=" + rol + ", provincia=" + provincia + ", canton=" + canton + ", distrito=" + distrito + '}';
+    }
 
 }

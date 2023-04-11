@@ -25,7 +25,6 @@ public class CarritoProducto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;
-    
 
     public long getId() {
         return id;
@@ -49,6 +48,11 @@ public class CarritoProducto implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    @Override
+    public String toString() {
+        return "CarritoProducto{" + "id=" + id + ", carrito=" + carrito + ", producto=" + producto + '}';
     }
 
 }

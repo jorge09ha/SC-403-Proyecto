@@ -51,4 +51,9 @@ public class ProveedorProducto implements Serializable {
         this.producto = producto;
     }
 
+    @Override
+    public String toString() {
+        return "ProveedorProducto{" + "id=" + id + ", proveedor=" + proveedor + ", producto=" + producto + '}';
+    }
+
 }

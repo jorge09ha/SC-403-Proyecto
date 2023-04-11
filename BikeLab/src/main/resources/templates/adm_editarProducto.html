@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 
-<head th:replace="plantilla/AdminTemplate::head"></head>
+    <head th:replace="plantilla/AdminTemplate::head"></head>
 
-<body>
-    <!---Header-->
-    <header th:replace="plantilla/AdminTemplate::header"></header>
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/AdminTemplate::header"></header>
 
-    <!---Contenido-->
-    <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
-        <div class="card-header bg-black text-white"></div>
-        <div class="card-body">
-            <div class="container">
-                <form th:object="${producto}" th:action="@{/editar/producto/{id}(id=${producto.getId})}" method="POST">
+        <!---Contenido-->
+        <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
+            <div class="card-header bg-black text-white"></div>
+            <div class="card-body">
+                <div class="container">
+                    <form th:object="${producto}" th:action="@{/editar/producto/{id}(id=${producto.getId})}" method="POST" enctype="multipart/form-data">
                         <!---Titulo-->
                         <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
                         <!---Nombre-->
@@ -85,11 +85,12 @@
                             </div>
                         </div>
                         <!---Imagen-->
-                        <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="imagen">Imagen</label>
+                        <div class="form-group mb-4 row col-8 mx-auto">
+                            <label class="control-label col-sm-2" for="imagen">Imagen:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{imagen}"
-                                       placeholder="Imagen" id="imagen" aria-describedby="emailHelp">
+                                <p type="text" class="form-control form-control-sm col-md-6" th:text="*{imagen}" id="imgActual" aria-describedby="emailHelp"></p>
+                                <img id="preview" th:src="${producto.getImagen}" alt="imagen" style="max-width: 100%; height: auto;">
+                                <input type="file" class="form-control-file" id="file" name="file" onchange="previewImage()">
                             </div>
                         </div>
                         <!---Tipo-->
@@ -124,8 +125,27 @@
             </div>
         </div>
 
-    <!---Footer-->
-    <footer th:replace="plantilla/AdminTemplate::footer"></footer>
-</body>
+        <script>
+            function previewImage() {
+                var preview = document.getElementById("preview");
+                var file = document.querySelector("input[type=file]").files[0];
+                var reader = new FileReader();
+
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                };
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "#";
+                }
+            }
+        </script>
+
+        <!---Footer-->
+        <footer th:replace="plantilla/AdminTemplate::footer"></footer>
+
+    </body>
 
 </html>

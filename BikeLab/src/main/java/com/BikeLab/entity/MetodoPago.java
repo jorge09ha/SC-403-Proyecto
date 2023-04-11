@@ -32,4 +32,9 @@ public class MetodoPago implements Serializable {
         this.metodopago = metodopago;
     }
 
+    @Override
+    public String toString() {
+        return "MetodoPago{" + "id=" + id + ", metodopago=" + metodopago + '}';
+    }
+
 }

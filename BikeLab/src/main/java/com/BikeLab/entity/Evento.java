@@ -142,4 +142,9 @@ public class Evento implements Serializable {
         this.distrito = distrito;
     }
 
+    @Override
+    public String toString() {
+        return "Evento{" + "id=" + id + ", fecha=" + fecha + ", nombre=" + nombre + ", precio=" + precio + ", detalle=" + detalle + ", direccion=" + direccion + ", stock=" + stock + ", imagen=" + imagen + ", tipoProducto=" + tipoProducto + ", provincia=" + provincia + ", canton=" + canton + ", distrito=" + distrito + '}';
+    }
+
 }

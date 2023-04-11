@@ -50,4 +50,9 @@ public class Proveedor implements Serializable {
         this.telefono = telefono;
     }
 
+    @Override
+    public String toString() {
+        return "Proveedor{" + "id=" + id + ", nombre=" + nombre + ", correo=" + correo + ", telefono=" + telefono + '}';
+    }
+
 }

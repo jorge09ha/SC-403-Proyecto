@@ -12,9 +12,8 @@
             <div class="card-header bg-black text-white"></div>
             <div class="card-body">
                 <div class="container">
-                    <form th:object="${evento}"
-                          th:action="@{/save/evento}"
-                          method="POST">
+                    <form th:object="${evento}"th:action="@{/save/evento}"method="POST" enctype="multipart/form-data">
+
                         <!---Titulo-->
                         <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>                    
                         <!---Nombre-->
@@ -66,11 +65,11 @@
                             </div>
                         </div>
                         <!---Imagen-->
-                        <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="imagen">Imagen</label>
+                        <div class="form-group mb-4 row col-8 mx-auto">
+                            <label class="control-label col-sm-2" for="imagen">Imagen:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{imagen}"
-                                       placeholder="Imagen" id="imagen" aria-describedby="emailHelp">
+                                <img id="preview" src="/images/no_image.jpg" style="max-width: 100%; height: auto;"alt="no_image">
+                                <input type="file" class="form-control-file" id="file" name="file" onchange="previewImage()">
                             </div>
                         </div>
                         <!---Tipo-->
@@ -123,10 +122,29 @@
                             <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
                             <a class="btn btn-danger " href="/admin/evento">CANCELAR</a>
                         </div>
+
                     </form>
                 </div>
             </div>
         </div>
+
+        <script>
+            function previewImage() {
+                var preview = document.getElementById("preview");
+                var file = document.querySelector("input[type=file]").files[0];
+                var reader = new FileReader();
+
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                };
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                    preview.src = "#";
+                }
+            }
+        </script>
 
         <!---Footer-->
         <footer th:replace="plantilla/AdminTemplate::footer"></footer>

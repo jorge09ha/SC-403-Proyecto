@@ -32,4 +32,9 @@ public class Marca implements Serializable {
         this.nombre = nombre;
     }
 
+    @Override
+    public String toString() {
+        return "Marca{" + "id=" + id + ", nombre=" + nombre + '}';
+    }
+
 }
