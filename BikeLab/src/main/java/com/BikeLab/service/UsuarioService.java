@@ -11,7 +11,8 @@ public class UsuarioService implements IUsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
-
+    
+  
     @Override
     public List<Usuario> getAllUsuario() {
         return (List<Usuario>) usuarioRepository.findAll();
@@ -32,4 +33,14 @@ public class UsuarioService implements IUsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+    @Override
+    public List<Usuario> getAllUser() {        
+          return (List<Usuario>) usuarioRepository.findAllUser();
+  }
+
+    @Override
+    public Usuario findByCorreo(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
 }

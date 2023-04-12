@@ -1,13 +1,17 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,11 +28,16 @@ public class Usuario implements Serializable {
     private String cedula;
     private String direccion;
     private String correo;
-    private String contrasenia;
+    private String password;
+    
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "rolusuario",
+			joinColumns = @JoinColumn(name = "usuario_id",referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
+			)
+	private List<Rol> roles;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
-    private Rol rol;
 
     @ManyToOne
     @JoinColumn(name = "provincia_id")
@@ -106,22 +115,23 @@ public class Usuario implements Serializable {
         this.correo = correo;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Rol getRol() {
-        return rol;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
+   
     public Provincia getProvincia() {
         return provincia;
     }
@@ -145,6 +155,32 @@ public class Usuario implements Serializable {
     public void setDistrito(Distrito distrito) {
         this.distrito = distrito;
     }
+  
+    
+     public Usuario() {
+       
+    }
 
+    public Usuario(long id, String nombre, String apellido1, String apellido2, int telefono, String cedula, String direccion, String correo, String password, List<Rol> roles, Provincia provincia, Canton canton, Distrito distrito) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.telefono = telefono;
+        this.cedula = cedula;
+        this.direccion = direccion;
+        this.correo = correo;
+        this.password = password;
+        this.roles = roles;
+        this.provincia = provincia;
+        this.canton = canton;
+        this.distrito = distrito;
+    }
+
+    
+     
+     
+    
+   
 
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class Tienda {
 
     //-------------------------- List --------------------------
-    @GetMapping("")
+    @GetMapping("tienda_home")
     public String index(Model model) {
         model.addAttribute("titulo", "HOME");
         return "tienda_home";

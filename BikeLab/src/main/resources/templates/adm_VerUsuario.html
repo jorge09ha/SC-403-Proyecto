@@ -58,8 +58,9 @@
                         <td th:text="${user.getTelefono}"></td>
                         <td th:text="${user.getCedula}"></td>
                         <td th:text="${user.getCorreo}"></td>
-                        <td th:text="${user.getCanton.getNombre}"></td>
-                        <td th:text="${user.getRol.getRol}"></td>
+                        <td th:text="${user.getCanton.getNombre}"></td>                          
+                       <td th:each="rol : ${user.getRoles}" th:text="${rol.getRol}"></td>                            
+                       
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
                             <a href="#!" style="color:yellow" th:href="@{/editar/usuario/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
                             <a href="#!" style="color:red" th:href="@{/eliminar/usuario/{id}(id=${user.getId})}" id="eliminar-${
@@ -69,12 +70,14 @@
                         </td>
                     </tr>
                 </th:block>
+               
+                
                 </tbody>
             </table>
         </div>
 
         <footer th:replace="plantilla/AdminTemplate::footer"></footer>
-        
+
         <script>
             const eliminarLinks = document.querySelectorAll('[id^="eliminar-"]');
             eliminarLinks.forEach(eliminarLink => {
@@ -87,7 +90,7 @@
                 });
             });
         </script>
-        
+
     </body>
 
 </html>

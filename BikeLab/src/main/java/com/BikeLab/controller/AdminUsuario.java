@@ -52,21 +52,14 @@ public class AdminUsuario {
 
     @GetMapping("/admin/usuario")
     public String indexUsuario(Model model) {
-        List<Usuario> lista = usuarioService.getAllUsuario();
-        model.addAttribute("titulo", "USUARIOS");
-        model.addAttribute("usuarios", lista);
+        List<Usuario> rolUsuario = usuarioService.getAllUser();   
+       model.addAttribute("titulo", "USUARIOS");
+       model.addAttribute("usuarios", rolUsuario);
         return "adm_VerUsuario";
     }
+
     //-------------------------- New --------------------------
-
-    @GetMapping("/admin/rol/nuevo")
-    public String crearRol(Model model) {
-        Rol rol = new Rol();
-        model.addAttribute("titulo", "Nuevo Rol");
-        model.addAttribute("rol", rol);
-        return "adm_crearRole";
-    }
-
+    
     @GetMapping("/admin/usuario/nuevo")
     public String crearUsuario(Model model) {
         List<Distrito> listaD = distritoService.getAllDistrito();
@@ -83,25 +76,14 @@ public class AdminUsuario {
     }
 
     //-------------------------- Save --------------------------
-    @PostMapping("/save/rol")
-    public String guardarRole(@ModelAttribute("rol") Rol rol) {
-        rolesService.saveRole(rol);
-        return "redirect:/admin/roles";
-    }
-
+   
     @PostMapping("/save/usuario")
-    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {
+    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {      
         usuarioService.saveUsuario(usuario);
         return "redirect:/admin/usuario";
     }
 
-    //-------------------------- Delete --------------------------
-    @GetMapping("/eliminar/rol/{id}")
-    public String eliminarRole(@PathVariable Long id) {
-        rolesService.deleteRole(id);
-        return "redirect:/admin/roles";
-    }
-
+    //-------------------------- Delete --------------------------    
     @GetMapping("/eliminar/usuario/{id}")
     public String eliminarUsuario(@PathVariable Long id) {
         usuarioService.deleteUsuario(id);
@@ -109,24 +91,6 @@ public class AdminUsuario {
     }
 
     //-------------------------- UpDate --------------------------
-    //*Roles
-    @GetMapping("/editar/rol/{id}")
-    public String editarRol(@PathVariable("id") Long id, Model model) {
-        Rol a = rolesService.getRoleById(id);
-        model.addAttribute("titulo", "Editar Rol");
-        model.addAttribute("rol", a);
-        return "adm_editarRol";
-    }
-
-    @PostMapping("/editar/rol/{id}")
-    public String actualizarRol(@PathVariable Long id, @ModelAttribute("Rol") Rol rol) {
-        Rol editar = rolesService.getRoleById(id);
-        editar.setId(id);
-        editar.setRol(rol.getRol());
-        rolesService.saveRole(editar);
-        return "redirect:/admin/roles";
-    }
-
     //*Usuario
     @GetMapping("/editar/usuario/{id}")
     public String editarUsuario(@PathVariable("id") Long id, Model model) {
@@ -155,8 +119,8 @@ public class AdminUsuario {
         editarUsuario.setCedula(usuario.getCedula());
         editarUsuario.setDireccion(usuario.getDireccion());
         editarUsuario.setCorreo(usuario.getCorreo());
-        editarUsuario.setContrasenia(usuario.getContrasenia());
-        editarUsuario.setRol(usuario.getRol());
+        editarUsuario.setPassword(usuario.getPassword());
+        editarUsuario.setRoles(usuario.getRoles());
         editarUsuario.setProvincia(usuario.getProvincia());
         editarUsuario.setCanton(usuario.getCanton());
         editarUsuario.setDistrito(usuario.getDistrito());

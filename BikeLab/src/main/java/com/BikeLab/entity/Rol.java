@@ -1,16 +1,13 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +19,10 @@ public class Rol implements Serializable {
     private long id;
     @Column(name = "rol")
     private String rol;
+    
+    
+     @ManyToMany(mappedBy = "roles")
+    private List<Usuario> roles;
 
     public long getId() {
         return id;
@@ -39,4 +40,13 @@ public class Rol implements Serializable {
         this.rol = rol;
     }
 
+    public List<Usuario> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Usuario> roles) {
+        this.roles = roles;
+    }
+    
+    
 }
