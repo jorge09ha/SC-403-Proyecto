@@ -29,6 +29,11 @@ public class RolDatosLoginService  implements IRolDatosLoginService {
     public List<RolDatosLogin> getAllUserRole() {
       return (List<RolDatosLogin>)rolDatosLoginRepository.findAll();
     }
+
+    @Override
+    public RolDatosLogin getCantonById(long id) {
+       return rolDatosLoginRepository.findById(id).orElse(null);
+    }
     
     
 }

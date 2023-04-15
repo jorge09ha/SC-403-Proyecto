@@ -14,6 +14,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,28 @@ public class Registro_Login {
     
     //-------------------------- New --------------------------
     
+    //------------------- Login----------------------------------
+     @GetMapping("/ingreso/login")
+    public String login(Model model) {
+        model.addAttribute("usuario", new DatosLogin());
+        return "login";
+    }
+    
+    @PostMapping("/login/validacion")
+    public String processLogin(@ModelAttribute("usuario") DatosLogin usuario, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "login";
+        }        
+        DatosLogin usuarioEncontrado = datosLoginService.findAllUser(usuario.getEmail());
+        if (usuarioEncontrado != null && usuarioEncontrado.getEmail().equals(usuario.getEmail())) {
+            return "redirect:/tienda_home";
+        } else {
+            bindingResult.rejectValue("username", "error.usuario", "Nombre de usuario o contraseña incorrecta");
+            return "login";
+        }
+    }
+     
+    
     @GetMapping("/login/nuevo")
     public String crearUsuario(Model model) {
         List<Rol> rol = roleService.getAllRole();
@@ -48,17 +71,8 @@ public class Registro_Login {
         return "registroDatosLogin";
     }
     
-    @GetMapping("/add/rol")
-    public String agregarRol(Model model) { 
-        List<Rol> rol = roleService.getAllRole();
-        List<DatosLogin> usuario =datosLoginService.getDistinctEmail();
-        model.addAttribute("titulo", "Nuevo Usuario");
-        model.addAttribute("rolUsuario", new RolDatosLogin());       
-        model.addAttribute("rol", rol);
-        model.addAttribute("email",usuario);
-        return "agregarRol";
-    }
-    
+   //------------------- Login---------------------------------- 
+        
     @GetMapping("/admin/rol/nuevo")
     public String crearRol(Model model) {
         Rol rol = new Rol();
@@ -75,11 +89,7 @@ public class Registro_Login {
          return "redirect:/tienda_home";    
 }
     
-    @PostMapping("/save/rol")
-    public String guardarRol(@ModelAttribute("usuario") RolDatosLogin usuario) {      
-        rolDatosLoginService.saveRol(usuario);
-         return "redirect:/registro?exito";    
-}
+    
     
     //-------------------------- UpDate --------------------------
     //*Roles

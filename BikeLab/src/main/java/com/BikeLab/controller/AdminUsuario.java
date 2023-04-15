@@ -1,13 +1,17 @@
 package com.BikeLab.controller;
 
 import com.BikeLab.entity.Canton;
+import com.BikeLab.entity.DatosLogin;
 import com.BikeLab.entity.Distrito;
 import com.BikeLab.entity.Provincia;
 import com.BikeLab.entity.Rol;
+import com.BikeLab.entity.RolDatosLogin;
 import com.BikeLab.entity.Usuario;
 import com.BikeLab.service.ICantonService;
+import com.BikeLab.service.IDatosLoginService;
 import com.BikeLab.service.IDistritoService;
 import com.BikeLab.service.IProvinciaService;
+import com.BikeLab.service.IRolDatosLoginService;
 import com.BikeLab.service.IRolService;
 import com.BikeLab.service.IUsuarioService;
 import java.util.List;
@@ -40,6 +44,12 @@ public class AdminUsuario {
 
     @Autowired
     private IDistritoService distritoService;
+    
+    @Autowired
+    private IDatosLoginService datosLoginService; 
+    
+     @Autowired
+    private IRolDatosLoginService rolDatosLoginService;
 
     //-------------------------- List --------------------------
     @GetMapping("/admin/roles")
@@ -56,6 +66,15 @@ public class AdminUsuario {
        model.addAttribute("titulo", "USUARIOS");
        model.addAttribute("usuarios", rolUsuario);
         return "adm_VerUsuario";
+    }
+    
+    
+    @GetMapping("/admin/datosLogin")
+    public String indexdatosLoginRol(Model model) {
+        List<DatosLogin> rolUsuario = datosLoginService.getAllUser();
+       model.addAttribute("titulo", "USUARIOS");
+       model.addAttribute("rolUsuario", rolUsuario);
+        return "adm_VerDatosLoginRol";
     }
 
     //-------------------------- New --------------------------
@@ -74,6 +93,17 @@ public class AdminUsuario {
         model.addAttribute("rol", rol);
         return "adm_crearUsuario";
     }
+    
+    @GetMapping("/admin/DatosLoginRol/add")
+    public String agregarRol(Model model) { 
+        List<Rol> rol = rolesService.getAllRole();
+        List<DatosLogin> usuario =datosLoginService.getDistinctEmail();
+        model.addAttribute("titulo", "Agregar Rol a usuario");
+        model.addAttribute("rolUsuario", new RolDatosLogin());       
+        model.addAttribute("rol", rol);
+        model.addAttribute("email",usuario);
+        return "adm_agregarRolUsuario";
+    }
 
     //-------------------------- Save --------------------------
    
@@ -82,11 +112,23 @@ public class AdminUsuario {
         usuarioService.saveUsuario(usuario);
         return "redirect:/admin/usuario";
     }
+    
+    @PostMapping("/save/rol")
+    public String guardarRol(@ModelAttribute("usuario") RolDatosLogin usuario) {      
+        rolDatosLoginService.saveRol(usuario);
+         return "redirect:/admin/datosLogin";    
+}
 
     //-------------------------- Delete --------------------------    
     @GetMapping("/eliminar/usuario/{id}")
     public String eliminarUsuario(@PathVariable Long id) {
         usuarioService.deleteUsuario(id);
+        return "redirect:/admin/usuario";
+    }
+    
+    @GetMapping("/eliminar/datosLogin/{id}")
+    public String eliminarDatosLogin(@PathVariable Long id) {
+        datosLoginService.deleteUsuario(id);
         return "redirect:/admin/usuario";
     }
 
@@ -127,5 +169,28 @@ public class AdminUsuario {
         usuarioService.saveUsuario(editarUsuario);
         return "redirect:/admin/usuario";
     }
+    
+    @GetMapping("/editar/RoldatosLogin/{id}")
+    public String editarDatosLogin(@PathVariable("id") Long id, Model model) {
+        DatosLogin editarUsuario = datosLoginService.getUsuarioById(id);
+          List<Rol> rol = rolesService.getAllRole(); 
+        model.addAttribute("titulo", "Editar Rol a usuario");
+        model.addAttribute("rolUsuario", editarUsuario);
+        model.addAttribute("rol", rol);
+        return "adm_editarDatosLogin";
+    }
+    
+    @PostMapping("/editar/RoldatosLogin/{id}")
+    public String actualizarDatosLogin(@PathVariable Long id, @ModelAttribute("DatosLogin") DatosLogin usuario) {
+        DatosLogin editarUsuario = datosLoginService.getUsuarioById(id);
+        editarUsuario.setId(id);
+        editarUsuario.setEmail(usuario.getEmail());
+        editarUsuario.setPassword(usuario.getPassword());
+        editarUsuario.setRoles(usuario.getRoles());
+        datosLoginService.saveUsuario(editarUsuario);
+        return "redirect:/admin/datosLogin";
+    }
+    
+    
 
 }

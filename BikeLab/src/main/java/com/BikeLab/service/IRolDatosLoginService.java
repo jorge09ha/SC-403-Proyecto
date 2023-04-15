@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 public interface IRolDatosLoginService {
     
      public RolDatosLogin saveRol(RolDatosLogin rolUsuario);
+     
+     public RolDatosLogin getCantonById(long id);
     
     public List<RolDatosLogin> getAllUserRole();
     
