@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
+
  *
  * @author bperez
  */
@@ -30,7 +31,7 @@ public class DatosLoginService implements IDatosLoginService {
     }
 
     @Override
-    public DatosLogin getUsuarioById(long id) {
+    public DatosLogin getUsuarioById(long id,long rol_id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
@@ -50,10 +51,7 @@ public class DatosLoginService implements IDatosLoginService {
         return (List<DatosLogin>) usuarioRepository.findAllUser();
     }
 
-    @Override
-    public DatosLogin findAllUser(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 
     @Override
     public List<DatosLogin> getAllUserRole() {
@@ -71,4 +69,19 @@ public class DatosLoginService implements IDatosLoginService {
     public List<DatosLogin> getDistinctEmail() {
         return (List<DatosLogin>) usuarioRepository.findByDistinctEmail();
     }
+
+    @Override
+    public DatosLogin findAllUser(String username) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public DatosLogin findByEmail(String username) {
+       return usuarioRepository.findByEmail(username);
+    }
 }
+
+
+  
+
+

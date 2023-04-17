@@ -25,7 +25,7 @@ public class DatosLoginDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        DatosLogin user = usuarioRepository.findByemail(username);
+        DatosLogin user = usuarioRepository.findByEmail(username);
         if (user == null) {
             throw new UsernameNotFoundException("User Not Found");
         }

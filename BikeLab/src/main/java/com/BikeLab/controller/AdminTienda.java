@@ -14,14 +14,23 @@ import com.BikeLab.service.IMarcaService;
 import com.BikeLab.service.IProductoService;
 import com.BikeLab.service.IProvinciaService;
 import com.BikeLab.service.ITipoProductoService;
+import com.BikeLab.service.UploadFileService;
+import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
+import javax.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -29,6 +38,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class AdminTienda {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(AdminTienda.class);
 
     @Autowired
     private IProductoService productoService;
@@ -50,6 +61,9 @@ public class AdminTienda {
 
     @Autowired
     private IDistritoService distritoService;
+
+    @Autowired
+    private UploadFileService upload;
 
 //-------------------------- List --------------------------
     @GetMapping("/admin")
@@ -103,27 +117,39 @@ public class AdminTienda {
 
     //-------------------------- Save -----------------------------
     @PostMapping("/save/producto")
-    public String guardarProducto(@ModelAttribute Producto producto) {
+    public String guardarProducto(@ModelAttribute Producto producto, @RequestParam("file") MultipartFile imagefile, HttpSession session) throws IOException {
+        String nombreImagen = upload.saveImageProducto(imagefile);
+        producto.setImagen(nombreImagen);
         productoService.saveProducto(producto);
+        LOGGER.info("CREATE {}", producto.toString());
         return "redirect:/admin/producto";
     }
 
     @PostMapping("/save/evento")
-    public String guardarEvento(@ModelAttribute Evento evento) {
+    public String guardarEvento(@ModelAttribute Evento evento, @RequestParam("file") MultipartFile imagefile) throws IOException {
+        String nombreImagen = upload.saveImageEvento(imagefile);
+        evento.setImagen(nombreImagen);
         eventoService.saveEvento(evento);
+        LOGGER.info("CREATE {}", evento.toString());
         return "redirect:/admin/evento";
     }
 
     //-------------------------- Delete ---------------------------
     @GetMapping("/eliminar/producto/{id}")
     public String eliminarProducto(@PathVariable Long id) {
+        Producto productoEliminar = productoService.getProductoById(id);
+        upload.deleteImage(productoEliminar.getImagen());
         productoService.deleteProducto(id);
+        LOGGER.info("DELETE producto {}", id.toString());
         return "redirect:/admin/producto";
     }
 
     @GetMapping("/eliminar/evento/{id}")
     public String eliminarEvento(@PathVariable Long id) {
+        Evento eventoEliminar = eventoService.getEventoById(id);
+        upload.deleteImage(eventoEliminar.getImagen());
         eventoService.deleteEvento(id);
+        LOGGER.info("DELETE evento {}", id.toString());
         return "redirect:/admin/evento";
     }
 
@@ -142,7 +168,7 @@ public class AdminTienda {
     }
 
     @PostMapping("/editar/producto/{id}")
-    public String actualizarProducto(@PathVariable Long id, @ModelAttribute("Producto") Producto producto) {
+    public String actualizarProducto(@PathVariable Long id, @ModelAttribute("Producto") Producto producto, @RequestParam("file") MultipartFile imagefile) throws IOException {
         Producto productoEditar = productoService.getProductoById(id);
         productoEditar.setId(id);
         productoEditar.setNombre(producto.getNombre());
@@ -153,9 +179,21 @@ public class AdminTienda {
         productoEditar.setAnio(producto.getAnio());
         productoEditar.setPrecio(producto.getPrecio());
         productoEditar.setStock(producto.getStock());
-        productoEditar.setImagen(producto.getImagen());
         productoEditar.setTipoProducto(producto.getTipoProducto());
+
+        if (imagefile.isEmpty()) {
+            LOGGER.info("UPDATE - No se modifica la imagen. Imagen actual: "+ productoEditar.getImagen());
+            productoEditar.setImagen(productoEditar.getImagen());
+        } else {
+            upload.deleteImage(productoEditar.getImagen());
+            productoEditar.setImagen(producto.getImagen());
+            String nombreImagen = upload.saveImageProducto(imagefile);
+            productoEditar.setImagen(nombreImagen);
+            LOGGER.info("UPDATE -  Se modifica la imagen. Imagen nueva: "+ nombreImagen);
+        }
+
         productoService.saveProducto(productoEditar);
+        LOGGER.info("UPDATE {}", productoEditar.toString());
         return "redirect:/admin/producto";
     }
 
@@ -177,7 +215,7 @@ public class AdminTienda {
     }
 
     @PostMapping("/editar/evento/{id}")
-    public String actualizarEvento(@PathVariable Long id, @ModelAttribute("Evento") Evento evento) {
+    public String actualizarEvento(@PathVariable Long id, @ModelAttribute("Evento") Evento evento, @RequestParam("file") MultipartFile imagefile) throws IOException {
         Evento eventoEditar = eventoService.getEventoById(id);
         eventoEditar.setId(id);
         eventoEditar.setFecha(evento.getFecha());
@@ -186,12 +224,22 @@ public class AdminTienda {
         eventoEditar.setDetalle(evento.getDetalle());
         eventoEditar.setDireccion(evento.getDireccion());
         eventoEditar.setStock(evento.getStock());
-        eventoEditar.setImagen(evento.getImagen());
         eventoEditar.setTipoProducto(evento.getTipoProducto());
         eventoEditar.setProvincia(evento.getProvincia());
         eventoEditar.setCanton(evento.getCanton());
         eventoEditar.setDistrito(evento.getDistrito());
+
+        if (imagefile.isEmpty()) {
+            System.out.println("No se modifica Imagen");
+            eventoEditar.setImagen(eventoEditar.getImagen());
+        } else {
+            System.out.println("Imagen nueva");
+            upload.deleteImage(eventoEditar.getImagen());
+            String nombreImagen = upload.saveImageEvento(imagefile);
+            eventoEditar.setImagen(nombreImagen);
+        }
         eventoService.saveEvento(eventoEditar);
+        LOGGER.info("UPDATE {}", evento.toString());
         return "redirect:/admin/evento";
     }
 

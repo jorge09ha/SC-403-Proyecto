@@ -34,6 +34,11 @@ public class RolDatosLoginService  implements IRolDatosLoginService {
     public RolDatosLogin getCantonById(long id) {
        return rolDatosLoginRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void deleteUsuario(long id, long rolId) {
+      rolDatosLoginRepository.eliminarRegistrosTablaIntermedia(id, rolId);
+    }
     
     
 }

@@ -7,7 +7,9 @@ package com.BikeLab.repository;
 import com.BikeLab.entity.RolDatosLogin;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -17,5 +19,9 @@ public interface RolDatosLoginRepository extends JpaRepository<RolDatosLogin, Lo
     
      @Query(value = "select dl.*,rol.rol from bikelab.roldatoslogin rdl join bikelab.datoslogin dl on rdl.usuario_id = dl.id join bikelab.rol on rdl.rol_id = rol.id", nativeQuery = true)
  List<RolDatosLogin> findByRol();
+ 
+   @Modifying
+@Query("delete from RolDatosLogin r where r.rolDatosLogin.usuario_id = :id and r.rolDatosLogin.rol_id = :rolId")
+void eliminarRegistrosTablaIntermedia(@Param("id") long id, @Param("rolId") long rolId);
     
 }

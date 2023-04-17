@@ -46,23 +46,24 @@
                         <th scope="col"></th>  
                     </tr>
                 </thead>
-                <tbody>
-                <th:block th:each="user : ${rolUsuario}">
-                    <tr style="background-color: #24272B; color: white;">
-                        <td th:text="${user.getEmail}"></td>                                      
-                       <td th:each="rol : ${user.getRoles}" th:text="${rol.getRol}"></td>                            
-                       <td></td>
+                <tbody>                      
+                <th:block th:with="i=0" th:each="user, iter : ${rolUsuario}">
+                    <tr style="background-color: #24272B; color: white;">    
+                        <td  th:text="${user.getEmail()}"></td>                     
+                        <td   th:each="rol : ${user.getRoles}"  th:text="${rol.getRol()} + ' '"></td>                             
+                        <td width="15%" style="padding-bottom: 10px; padding-top: 10px;"></td>
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
-                            <a href="#!" style="color:yellow" th:href="@{/editar/RoldatosLogin/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
-                            <a href="#!" style="color:red" th:href="@{/eliminar/datosLogin/{id}(id=${user.getId})}" id="eliminar-${
-                                   user.getId
-                               }"><ion-icon name="trash-sharp"></ion-icon></a>
-                        </td>
-                        </td>
+                    <th:block th:each="rol : ${user.getRoles}">                               
+                        <a href="#!" style="color:yellow" th:href="@{/editar/RoldatosLogin/{id}/{rol_id}(id=${user.getId},rol_id=${rol.getId})}"><ion-icon name="create-sharp"></ion-icon></a>                    
+                        <a href="#!" style="color:red" th:href="@{/eliminar/datosLogin/{id}/{rol_id}(id=${user.getId},rol_id=${rol.getId})}" id="eliminar-${
+                               user.getId
+                           }"><ion-icon name="trash-sharp"></ion-icon></a>
+                        </tr>                                
+                    </th:block>  </td>
                     </tr>
                 </th:block>
-               
-                
+
+
                 </tbody>
             </table>
         </div>

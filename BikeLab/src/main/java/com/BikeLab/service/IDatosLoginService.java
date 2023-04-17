@@ -17,7 +17,7 @@ public interface IDatosLoginService {
     
       public List<DatosLogin> getAllUsuario();
 
-    public DatosLogin getUsuarioById(long id);
+    public DatosLogin getUsuarioById(long id,long rol_Id);
 
     public DatosLogin saveUsuario(DatosLogin usuario);
     
@@ -32,5 +32,7 @@ public interface IDatosLoginService {
   public List<DatosLogin> getAllUserRole();
   
    public List<DatosLogin> getDistinctEmail();
+   
+  public DatosLogin findByEmail(String username);
     
 }

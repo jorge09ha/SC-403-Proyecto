@@ -21,4 +21,6 @@ public interface IRolDatosLoginService {
     
     public List<RolDatosLogin> getAllUserRole();
     
+     public void deleteUsuario(long id, long rolId);
+    
 }

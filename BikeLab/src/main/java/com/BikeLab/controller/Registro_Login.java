@@ -4,6 +4,7 @@
  */
 package com.BikeLab.controller;
 
+import com.BikeLab.WebSecurityConfig;
 import com.BikeLab.entity.DatosLogin;
 import com.BikeLab.entity.Rol;
 import com.BikeLab.entity.RolDatosLogin;
@@ -11,7 +12,13 @@ import com.BikeLab.service.IDatosLoginService;
 import com.BikeLab.service.IRolDatosLoginService;
 import com.BikeLab.service.IRolService;
 import java.util.List;
+import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -37,17 +45,33 @@ public class Registro_Login {
     @Autowired
     private IRolDatosLoginService rolDatosLoginService;
     
+@Autowired
+    private AuthenticationManager authenticationManager;
     
     //-------------------------- New --------------------------
     
     //------------------- Login----------------------------------
-     @GetMapping("/ingreso/login")
-    public String login(Model model) {
-        model.addAttribute("usuario", new DatosLogin());
-        return "login";
-    }
     
-    @PostMapping("/login/validacion")
+       @GetMapping("/login")
+     public String index(){
+       return "/login";
+     }
+     
+     @PostMapping("/login")
+public String login(@RequestParam String email, @RequestParam String password, Model model) {
+
+   try {
+      Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+      return "redirect:/tienda_home";
+   } catch (AuthenticationException ex) {
+      LOGGER.error("Error de autenticación: " + ex.getMessage());
+      model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
+      return "/login";
+   }
+}       
+    
+    @PostMapping("/ingreso/login")
     public String processLogin(@ModelAttribute("usuario") DatosLogin usuario, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "login";
@@ -86,7 +110,7 @@ public class Registro_Login {
     @PostMapping("/save/login")
     public String guardarUsuario(@ModelAttribute("usuario") DatosLogin usuario) {      
         datosLoginService.saveUsuario(usuario);
-         return "redirect:/tienda_home";    
+         return "redirect:/login/nuevo?exito";    
 }
     
     

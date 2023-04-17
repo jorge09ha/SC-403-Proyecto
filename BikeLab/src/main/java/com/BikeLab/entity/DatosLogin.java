@@ -76,8 +76,8 @@ public class DatosLogin implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword() {     
+    return password;
     }
 
     public void setPassword(String password) {
@@ -94,3 +94,5 @@ public class DatosLogin implements Serializable {
        
     
 }
+
+

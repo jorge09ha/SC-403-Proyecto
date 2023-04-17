@@ -26,6 +26,15 @@ body {
     min-height: 100vh;
 }
 
+.bodyLogin {
+    background-image: url('../images/specialized.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    height: 100%;
+    font-family: 'Numans', sans-serif;
+    position:relative;
+}
+
 a {
     text-decoration: none;
 }

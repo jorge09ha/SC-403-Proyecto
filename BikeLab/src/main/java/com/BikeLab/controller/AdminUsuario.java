@@ -15,7 +15,9 @@ import com.BikeLab.service.IRolDatosLoginService;
 import com.BikeLab.service.IRolService;
 import com.BikeLab.service.IUsuarioService;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -126,10 +128,11 @@ public class AdminUsuario {
         return "redirect:/admin/usuario";
     }
     
-    @GetMapping("/eliminar/datosLogin/{id}")
-    public String eliminarDatosLogin(@PathVariable Long id) {
-        datosLoginService.deleteUsuario(id);
-        return "redirect:/admin/usuario";
+    @Transactional
+    @GetMapping("/eliminar/datosLogin/{id}/{rol_id}")
+    public String eliminarDatosLogin(@PathVariable Long id,@PathVariable Long rol_id) {
+        rolDatosLoginService.deleteUsuario(id, rol_id);  
+        return "redirect:/admin/datosLogin";
     }
 
     //-------------------------- UpDate --------------------------
@@ -159,10 +162,7 @@ public class AdminUsuario {
         editarUsuario.setApellido2(usuario.getApellido2());
         editarUsuario.setTelefono(usuario.getTelefono());
         editarUsuario.setCedula(usuario.getCedula());
-        editarUsuario.setDireccion(usuario.getDireccion());
-        editarUsuario.setCorreo(usuario.getCorreo());
-        editarUsuario.setPassword(usuario.getPassword());
-        editarUsuario.setRoles(usuario.getRoles());
+        editarUsuario.setDireccion(usuario.getDireccion());      
         editarUsuario.setProvincia(usuario.getProvincia());
         editarUsuario.setCanton(usuario.getCanton());
         editarUsuario.setDistrito(usuario.getDistrito());
@@ -170,9 +170,9 @@ public class AdminUsuario {
         return "redirect:/admin/usuario";
     }
     
-    @GetMapping("/editar/RoldatosLogin/{id}")
-    public String editarDatosLogin(@PathVariable("id") Long id, Model model) {
-        DatosLogin editarUsuario = datosLoginService.getUsuarioById(id);
+    @GetMapping("/editar/RoldatosLogin/{id}/{rol_id}")
+    public String editarDatosLogin(@PathVariable("id") Long id, @PathVariable("rol_id") Long rol_id,Model model) {
+        DatosLogin editarUsuario = datosLoginService.getUsuarioById(id,rol_id);
           List<Rol> rol = rolesService.getAllRole(); 
         model.addAttribute("titulo", "Editar Rol a usuario");
         model.addAttribute("rolUsuario", editarUsuario);
@@ -180,9 +180,9 @@ public class AdminUsuario {
         return "adm_editarDatosLogin";
     }
     
-    @PostMapping("/editar/RoldatosLogin/{id}")
-    public String actualizarDatosLogin(@PathVariable Long id, @ModelAttribute("DatosLogin") DatosLogin usuario) {
-        DatosLogin editarUsuario = datosLoginService.getUsuarioById(id);
+    @PostMapping("/editar/RoldatosLogin/{id}/{rol_id}")
+    public String actualizarDatosLogin(@PathVariable Long id,  @PathVariable("rol_id") Long rol_id,@ModelAttribute("DatosLogin") DatosLogin usuario) {
+        DatosLogin editarUsuario = datosLoginService.getUsuarioById(id,rol_id);
         editarUsuario.setId(id);
         editarUsuario.setEmail(usuario.getEmail());
         editarUsuario.setPassword(usuario.getPassword());
