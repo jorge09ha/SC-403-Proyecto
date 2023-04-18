@@ -15,4 +15,6 @@ public interface IProductoService {
 
     public void deleteProducto(long id);
 
+    List<Producto> findByFamilia(String familia);
+
 }

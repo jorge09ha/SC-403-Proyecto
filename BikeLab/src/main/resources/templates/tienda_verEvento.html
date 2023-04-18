@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head th:replace="plantilla/Template::head"></head>
+
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/Template::header"></header>
+
+        <!---Contenido-->
+        <div class=" product-container">
+            <div class="card-header bg-black text-white"></div>
+            <div class="container">
+                <h3 class="mb-3"><strong> </strong><span th:text="${evento.nombre}"></span></h3>
+                <h4 class="mb-3"><strong> </strong><span th:text="${evento.fecha}"></span></h4>
+                <div class="text-center">
+                    <img id="preview" th:src="${evento.getImagen}" alt="imagen" class="product-image">
+                </div>
+                <h4 class="mb-3"><strong>Precio: </strong>₡<span th:text="${evento.precio}"></span></h4>
+                <h4 class="mb-3"><strong>Detalle: </strong><span th:text="${evento.detalle}"></span></h4>
+                <h4 class="mb-3"><strong>Stock: </strong><span th:text="${evento.stock}"></span></h4>
+                <h4 class="mb-3"><strong>Tipo de Producto: </strong><span th:text="${evento.tipoProducto.tipo}"></span></h4>
+                <h4 class="mb-3"><strong>Provincia: </strong><span th:text="${evento.provincia.nombre}"></span></h4>
+                <h4 class="mb-3"><strong>Canton: </strong><span th:text="${evento.canton.nombre}"></span></h4>
+                <h4 class="mb-3"><strong>Distrito: </strong><span th:text="${evento.distrito.nombre}"></span></h4>
+                <h4 class="mb-3"><strong>Dirección: </strong><span th:text="${evento.direccion}"></span></h4>
+
+                <div class="d-flex increment-decrement-container" th:if="${evento.stock > 0}">
+                    <div class="input-group increment-decrement-input-group">
+                        <button type="button" class="btn btn-3" onclick="decrementValue(this)">-</button>
+                        <input type="number" class="form-control text-center" min="1" th:max="${evento.stock}" value="1" readonly>
+                        <button type="button" class="btn btn-3" onclick="incrementValue(this)">+</button>
+                    </div>
+                    <a href="#" class="btn btn-2 ml-auto">Agregar <ion-icon name="cart"></ion-icon></a>
+                </div>
+
+
+            </div>
+        </div>
+
+        <footer th:replace="plantilla/Template::footer"></footer>
+    </body>
+
+
+    <script>
+        function incrementValue(button) {
+            let input = button.previousElementSibling;
+            let maxValue = parseInt(input.max);
+            let currentValue = parseInt(input.value);
+
+            if (currentValue < maxValue) {
+                input.value = currentValue + 1;
+            }
+        }
+
+        function decrementValue(button) {
+            let input = button.nextElementSibling;
+            let minValue = parseInt(input.min);
+            let currentValue = parseInt(input.value);
+
+            if (currentValue > minValue) {
+                input.value = currentValue - 1;
+            }
+        }
+    </script>
+
+</html>

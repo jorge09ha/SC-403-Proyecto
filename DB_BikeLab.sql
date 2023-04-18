@@ -39,9 +39,6 @@ CREATE TABLE usuario(
   telefono varchar(20),
   cedula varchar(30),
   direccion varchar(500),
-  correo VARCHAR(30) NOT NULL,
-  contrasenia VARCHAR(30) NOT NULL,
-  rol_id INT NOT NULL DEFAULT 2,
   provincia_id INT,
   canton_id INT,
   distrito_id INT,
@@ -50,11 +47,24 @@ CREATE TABLE usuario(
   KEY `fk_usuario_provincia_idx` (`provincia_id`),
   KEY `fk_usuario_canton_idx` (`canton_id`),
   KEY `fk_usuario_distrito_idx` (`distrito_id`),
-  CONSTRAINT `fk_Usuario_rol` FOREIGN KEY (`rol_id`) REFERENCES `rol` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_provincia` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_canton` FOREIGN KEY (`canton_id`) REFERENCES `canton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
+
+CREATE TABLE datoslogin (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(30) NOT NULL UNIQUE,
+  password VARCHAR(200) NOT NULL,
+  PRIMARY KEY (id) 
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE roldatoslogin (
+  rol_id INT NOT NULL,
+  usuario_id INT NOT NULL,
+  primary key (rol_id,usuario_id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE proveedor(
  id INT NOT NULL AUTO_INCREMENT,
@@ -270,8 +280,7 @@ INSERT INTO `distrito` VALUES
 (70305,'El Cairo',703), (70306,'Alegría',703), (70307,'Reventazón',703), (70401,'Bratsi',704), (70402,'Sixaola',704), (70403,'Cahuita',704), (70404,'Telire',704), (70501,'Matina',705), (70502,'Batán',705), (70503,'Carrandi',705), (70601,'Guácimo',706), (70602,'Mercedes',706), (70603,'Pocora',706), (70604,'Río Jiménez',706), (70605,'Duacarí',706);
 
 
-INSERT INTO `rol` VALUES (1,'Admin'),(2,'User');
-
+INSERT INTO `rol` VALUES (1,'ROLE_ADMIN'), (2,'ROLE_USER'),(3,'ROLE_VENDEDOR');
 
 INSERT INTO usuario (nombre, apellido1, apellido2, telefono, cedula, direccion, correo, contrasenia, rol_id, provincia_id, canton_id, distrito_id)
 VALUES ('Juan', 'Perez', 'Gomez', '123456789', '1234567890', 'Calle 1 #123', 'juanperez@email.com', 'password', 2, 1, 101, 10101),
@@ -285,8 +294,12 @@ INSERT INTO proveedor VALUES (1, 'Bicimax', 'bicimax@email.com', 12345678),(2, '
 (13, 'Biciworld', 'biciworld@email.com', 45678901),(14, 'Cycloworks', 'cycloworks@email.com', 56789012),(15, 'Bikestyle', 'bikestyle@email.com', 67890123),(16, 'Accesovelo', 'accesovelo@email.com', 78901234),
 (17, 'Pedalmaster', 'pedalmaster@email.com', 89012345),(18, 'Velopro', 'velopro@email.com', 90123456),(19, 'Biciclismo', 'biciclismo@email.com', 12345678),(20, 'Cyclotrek', 'cyclotrek@email.com', 23456789);
 
-INSERT INTO `marca` VALUES (1, 'Giant'),(2, 'Trek'),(3, 'Specialized'),(4, 'Cannondale'),(5, 'Scott'),(6, 'Santa Cruz'),(7, 'Bianchi'),(8, 'Colnago'),(9, 'Pinarello'),
- (10, 'Canyon'),(11, 'Orbea'),(12, 'Merida'),(13, 'Kona'),(14, 'Cube'),(15, 'Fuji'),(16, 'Raleigh'),(17, 'Diamondback'),(18, 'Felt'),(19, 'BMC'),(20, 'Cervelo'); 
+
+INSERT INTO `marca` VALUES 
+(1, 'KTM'),(2, 'Scott'),(3, 'Giant'),(4, 'Lapierre'),(5, 'Niner'),
+(6, 'NiteRider'),(7, 'Zefal'),(8, 'Topeak'),(9, 'IGPSPORT'),(10, 'Moto X'),
+(11, 'Maxxis'),(12, 'SRAM'),(13, 'FOX'),(14, 'Shimano'),(15, 'Vittoria'),
+(16, 'Northwave'),(17, 'SUAREZ'),(18, 'SALICE'),(19,'KONA'); 
 
 INSERT INTO `familiaproducto` VALUES
 (1, 'Bicicletas', 'Bicicletas de distintos tipos'),
@@ -295,13 +308,13 @@ INSERT INTO `familiaproducto` VALUES
 (4, 'Vestimenta', 'Indumentaria para todo tipo de ciclista');
 
 INSERT INTO `tipoproducto` VALUES
-(1, 'MTB', 'Ideal para terrenos montañosos', 1),
-(2, 'RUTA', 'Perfecta para viajes largos', 1),
-(3, 'EBIKE', 'Bicicletas de montaña con asistencia eléctrica al pedaleo', 1),
-(4, 'DOWNHILL', 'Bicicletas para competir en los senderos más técnicos y rápidos', 1),
-(5, 'GRAVEL', 'Bicicletas diseñadas para competiciones de ciclocross', 1),
-(6, 'BMX', 'Ideal para saltos y acrobacias', 1),
-(7, 'KIDS', 'Bicicleta de tamaño reducido para que los niños', 1),
+(1, 'Bicicletas MTB', 'Ideal para terrenos montañosos', 1),
+(2, 'Bicicletas RUTA', 'Perfecta para viajes largos', 1),
+(3, 'Bicicletas EBIKE', 'Bicicletas de montaña con asistencia eléctrica al pedaleo', 1),
+(4, 'Bicicletas DOWNHILL', 'Bicicletas para competir en los senderos más técnicos y rápidos', 1),
+(5, 'Bicicletas GRAVEL', 'Bicicletas diseñadas para competiciones de ciclocross', 1),
+(6, 'Bicicletas BMX', 'Ideal para saltos y acrobacias', 1),
+(7, 'Bicicletas KIDS', 'Bicicleta de tamaño reducido para que los niños', 1),
 (11, 'Luces', 'Recargables y de alta luminosidad', 2),
 (12, 'Bolsas de viaje', 'Lleva todo lo que necesitas contigo', 2),
 (13, 'Infladores', 'Mantén tus neumáticos en óptimas condiciones', 2),
@@ -334,31 +347,65 @@ INSERT INTO `tipoproducto` VALUES
 (40, 'Zapatos de MTB', 'Con suela de agarre para terrenos difíciles', 4),
 (41, 'Zapatos de Ruta', 'Con suela rígida para mayor eficiencia en pedaleo', 4),
 (42, 'Casco de MTB', 'Con visera y mayor protección en la parte trasera', 4),
-(43, 'Casco de Ruta', 'Con aerodinámica optimizada para mayor velocidad', 4);
+(43, 'Herraminetas', 'Listo para cada emergencia', 2),
+(44, 'Ciclometro', 'Listo para medir tu distancia y rendimiento', 2),
+(45, 'Anfora', 'Para hidratacion', 2),
+(46, 'Casco de Ruta', 'Con aerodinámica optimizada para mayor velocidad', 4);
+
 
 INSERT INTO `producto` VALUES
-(1,'Fuji Nevada','Nevada','M',27.5,'Un elemento básico en la línea de bicicletas de montaña Fuji, disponible en tamaños de rueda de 29″ o 27,5″, la Nevada combina un cuadro rígido probado y verdadero y componentes sólidos para llevar tus aventuras todoterreno al siguiente nivel.',2023,250000,5,NULL,1,15),
-(2,'GIANT XTC SLR 2 2022','XTC SLR 2','S',29,'Perfecto como su primera bicicleta de montaña, el cuadro de aluminio de grado ALUXX es liviano, capaz y duradero Versátil. La geometría cómoda pero orientada al rendimiento de Tempt le da la versatilidad tanto para los viajes alrededor del campus como para los paseos fuera de la carretera.',2022,520000,2,NULL,1,1);
+(1,'Kit de Luces','Swift/Sabre',NULL,0,'Equípate para montar de día o de noche con el juego de luces para bicicleta NiteRider Swift 500 / Sabre 110, un dúo compacto y liviano diseñado para ayudarte a ver más y ayudar a otros a ver más de ti.',2023,15000,0,'/images/producto/acc1.jpg',11,6),
+(2,'Inflador CO2','EZ Push',NULL,0,'El sistema Z-Pusho, permite el control de la cantidad de gas a inyectar. El cartucho solamente se vacía durante el inflado cuando el Z-push entra en contacto con la válvula.',2023,12000,0,'/images/producto/acc2.jpg',11,7),
+(3,'Espejo retrovisor','Spy',NULL,0,'El espejo Spy puede colocarse en varios lugares de nuestra bicicleta. La faja elástica permite instalarlo fácilmente sobre tubos de 22 a 60 mm de diámetro.',2023,8000,0,'/images/producto/acc3.jpg',21,7),
+(4,'Multi herramienta','Mini 20 Pro',NULL,0,'De peso ligero, de alta resistencia cuerpo forjado de aleación resistente a torsión durante el uso duro y sus herramientas de calidad profesional de acero templado le proveerá muchos años de servicio. ',2023,16700,0,'/images/producto/acc4.jpg',43,8),
+(5,'CICLOCOMPUTADOR','GPS IGS620',NULL,0,'Compatible con ANT o Sensor Bluetooth, incluye medidor de potencia, sensor de cadencia, sensor de velocidad, sensor de frecuencia cardíaca, puedes configurar alarmas de rango. ',2023,143000,0,'/images/producto/acc5.jpg',44,9),
+(6,'Puños','Wtb',NULL,0,'Con 35 milímetros de ancho, es el agarre más grueso en la línea wtb, lo que proporciona el punto de contacto perfecto para los ciclistas con manos grandes.',2023,15300,0,'/images/producto/acc6.jpg',28,10),
+(7,'Porta herramientas','Aero Wedge Pack',NULL,0,'El bolso Topeak Aero Wedge Pack es una bolsa aerodinámica que se coloca debajo del sillín.',2023,11300,0,'/images/producto/acc7.jpg',43,8),
+(8,'Porta anfora','Pulse FG',NULL,0,'Porta anfora en fibra de vidrio, al mismo tiempo flexible y fuerte. Permite una óptima fijación de la ánfora, incluso en carreteras algo accidentadas. Disponible en diferentes colores.',2023,5500,0,'/images/producto/acc8.jpg',45,7),
 
-INSERT INTO `proveedorProducto` VALUES (1,1),(2,2);
+(9,'KTM MACINA','PROWLER PRESTIGE XTR 12V ebike','L',29,'Con un sistema de ajuste liviano, el Mainframe MIPS te mantendrá fresco, y gracias a su liner fácilmente removible, podrás limpiarlo sin problema.',2023,6800000,3,'/images/producto/bike1.jpg',3,1),
+(10,'Bicicleta SCOTT','SCALE 965','S',29,'La Scale 965 de SCOTT viene equipada con transmisión de 12 velocidades Shimano y una horquilla Rock Shox, junto con tecnología de bloqueo remoto para permitir diferentes ajustes del recorrido en función de las necesidades de cada momento.',2023,990000,3,'/images/producto/bike2.jpg',1,2),
+(11,'Bicicleta GIANT ','STANCE 29 ROSEWOOD','L',29,'COMO SI FLOTARAS SOBRE EL CAMPO DE ROCAS. FLUYE POR LAS PISTAS MÁS TÉCNICAS. ESTA MÁQUINA DE 29″ DE SUSPENSIÓN TOTAL HACE QUE RESULTE MÁS FÁCIL QUE NUNCA CONTAR CON LA ÚLTIMA TECNOLOGÍA PARA DOMAR LOS TERRENOS MÁS SALVAJES. CON LA STANCE 29 SERÁS EL DUEÑO DE LOS CAMINOS. ',2023,2000000,3,'/images/producto/bike3.jpg',1,3),
+(12,'Bicicleta KTM','Scarp 294 Doble suspensión','M',29,'Pediste un modelo de Scarp más accesible y lo escuchamos. Con las versiones ELITE y 294, ofrecemos modelos de nivel de entrada que lo colocan en el carril de la victoria incluso a un costo menor. ',2023,1800000,3,'/images/producto/bike4.jpg',1,1),
+(13,'Bicicleta GIANT TCR','COMPACT HEMATITE','L',26,'Una bicicleta de alto rendimiento lista para cosechar victorias en el KOM. Los perfiles del tubo de dirección, el tubo diagonal y la horquilla hacen que esta TCR Advanced Disc sea la opción para aquellos que quieren una bicicleta de carreras versátil que te lleve hasta el podio. ',2023,2200000,3,'/images/producto/bike5.jpg',2,3),
+(14,'Bicicleta Lapierre ','Xelius SL 600','S',27.5,'Corra. Suba. Baje. Repita. Nunca más volverá a estar solo en el exigente esfuerzo de afrontar un repechón, una montaña o un puerto.',2023,2240000,3,'/images/producto/bike6.jpg',2,4),
+(15,'Bicicleta Gravel Niner','BSB 9 RDO Rival 1','M',29,'El BSB recompensa al ciclista con un cuadro que presenta una increíble transferencia de potencia y rigidez, así como una tecnología actualizada, como frenos de disco de montaje plano y ventanas de acceso para el enrutamiento Di2.',2023,2650000,3,'/images/producto/bike7.jpg',5,5),
+(16,'Bicicleta Gravel Niner','BSB 9 RDO 2 STAR','L',26,'El BSB 9 RDO es el piloto de ciclocross más importante de la compañía. Al igual que el deporte en sí, el BSB 9 RDO es rápida e implacable.',2023,1850000,3,'/images/producto/bike8.jpg',5,5),
+
+(17,'Neumático Mountain','Mountain Maxxis',NULL,0,'Maxxis produce materiales de larga duración de calidad profesional. Por favor, observe las siguientes recomendaciones para asegurar una gran experiencia.',2023,3600,0,'/images/producto/comp1.jpg',3,11),
+(18,'Transmisión 1x12','SRAM nx eagle',NULL,0,'El sram nx eagle se presenta en forma de grupo completo compuesto por cassette 11-50t (11-13-15-17-19-22-25-28-32-36-42-50) de 12v, mando de cambio de 12v, cambio trasero de 12v, bielas monoplato con eje dub y cadena de transmisión de 12v ',2023,296800,0,'/images/producto/comp2.jpg',3,12),
+(19,'Horquilla de suspencion FOX','shox 38 float 29',NULL,0,'Optimizada para los recorridos de 160 a 180 mm, la horquilla fox 38 hereda de lo que ha hecho de su hermana fox 36 el modelo estrella para la práctica del enduro,  pero, con caracteristicas impresionantes.',2023,997000,0,'/images/producto/comp3.jpg',3,13),
+(20,'Set de frenos para MTB','Shimano xt m 8000',NULL,0,'La principal novedad que observamos en los frenos xt m8000 es la renovación del clindro maestro, la parte central y principal del freno en nuestro manillar.',2023,159700,0,'/images/producto/comp4.jpg',3,14),
+(21,'Cadena','SR gx 11v',NULL,0,'Diseñada con la geometría de la xx1, la cadena x1 tiene pines macizos, powerlock de 11v y una suave y eficiente precisión de cambio que notarás en cada salida.',2023,16500,0,'/images/producto/comp5.jpg',3,12),
+(22,'Aros','Qurano 46 as',NULL,0,'Vittoria afirma que el grafeno hace que los quranos sean más fuertes y lateralmente más rígidos, con mayor resistencia al impacto, pero también más livianos y con una disipación de calor mejorada, y aún más dóciles.',2023,38000,0,'/images/producto/comp6.jpg',3,15),
+(23,'Spander','Niner aluminio',NULL,0,'Cuerpo y placa frontal de aleación forjada acabado negra mate 80, 90, 100, 110 mm +/- 8 grados 130g',2023,5500,0,'/images/producto/comp7.jpg',3,5),
+(24,'Horquilla de suspencion FOX','shox 34 float sc 29',NULL,0,'La horquilla fox 34 es un referente en el mundo del trail y ha ido evolucionando a lo largo de los últimos años para proporcionar la mejor sensación de conducción, robustez y ligereza.',2023,932000,0,'/images/producto/comp8.jpg',3,1),
+
+(25,'FOX CASCO','MAINFRAME CON MIPS','M',0,'Presenta una cobertura extendida para protegerte en los días más intensos, la protección MIPS probada mantendrá tu cerebro a salvo en caso de un impacto, absorbiendo y redirigiendo las energías.',2023,62000,3,'/images/producto/vest1.jpg',42,1),
+(26,'FOX GUANTE','RANGER BLACK','L',0,'Fox Ranger Gel Short Gloves, los guantes de bicicleta de montaña más vendidos con acolchado de gel y dedos desnudos. ',2023,19000,3,'/images/producto/vest2.jpg',36,1),
+(27,'Zapato ruta Northwave','Jet Evo','S',38,'Los zapatos Jet Evo cuentan con suela NRG Air con un índice de rigidez de 6.0 y 5 respiraderos para un flujo de aire perfecto.',2023,48000,3,'/images/producto/vest3.jpg',40,16),
+(28,'Casco para dama Fox','Womens Flux','L',0,'Es un casco ligero y seguro adecuado para XC, todo tipo de montaña y senderos. Un perfil más profundo y un codo extendido proporcionan un alto nivel de protección importante para viajar en un terreno desafiante. ',2023,61000,3,'/images/producto/vest4.jpg',42,1),
+(29,'Camisa de hombre','Suarez classic mot wine','M',0,'Telas con control de humedad, protección solar y alta durabilidad.',2023,42000,3,'/images/producto/vest5.jpg',33,17),
+(30,'Anteojos SALICE','Salice 020r negro','M',0,'Las gafas Salice 020 RW tienen un diseño aerodinámico, son perfectas para el ciclismo, la carrera y muchos otros deportes.',2023,81000,3,'/images/producto/vest6.jpg',39,18),
+(31,'Anteojo LIMAR','LIMAR KONA','M',0,'Las gafas Kona están equipadas con una única lente de pantalla ancha que aumenta la visión periférica y la protección UV.',2023,41000,3,'/images/producto/vest7.jpg',39,19),
+(32,'Zapato para MTB','Shimano SH-XC 500','M',41,'Los zapatos de ciclismo Shimano XC5 se han fabricado para ofrecer una buena transmisión de potencia en el pedaleo pero a la vez aportar comodidad y seguridad.',2023,62000,3,'/images/producto/vest8.jpg',40,14);
 
 INSERT INTO `evento` VALUES 
-(1,'2023-10-04','Vuelta a la Península de Nicoya',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,'../images/evento/evento1.jpg',1,5,502,50201),
-(2,'2023-06-18','Recreativa Atenas',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,'../images/evento/evento2.jpg',1,2,205,20501),
-(3,'2023-08-05','Carrera de Montaña en Orosi',25000,'¡Desafía tus límites y corre en una de las montañas más bellas de Costa Rica! Incluye: hidratación, asistencia mecánica, premios y medallas.','Orosi',300,'../images/evento/evento3.jpg',1,4,401,40102),
-(4,'2023-05-15','Paseo en bicicleta en Turrialba',15000,'Recorre los paisajes más hermosos del Valle de Turrialba en bicicleta. Incluye: desayuno, hidratación, asistencia mecánica y guía.','Turrialba',200,'../images/evento/evento4.jpg',1,5,503,50301),
-(5,'2023-09-10','Festival de Running en Cartago',20000,'¡Cletea por la ciudad de Cartago y vive una experiencia única en el Festival de Running! Incluye: hidratación, asistencia mecánica, premios y medallas.','Cartago',500,'../images/evento/evento5.jpg',1,2,201,20101),
-(6,'2023-05-08','Tour en bicicleta por Heredia',10000,'Recorre los lugares más interesantes de la ciudad de Heredia en bicicleta. Incluye: desayuno, hidratación y asistencia mecánica.','Heredia',150,'../images/evento/evento6.jpg',1,5,501,50101),
-(7,'2023-07-03','Carrera de obstáculos',30000,'Desafía tus límites y supera todos los obstáculos de la carrera. Incluye: hidratación, asistencia mecánica, premios y medallas.','Gimnasio Bodytech, San José',500,'../images/evento/evento7.jpg',1,2,203,20301),
-(8,'2023-08-20','Carrera nocturna',15000,'Corre bajo las estrellas y disfruta de la ciudad iluminada. Incluye: hidratación, asistencia mecánica, premios y medallas.','Parque de la Paz',300,'../images/evento/evento8.jpg',1,2,204,20401),
-(9,'2023-08-12','Rally de Montaña en Escazú',20000,'Disfruta de una emocionante carrera de ciclismo de montaña en Escazú. Incluye: hidratación, asistencia mecánica y premios.','Escazú',250,'../images/evento/evento9.jpg',1,5,504,50401),
-(10,'2023-06-04','Carrera de Ruta en Alajuela',15000,'Corre por las hermosas rutas de Alajuela en una carrera de ciclismo de ruta. Incluye: hidratación, asistencia mecánica y medalla.','Alajuela',300,'../images/evento/evento10.jpg',1,5,505,50501),
-(11,'2023-09-16','Carrera de Contrarreloj en Heredia',10000,'Participa en una emocionante carrera contrarreloj en la hermosa ciudad de Heredia. Incluye: hidratación, asistencia mecánica y premios.','Heredia',200,'../images/evento/evento11.jpg',1,5,506,50601),
-(12,'2023-07-09','Gran Fondo en Puntarenas',25000,'Únete a la Gran Fondo en Puntarenas y recorre las hermosas carreteras de la costa pacífica de Costa Rica. Incluye: hidratación, asistencia mecánica y medalla.','Puntarenas',500,'../images/evento/evento12.jpg',1,5,507,50701),
-(13,'2023-05-22','Carrera de BMX en Liberia',8000,'Participa en una emocionante carrera de BMX en la ciudad de Liberia. Incluye: hidratación, asistencia mecánica y premios.','Liberia',100,'../images/evento/evento13.jpg',1,5,508,50801);
+(1,'2023-08-20','Nicoya Ruta Colonial Indigena',94200,'Las mejores playas de Guanacaste en un solo ride!, El reto está en vos!, 4 de Noviembre, Ruta 120kms 2000m ASC. ACUM., Ruta 50kms 900m ASC. ACUM., Ruta 25kms 600m ASC. ACUM.','Nicoya Crentro',400,'/images/evento/evento1.jpg',1,5,502,50201),
+(2,'2023-06-18','Recreativa Atenas',13000,'No se lo pierdan! La inscripción incluye: Desayuno, Hidratación, Asitencia mecánica (Te lavamos la bici!), Masaje de descarga muscular, Rifas, Premios, Parqueo','Liceo de Atenas',200,'/images/evento/evento2.jpg',1,2,205,20501),
+(3,'2023-08-05','Carrera de Montaña en Orosi',25000,'¡Desafía tus límites y corre en una de las montañas más bellas de Costa Rica! Incluye: hidratación, asistencia mecánica, premios y medallas.','Orosi',300,'/images/evento/evento3.jpg',1,4,401,40102),
+(4,'2023-05-15','Paseo en bicicleta en Turrialba',15000,'Recorre los paisajes más hermosos del Valle de Turrialba en bicicleta. Incluye: desayuno, hidratación, asistencia mecánica y guía.','Turrialba',200,'/images/evento/evento4.jpg',1,5,503,50301),
+(5,'2023-09-10','Festival de Running en Cartago',20000,'¡Cletea por la ciudad de Cartago y vive una experiencia única en el Festival de Running! Incluye: hidratación, asistencia mecánica, premios y medallas.','Cartago',500,'/images/evento/evento5.jpg',1,2,201,20101),
+(6,'2023-05-08','Tour en bicicleta por Heredia',10000,'Recorre los lugares más interesantes de la ciudad de Heredia en bicicleta. Incluye: desayuno, hidratación y asistencia mecánica.','Heredia',150,'/images/evento/evento6.jpg',1,5,501,50101),
+(7,'2023-07-03','Carrera de obstáculos',30000,'Desafía tus límites y supera todos los obstáculos de la carrera. Incluye: hidratación, asistencia mecánica, premios y medallas.','Gimnasio Bodytech, San José',500,'/images/evento/evento7.jpg',1,2,203,20301),
+(8,'2023-08-20','Carrera nocturna',15000,'Corre bajo las estrellas y disfruta de la ciudad iluminada. Incluye: hidratación, asistencia mecánica, premios y medallas.','Parque de la Paz',300,'/images/evento/evento8.jpg',1,2,204,20401),
+(9,'2023-08-12','Rally de Montaña en Escazú',20000,'Disfruta de una emocionante carrera de ciclismo de montaña en Escazú. Incluye: hidratación, asistencia mecánica y premios.','Escazú',250,'/images/evento/evento9.jpg',1,5,504,50401),
+(10,'2023-06-04','Carrera de Ruta en Alajuela',15000,'Corre por las hermosas rutas de Alajuela en una carrera de ciclismo de ruta. Incluye: hidratación, asistencia mecánica y medalla.','Alajuela',300,'/images/evento/evento10.jpg',1,5,505,50501),
+(11,'2023-09-16','Carrera de Contrarreloj en Heredia',10000,'Participa en una emocionante carrera contrarreloj en la hermosa ciudad de Heredia. Incluye: hidratación, asistencia mecánica y premios.','Heredia',200,'/images/evento/evento11.jpg',1,5,506,50601),
+(12,'2023-07-09','Gran Fondo en Puntarenas',25000,'Únete a la Gran Fondo en Puntarenas y recorre las hermosas carreteras de la costa pacífica de Costa Rica. Incluye: hidratación, asistencia mecánica y medalla.','Puntarenas',500,'/images/evento/evento12.jpg',1,5,507,50701),
+(13,'2023-05-22','Carrera de BMX en Liberia',8000,'Participa en una emocionante carrera de BMX en la ciudad de Liberia. Incluye: hidratación, asistencia mecánica y premios.','Liberia',100,'/images/evento/evento13.jpg',1,5,508,50801);
 
 
 INSERT INTO metodopago VALUES 
 (1, 'Tarjeta de crédito'),(2, 'Tarjeta de débito'),(3, 'PayPal'),(4, 'Transferencia bancaria'),(5, 'Cheque'),(6, 'Efectivo'),(7, 'SINPE móvil'); 
-
 
