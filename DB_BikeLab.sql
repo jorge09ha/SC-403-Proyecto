@@ -31,6 +31,21 @@ Create table rol(
   PRIMARY KEY (id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+CREATE TABLE datoslogin (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(30) NOT NULL UNIQUE,
+  password VARCHAR(200) NOT NULL,
+  PRIMARY KEY (id) 
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE roldatoslogin (
+  rol_id INT NOT NULL,
+  usuario_id INT NOT NULL,
+  primary key (rol_id,usuario_id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+INSERT INTO `rol` VALUES (1,'ROLE_ADMIN'), (2,'ROLE_USER'),(3,'ROLE_VENDEDOR');
+
 CREATE TABLE usuario(
   id INT NOT NULL AUTO_INCREMENT,
   nombre varchar(30) NOT NULL,
@@ -211,6 +226,25 @@ CREATE TABLE orden(
   CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`metodo_id`) REFERENCES `metodopago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
+
+Use bikelab;
+DELIMITER $$
+CREATE PROCEDURE eliminar_registros_sin_rol()
+BEGIN
+   DECLARE idEliminar INT;
+   DECLARE email VARCHAR(50);
+   DECLARE password VARCHAR(50);
+   DECLARE rol VARCHAR(50);
+ 
+   SELECT dl.id, dl.email, rol.rol INTO idEliminar, email, rol
+   FROM bikelab.datoslogin dl
+   LEFT JOIN bikelab.roldatoslogin rdl ON dl.id = rdl.usuario_id
+   LEFT JOIN bikelab.rol ON rdl.rol_id = rol.id
+   WHERE rol.rol IS NULL limit 1;
+ 
+   DELETE FROM bikelab.datoslogin WHERE id = idEliminar;
+END $$
+DELIMITER ;
 
 
 /*----------------------------------------------------- INSERT -----------------------------------------------------*/
