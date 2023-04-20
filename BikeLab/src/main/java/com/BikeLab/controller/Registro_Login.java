@@ -14,6 +14,9 @@ import com.BikeLab.service.IRolService;
 import java.util.List;
 import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -47,6 +51,10 @@ public class Registro_Login {
     
 @Autowired
     private AuthenticationManager authenticationManager;
+
+@Autowired
+private JdbcTemplate jdbcTemplate;
+
     
     //-------------------------- New --------------------------
     
@@ -107,12 +115,29 @@ public String login(@RequestParam String email, @RequestParam String password, M
     
     
     //-------------------------- Save --------------------------
-    @PostMapping("/save/login")
-    public String guardarUsuario(@ModelAttribute("usuario") DatosLogin usuario) {      
-        datosLoginService.saveUsuario(usuario);
-         return "redirect:/login/nuevo?exito";    
-}
+//    @PostMapping("/save/login")
+//    public String guardarUsuario(@ModelAttribute("usuario") Model model, DatosLogin usuario) {      
+//        try { datosLoginService.saveUsuario(usuario);
+//          return "redirect:/login/nuevo?exito"; 
+//        } catch (DataIntegrityViolationException e) {
+//        model.addAttribute("error", "El email ya se encuentra registrado");
+//         return "redirect:/login/nuevo";
+//}   
+//    }
     
+    @PostMapping("/save/login")
+public String guardarUsuario(@ModelAttribute("usuario") DatosLogin usuario, BindingResult result, RedirectAttributes attributes) {      
+    try { 
+        datosLoginService.saveUsuario(usuario);     
+        SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
+            .withProcedureName("eliminar_registros_sin_rol");
+        jdbcCall.execute();
+        return "redirect:/login/nuevo?exito"; 
+    } catch (DataIntegrityViolationException e) {      
+        return"redirect:/login/nuevo?error";
+    }   
+}
+     
     
     
     //-------------------------- UpDate --------------------------

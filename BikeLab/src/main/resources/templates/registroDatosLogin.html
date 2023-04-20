@@ -17,7 +17,8 @@
                           method="POST">
                         <div th:if=${param.exito}>
                             <div class="alert alert-success">Se ha registrado exitosamente</div>
-                        </div>
+                        </div>            
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert" >El email ya se encuentra registrado</div>
                         <!---Titulo-->                        
                         <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>                    
                         <!---Nombre-->
@@ -64,3 +65,5 @@
     </body>
 
 </html>
+
+

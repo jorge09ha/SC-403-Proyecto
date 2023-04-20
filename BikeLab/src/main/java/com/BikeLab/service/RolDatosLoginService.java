@@ -7,6 +7,9 @@ package com.BikeLab.service;
 import com.BikeLab.entity.RolDatosLogin;
 import com.BikeLab.repository.RolDatosLoginRepository;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RolDatosLoginService  implements IRolDatosLoginService {
+    
+    @PersistenceContext
+    private EntityManager entityManager;
     
     @Autowired
     private RolDatosLoginRepository rolDatosLoginRepository;
@@ -37,7 +43,8 @@ public class RolDatosLoginService  implements IRolDatosLoginService {
 
     @Override
     public void deleteUsuario(long id, long rolId) {
-      rolDatosLoginRepository.eliminarRegistrosTablaIntermedia(id, rolId);
+         // Llamada al SP para eliminar registros sin rol asociado para el usuario con el email proporcionado    
+      rolDatosLoginRepository.eliminarRegistrosTablaIntermedia(id, rolId);       
     }
     
     

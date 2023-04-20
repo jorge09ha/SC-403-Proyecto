@@ -34,3 +34,4 @@ public interface DatosLoginRepository extends JpaRepository<DatosLogin, Long> {
 
 
 }
+
