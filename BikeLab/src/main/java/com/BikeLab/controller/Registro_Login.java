@@ -71,7 +71,7 @@ public String login(@RequestParam String email, @RequestParam String password, M
    try {
       Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
       SecurityContextHolder.getContext().setAuthentication(authentication);
-      return "redirect:/tienda_home";
+      return "redirect:/";
    } catch (AuthenticationException ex) {
       LOGGER.error("Error de autenticación: " + ex.getMessage());
       model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
@@ -86,7 +86,7 @@ public String login(@RequestParam String email, @RequestParam String password, M
         }        
         DatosLogin usuarioEncontrado = datosLoginService.findAllUser(usuario.getEmail());
         if (usuarioEncontrado != null && usuarioEncontrado.getEmail().equals(usuario.getEmail())) {
-            return "redirect:/tienda_home";
+            return "redirect:/";
         } else {
             bindingResult.rejectValue("username", "error.usuario", "Nombre de usuario o contraseña incorrecta");
             return "login";

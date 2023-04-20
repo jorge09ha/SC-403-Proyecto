@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,12 +22,6 @@ public class Usuario implements Serializable {
     private int telefono;
     private String cedula;
     private String direccion;
-    private String correo;
-    private String contrasenia;
-
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
-    private Rol rol;
 
     @ManyToOne
     @JoinColumn(name = "provincia_id")
@@ -98,30 +91,6 @@ public class Usuario implements Serializable {
         this.direccion = direccion;
     }
 
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
-    }
-
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
     public Provincia getProvincia() {
         return provincia;
     }
@@ -148,7 +117,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", cedula=" + cedula + ", direccion=" + direccion + ", correo=" + correo + ", contrasenia=" + contrasenia + ", rol=" + rol + ", provincia=" + provincia + ", canton=" + canton + ", distrito=" + distrito + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", cedula=" + cedula + ", direccion=" + direccion + ", provincia=" + provincia + ", canton=" + canton + ", distrito=" + distrito + '}';
     }
 
 }

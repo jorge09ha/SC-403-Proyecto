@@ -56,7 +56,7 @@ private IUsuarioService usuarioService;
     @PostMapping("/guardar/usuario")
     public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {
         usuarioService.saveUsuario(usuario);
-        return "redirect:/tienda_home";
+        return "redirect:/";
     }
     
     
