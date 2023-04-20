@@ -1,12 +1,16 @@
 package com.BikeLab.entity;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,8 +22,6 @@ public class Rol implements Serializable {
     private long id;
     @Column(name = "rol")
     private String rol;
-    
-        
 
     public long getId() {
         return id;
@@ -37,6 +39,13 @@ public class Rol implements Serializable {
         this.rol = rol;
     }
 
-       
-    
+    int length() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String toString() {
+        return "Rol{" + "id=" + id + ", rol=" + rol + '}';
+    }
+
 }

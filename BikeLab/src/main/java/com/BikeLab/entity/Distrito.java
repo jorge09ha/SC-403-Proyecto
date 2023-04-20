@@ -46,4 +46,9 @@ public class Distrito implements Serializable {
         this.canton = canton;
     }
 
+    @Override
+    public String toString() {
+        return "Distrito{" + "id=" + id + ", nombre=" + nombre + ", canton=" + canton + '}';
+    }
+
 }

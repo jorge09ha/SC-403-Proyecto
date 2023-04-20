@@ -26,15 +26,6 @@ body {
     min-height: 100vh;
 }
 
-.bodyLogin {
-    background-image: url('../images/specialized.jpg');
-    background-size: cover;
-    background-repeat: no-repeat; 
-    height: 100%;
-    font-family: 'Numans', sans-serif;
-    position:relative;
-}
-
 a {
     text-decoration: none;
 }
@@ -45,6 +36,7 @@ a {
     align-items: center;
     justify-content: space-between;
     background: var(--color5);
+    padding: 10px;
     width: 100%;
     z-index: 100;
 }
@@ -62,7 +54,12 @@ a {
 
 .navbar-links {
     color: var(--color1);
-    width: 100%;
+    margin-top: 10px;
+}
+.navIcon {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .navbar-links ul {
@@ -114,8 +111,135 @@ ul li:hover ul.dropdown {
     display: block;
 }
 
-.navIcon a ion-icon {
-    width: 200px;
+/*----------------------- menu 2 -----------------------*/
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger-menu span {
+    width: 30px;
+    height: 2px;
+    background: white;
+    margin-bottom: 6px;
+}
+
+/*----------------------- Cards -----------------------*/
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 100px;
+}
+
+.card {
+    background-color: var(--color6);
+    border-radius: 20px;
+    color: var(--color4);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+    max-width: 400px; /* Establecer un ancho máximo para la tarjeta */
+    width: 100%; /* Establecer el ancho al 100% para que se ajuste al contenedor */
+    box-sizing: border-box; /* Incluir el padding y el borde en el tamaño total de la tarjeta */
+    margin:  auto; /* Centrar la tarjeta en su contenedor */
+    padding: 0;
+}
+.card-wrapper {
+    flex: 0 0 calc(25% - 20px); /* Establece el ancho para que muestre 4 tarjetas por fila, restando el espacio entre tarjetas (20px) */
+    max-width: calc(20% - 20px); /* Establece un ancho máximo para mantener un tamaño consistente */
+}
+
+.card img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.card-body {
+    padding: 10px;
+
+    background-color: var(--color4);
+    color: var(--color6);
+}
+
+.card-title {
+    color: var(--color1);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.card-subtitle {
+    color: var(--color5);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: var(--color6);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.btn-1 {
+    background-color: var(--color5);
+    color: var(--color4);
+    border-color: #141617;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.btn-1:hover {
+    background-color: var(--color3);
+    color: var(--color5);
+}
+
+.btn-2 {
+    background-color: var(--color1);
+    color: var(--color4);
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.btn-2:hover {
+    background-color: var(--color2);
+    color: var(--color5);
+}
+/*-----------------------HOME----------------------------------*/
+.carousel-img {
+    height: 600px;
+    width: 800px;
+    object-fit:fill;
+    flex-wrap: wrap;
+}
+
+.carousel-item {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    position: relative;
+}
+
+.card-container .rowHome{
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Ajusta este valor para controlar el espacio entre las tarjetas */
+    flex-wrap: wrap;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Ajusta este valor para controlar el espacio entre las tarjetas y el botón "Ver más" */
 }
 
 /*----------------------- Content -----------------------*/
@@ -133,10 +257,62 @@ ul li:hover ul.dropdown {
     justify-content: space-between;
 }
 
+/*----------------------- Vista detalle -----------------------*/
+
+.product-container {
+    background-color: white;
+    color: black;
+    margin: 5%;
+    border-radius: 10px;
+    padding: 5%;
+}
+
+.product-image {
+    max-width: 80%;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+/*btm*/
+.increment-decrement-container {
+    display: flex;
+    align-items: center;
+}
+
+.increment-decrement-input-group {
+    display: flex;
+    border: none;
+    border-radius: 2px;
+    margin-right: 1rem; /* Agregado margen a la derecha para separación */
+}
+
+.increment-decrement-input-group input {
+    width: 50px;
+    text-align: center;
+    border: 1px solid var(--color6);
+    background-color: var(--color4);
+    color: var(--color5);
+    margin: auto;
+}
+
+.increment-decrement-input-group button {
+    background-color: var(--color1);
+    color: var(--color4);
+    border: 1px solid var(--color6);
+    border-radius: 6px;
+    width: 50px;
+    height: 100%; /* Cambiado a 100% para que el botón tenga la misma altura que el input */
+    cursor: pointer;
+}
+
+.increment-decrement-input-group button:hover {
+    background-color: var(--color2);
+}
+
 
 /*----------------------- Footer -----------------------*/
-.footContainer{
-    padding-top: 1em ;
+.footContainer {
+    padding-top: 1em;
     text-align: center;
     margin-top: auto;
     bottom: 0;
@@ -165,12 +341,83 @@ ul li:hover ul.dropdown {
 }
 
 @media screen and (min-width: 1000px) {
-  footContainer {
-   position: relative;
-    bottom: 0;
-    width: 100%; 
-    margin-top: 0;
-    height: 80px;
-  }
-  
+    footContainer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin-top: 0;
+        height: 80px;
+    }
+}
+/* Pantallas pequeñas (1 tarjeta por línea) */
+@media screen and (max-width: 767px) {
+    .card-wrapper {
+        flex: 0 0 calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
+
+/* Pantallas medianas (2 tarjetas por línea) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .card-wrapper {
+        flex: 0 0 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* Pantallas grandes (3 tarjetas por línea) */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .card-wrapper {
+        flex: 0 0 calc(33.33% - 20px);
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+/* Pantallas extra grandes (4 tarjetas por línea) */
+@media screen and (min-width: 1200px) {
+    .card-wrapper {
+        flex: 0 0 calc(25% - 20px);
+        max-width: calc(25% - 20px);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger-menu {
+        display: inline-flex;
+        margin-right: 30px;
+    }
+    
+    .navbar-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        flex-direction: column;
+        background: var(--color5);
+        width: 100%;
+        display: none;
+    }
+
+    .navbar-links ul {
+        flex-direction: column;
+    }
+    
+    .navbar-links ul li {
+        text-align: center;
+        padding: 10px 0;
+    }
+    
+    .navbar-links ul li ul.dropdown {
+        position: static;
+        background: none;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .navbar-links ul li ul.dropdown li {
+        padding: 10px 0;
+    }
+    
+    .navbar-links ul li:hover ul.dropdown {
+        display: none;
+    }
 }

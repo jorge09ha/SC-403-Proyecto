@@ -33,4 +33,9 @@ public class ProductoService implements IProductoService {
         productoRepository.deleteById(id);
     }
 
+    @Override
+    public List<Producto> findByFamilia(String familia) {
+        return productoRepository.findByFamilia(familia);
+    }
+
 }

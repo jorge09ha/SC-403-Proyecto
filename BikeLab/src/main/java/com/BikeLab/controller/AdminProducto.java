@@ -6,6 +6,7 @@ import com.BikeLab.entity.TipoProducto;
 import com.BikeLab.service.IFamiliaProductoService;
 import com.BikeLab.service.IMarcaService;
 import com.BikeLab.service.ITipoProductoService;
+import com.BikeLab.service.UploadFileService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ public class AdminProducto {
 
     @Autowired
     private ITipoProductoService tipoProductoService;
+
 
 //-------------------------- List --------------------------
     @GetMapping("/admin/marca_producto")
@@ -75,7 +77,7 @@ public class AdminProducto {
 
     @GetMapping("/admin/tipo/nuevo")
     public String crearTipoP(Model model) {
-         List<FamiliaProducto> lista = familiaProductoService.getAllFamiliaProducto();
+        List<FamiliaProducto> lista = familiaProductoService.getAllFamiliaProducto();
         TipoProducto tipoProducto = new TipoProducto();
         model.addAttribute("titulo", "Nueva Tipo Producto");
         model.addAttribute("tipo", tipoProducto);

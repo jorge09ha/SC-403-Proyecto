@@ -131,4 +131,9 @@ public class Producto implements Serializable {
         this.marca = marca;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" + "id=" + id + ", nombre=" + nombre + ", modelo=" + modelo + ", talla=" + talla + ", tamanio=" + tamanio + ", detalle=" + detalle + ", anio=" + anio + ", precio=" + precio + ", stock=" + stock + ", imagen=" + imagen + ", tipoProducto=" + tipoProducto + ", marca=" + marca + '}';
+    }
+
 }

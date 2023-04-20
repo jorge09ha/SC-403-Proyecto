@@ -2,12 +2,14 @@ package com.BikeLab.entity;
 
 import com.BikeLab.entity.FamiliaProducto;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,9 @@ public class TipoProducto implements Serializable {
     @ManyToOne
     @JoinColumn(name = "familia_id")
     private FamiliaProducto familiaproducto;
+
+    @OneToMany(mappedBy = "tipoProducto")
+    private List<Producto> productos;
 
     public long getId() {
         return id;
@@ -55,5 +60,20 @@ public class TipoProducto implements Serializable {
     public void setFamiliaproducto(FamiliaProducto familiaproducto) {
         this.familiaproducto = familiaproducto;
     }
+
+    @Override
+    public String toString() {
+        return "TipoProducto{" + "id=" + id + ", tipo=" + tipo + ", detalle=" + detalle + ", familiaproducto=" + familiaproducto + '}';
+    }
+
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
+    
+    
 
 }

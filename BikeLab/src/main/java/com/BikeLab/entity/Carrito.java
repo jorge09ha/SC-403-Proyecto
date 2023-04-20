@@ -83,4 +83,9 @@ public class Carrito implements Serializable {
         this.evento = evento;
     }
 
+    @Override
+    public String toString() {
+        return "Carrito{" + "id=" + id + ", fecha=" + fecha + ", cantidad=" + cantidad + ", usuario=" + usuario + ", producto=" + producto + ", evento=" + evento + '}';
+    }
+
 }

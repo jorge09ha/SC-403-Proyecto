@@ -92,4 +92,9 @@ public class Orden implements Serializable {
         this.carrito = carrito;
     }
 
+    @Override
+    public String toString() {
+        return "Orden{" + "id=" + id + ", detalle=" + detalle + ", montototal=" + montototal + ", fecha=" + fecha + ", usuario=" + usuario + ", metodopago=" + metodopago + ", carrito=" + carrito + '}';
+    }
+
 }
