@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>⚙️ BIKELAB</title>
+    <title>🔧 Admin - BikeLab</title>
     <!---Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
@@ -21,11 +21,12 @@
     <link th:href="@{/styles/adminTemplate.css}" rel="stylesheet" />
     <link rel="stylesheet" href="../static/css/adminTemplate.css" th:href="@{/css/adminTemplate.css}" media="screen" />
 </head>
-<body >
+
+<body>
     <header th:fragment="header">
         <div class="navbar">
-            <nav class="navbar-links">
-                <ul>
+            <nav class="navbar-links" id="navbar-menu">
+                <ul class="nav-list">
                     <li class="logo">
                         <a class="navbar-logo" href="/admin"><img src="/images/logo1.png" alt="BikeLab"></a>
                     </li>
@@ -33,8 +34,8 @@
                         <a class="nav-link active" href="#">Usuarios</a>
                         <ul class="dropdown">
                             <li><a href="/admin/roles">Roles</a></li>
-                             <li><a href="/admin/usuario">Usuarios</a></li>  
-                             <li><a href="/admin/datosLogin">Rol usuario</a></li>  
+                            <li><a href="/admin/usuario">Usuarios</a></li>
+                            <li><a href="/admin/datosLogin">Rol usuario</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -65,8 +66,20 @@
                             <li><a href="/admin/evento">Evento</a></li>
                         </ul>
                     </li>
+                </ul>
+                <ul class="nav-list">
                     <li>
-                        <a href="/"><button class="btn" style="color:white; background-color: #EB2546;" type="submit">TIENDA</button></a>
+                        <a href="/" class="icon-link"><ion-icon name="bag-handle"></ion-icon></a>
+                    <li class="nav-drop dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <ion-icon name="person-circle"></ion-icon>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar
+                                sesión</a>
+                        </div>
+                    </li>
                     </li>
                 </ul>
             </nav>
@@ -74,64 +87,63 @@
     </header>
 
 
-    <footer th:fragment="footer" class="footContainer   text-white text-center text-lg-start">     
-            <!-- Grid container -->
-            <div class="footerRow p-4">
-                <!--Grid copyright-->
-                <div class="row">
-                    <!--Grid 1-->
-                    <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <img src="/images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
-                        <p>Lleva tu pedaleo al siguiente nivel.</p>
-                    </div>
-                    <!--Grid 2-->
-                    <div class="grid2 col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Redes Sociales</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="logo-instagram"></ion-icon>Bike-Lab</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="logo-facebook"></ion-icon>Bike-Lab</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="logo-whatsapp"></ion-icon>+506
-                                    8888-8888</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid 3-->
-                    <div class="grid3 col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Contáctenos</h6>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="call-sharp"></ion-icon>+506
-                                    2532-3577</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="navigate-circle-sharp"></ion-icon>San
-                                    José, Costa Rica.</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon
-                                        name="mail-sharp"></ion-icon>bikelab@email.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid 3 end-->
+    <footer th:fragment="footer">
+        <!-- Grid container -->
+        <div class="footerRow p-4">
+            <!--Grid copyright-->
+            <div class="row">
+                <!--Grid 1-->
+                <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <img src="/images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
+                    <p>Lleva tu pedaleo al siguiente nivel.</p>
                 </div>
-                <!--Grid row end-->
+                <!--Grid 2-->
+                <div class="grid2 col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h6 class="text-uppercase">Redes Sociales</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="logo-instagram"></ion-icon>Bike-Lab</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="logo-facebook"></ion-icon>Bike-Lab</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="logo-whatsapp"></ion-icon>+506
+                                8888-8888</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid 3-->
+                <div class="grid3 col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h6 class="text-uppercase">Contáctenos</h6>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="call-sharp"></ion-icon>+506
+                                2532-3577</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="navigate-circle-sharp"></ion-icon>San
+                                José, Costa Rica.</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="mail-sharp"></ion-icon>bikelab@email.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid 3 end-->
             </div>
-            <!-- Grid container end-->
-            <!-- Copyright -->
-            <div class="copyright p-3">
-                <p>&COPY[[#{plantilla.derechos}]]
-                    <a th:href="@{/(lang=es)}">ES</a>
-                    <a th:href="@{/(lang=en)}">EN</a>
-                </p>
-            </div>
-            <!-- Copyright end-->
-        </footer>
+            <!--Grid row end-->
+        </div>
+        <!-- Grid container end-->
+        <!-- Copyright -->
+        <div class="copyright p-3">
+            <p>&COPY[[#{plantilla.derechos}]]
+                <a th:href="@{/(lang=es)}">ES</a>
+                <a th:href="@{/(lang=en)}">EN</a>
+            </p>
+        </div>
+        <!-- Copyright end-->
+    </footer>
 </body>
 
 </html>

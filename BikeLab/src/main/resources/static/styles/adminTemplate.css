@@ -41,7 +41,7 @@ a {
 }
 
 .logo {
-    margin-left: 30px;
+    margin-left: 20px;
 }
 
 .logo a img {
@@ -52,8 +52,23 @@ a {
 }
 
 .navbar-links {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 1;
     color: var(--color1);
-    width: 100%;
+    margin-top: 10px;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    margin-right: 30px;
+}
+
+.navIcon {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 .navbar-links ul {
@@ -76,7 +91,7 @@ a {
     font-size: 20px;
 }
 
-.navbar-links ul li a::before {
+.navbar-links .nav-item a::before {
     content: "";
     height: 3px;
     width: 0%;
@@ -87,11 +102,11 @@ a {
     transition: 0.3s ease-out;
 }
 
-.navbar-links ul li a:hover::before {
+.navbar-links .nav-item a:hover::before {
     width: 100%;
 }
 
-
+/**DropDown**/
 ul li ul.dropdown {
     width: 180px;
     padding: 10px;
@@ -100,9 +115,31 @@ ul li ul.dropdown {
     display: none;
 }
 
-
 ul li:hover ul.dropdown {
     display: block;
+}
+
+/*Icon */
+.icon-link {
+    font-size: 1.3em;
+    margin-right: 5px;
+    color: var(--color4);
+    text-decoration: none;
+}
+
+.icon-link:hover {
+    color: var(--color2);
+}
+
+/*Icon persona */
+.login-btn {
+    display: flex;
+    align-items: center;
+}
+
+ion-icon[name="person-circle"] {
+    font-size: 1.2em;
+    margin-right: 5px;
 }
 
 /*----------------------- Content -----------------------*/
@@ -158,5 +195,4 @@ ul li:hover ul.dropdown {
         margin-top: 0;
         height: 80px;
     }
-
 }

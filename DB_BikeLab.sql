@@ -67,20 +67,6 @@ CREATE TABLE usuario(
   CONSTRAINT `fk_usuario_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ); 
 
-CREATE TABLE datoslogin (
-  id INT NOT NULL AUTO_INCREMENT,
-  email VARCHAR(30) NOT NULL UNIQUE,
-  password VARCHAR(200) NOT NULL,
-  PRIMARY KEY (id) 
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-CREATE TABLE roldatoslogin (
-  rol_id INT NOT NULL,
-  usuario_id INT NOT NULL,
-  primary key (rol_id,usuario_id)
-)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
 CREATE TABLE proveedor(
  id INT NOT NULL AUTO_INCREMENT,
  nombre VARCHAR(50) NOT NULL,

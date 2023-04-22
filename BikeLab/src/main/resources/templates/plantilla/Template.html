@@ -1,132 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>⚙️ BIKELAB</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>⚙️ BikeLab</title>
 
-        <!---Bootstrap-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-              integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <!---Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
 
-        <!---ionicons-->
-        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!---ionicons-->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-        <!---Google Fonts-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-            rel="stylesheet">
+    <!---Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 
-        <!---CSS-->
-        <link th:href="@{/styles/Template.css}" rel="stylesheet" />
-        <link rel="stylesheet" href="../static/styles/Template.css" th:href="@{/css/adminTemplate.css}" media="screen" />
+    <!---CSS-->
+    <link th:href="@{/styles/Template.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/styles/Template.css" th:href="@{/css/adminTemplate.css}" media="screen" />
 
-        <!-- Agrega las referencias a jQuery, Popper.js y Bootstrap JS -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Agrega las referencias a jQuery, Popper.js y Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    </head>
-    <body >
-        <header th:fragment="header">
+</head>
 
-            <div class="navbar">
-                <nav class="navbar-links">
-                    <ul>
-                        <li class="logo">
-                            <a class="navbar-logo" href="/"><img src="../images/logo1.png" alt="BikeLab"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/bicicletas">BICICLETAS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/componentes">COMPONENTES</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/vestimenta">VESTIMENTA</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/accesorios">ACCESORIOS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/eventos">EVENTOS</a>
-                        </li>
-                        <ul class="navbar-nav ml-auto">
-                            <ul class="navIcon">
-                                <a href="#!" class="text-white" ><ion-icon name="cart-sharp"></ion-icon></a>                   
-                                <a sec:authorize="isAnonymous()" th:href="@{~/login}" class="btn" style="color:white; background-color: #EB2546; display: inline-block;" type="submit" href="/login">Iniciar Sesión</a>
-                                <a sec:authorize="isAuthenticated()" class="btn" style="color:white; background-color: #EB2546; display: inline-block;" type="submit" th:href="@{/logout}">Cerrar Sesión</a>   
-                                <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')"  class="btn" style="color:white; background-color: #EB2546; display: inline-block;" type="submit" href="/admin">Admin</a>                                     
-                                <a class="btn" style="color:white; background-color: #EB2546;" type="submit"  href="/login/nuevo">Registrarse</a>  
-                            </ul>
-                        </ul>
-                    </ul>
-                </nav>
-            </div>
-        </header>
+<body>
+    <header th:fragment="header">
+        <div class="navbar">
+            <nav class="navbar-links" id="navbar-menu">
+                <ul class="nav-list">
+                    <li class="logo">
+                        <a class="navbar-logo" href="/"><img src="../images/logo1.png" alt="BikeLab"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/bicicletas">Bicicletas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/componentes">Componentes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/vestimenta">Vestimenta</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/accesorios">Accesorios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/eventos">Eventos</a>
+                    </li>
+                </ul>
+                <ul class="nav-list">
+                    <a href="#!" class="icon-link"><ion-icon name="cart-sharp"></ion-icon></a>
+                    <li class="nav-drop dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <ion-icon name="person-circle"></ion-icon>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a sec:authorize="isAnonymous()" th:href="@{~/login}" class="dropdown-item"
+                                href="/login">Iniciar sesión</a>
+                            <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar
+                                sesión</a>
+                            <a class="dropdown-item" href="/login/nuevo">Registrarse</a>
+                            <div class="dropdown-divider"></div>
+                            <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')" class="dropdown-item"
+                                href="/admin">Admin</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <footer th:fragment="footer" class="footContainer   text-white text-center text-lg-start">     
-            <!-- Grid container -->
-            <div class="footerRow p-4">
-                <!--Grid copyright-->
-                <div class="row">
-                    <!--Grid 1-->
-                    <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
-                        <img src="../images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
-                        <p>Lleva tu pedaleo al siguiente nivel.</p>
-                    </div>
-                    <!--Grid 2-->
-                    <div class="grid2 col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Redes Sociales</h6>
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="logo-instagram"></ion-icon>Bike-Lab</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="logo-facebook"></ion-icon>Bike-Lab</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="logo-whatsapp"></ion-icon>+506
-                                    8888-8888</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid 3-->
-                    <div class="grid3 col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h6 class="text-uppercase">Contáctenos</h6>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="call-sharp"></ion-icon>+506
-                                    2532-3577</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon name="navigate-circle-sharp"></ion-icon>San
-                                    José, Costa Rica.</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><ion-icon
-                                        name="mail-sharp"></ion-icon>bikelab@email.com</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!--Grid 3 end-->
+
+
+    <footer th:fragment="footer">
+        <!-- Grid container -->
+        <div class="footerRow p-4">
+            <!--Grid copyright-->
+            <div class="row">
+                <!--Grid 1-->
+                <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <img src="../images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
+                    <p>Lleva tu pedaleo al siguiente nivel.</p>
                 </div>
-                <!--Grid row end-->
+                <!--Grid 2-->
+                <div class="grid2 col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h6 class="text-uppercase">Redes Sociales</h6>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="logo-instagram"></ion-icon>Bike-Lab</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="logo-facebook"></ion-icon>Bike-Lab</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="logo-whatsapp"></ion-icon>+506
+                                8888-8888</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid 3-->
+                <div class="grid3 col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h6 class="text-uppercase">Contáctenos</h6>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="call-sharp"></ion-icon>+506
+                                2532-3577</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="navigate-circle-sharp"></ion-icon>San
+                                José, Costa Rica.</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white"><ion-icon name="mail-sharp"></ion-icon>bikelab@email.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <!--Grid 3 end-->
             </div>
-            <!-- Grid container end-->
-            <!-- Copyright -->
-            <div class="copyright p-3">
-                <p>&COPY[[#{plantilla.derechos}]]
-                    <a th:href="@{/(lang=es)}">ES</a>
-                    <a th:href="@{/(lang=en)}">EN</a>
-                </p>
-            </div>
-            <!-- Copyright end-->
-        </footer>
-    </body>
+            <!--Grid row end-->
+        </div>
+        <!-- Grid container end-->
+        <!-- Copyright -->
+        <div class="copyright p-3">
+            <p>&COPY[[#{plantilla.derechos}]]
+                <a th:href="@{/(lang=es)}">ES</a>
+                <a th:href="@{/(lang=en)}">EN</a>
+            </p>
+        </div>
+        <!-- Copyright end-->
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/WM6eB3z8RtpoOU3wi7jy68pu77/9X7FcMdvRpt"
+        crossorigin="anonymous"></script>
+</body>
 
 </html>
