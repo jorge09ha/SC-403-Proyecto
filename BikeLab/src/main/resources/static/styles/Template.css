@@ -8,8 +8,8 @@
 }
 
 :root {
-    --color1: #E30845;
-    --color2: #FF3456;
+    --color2: #E30845;
+    --color1: #FF3456;
     --color3: #A3A2A3;
     --color4: #FFFFFF;
     --color5: #141617;
@@ -200,10 +200,10 @@ ion-icon[name="person-circle"] {
     justify-content: space-between;
 }
 
-/*----------------------- Footer -----------------------*/
+/*---------------------- Footer -----------------------*/
 footer {
-    background-color: #222;
-    color: #fff;
+    background-color: var(--color4);
+    color: var(--color4);
     font-size: 14px;
     bottom: 0;
     position: relative;
@@ -223,6 +223,7 @@ footer {
 }
 
 .footerRow {
+    color: var(--color4);
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;

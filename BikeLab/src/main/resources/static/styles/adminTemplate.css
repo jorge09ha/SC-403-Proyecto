@@ -8,8 +8,8 @@
 }
 
 :root {
-    --color1: #EB2546;
-    --color2: #FF3456;
+    --color2: #EB2546;
+    --color1: #FF3456;
     --color3: #A3A2A3;
     --color4: #FFFFFF;
     --color5: #141617;
@@ -24,6 +24,10 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+html, body {
+    height: 100%;
 }
 
 a {
@@ -131,16 +135,7 @@ ul li:hover ul.dropdown {
     color: var(--color2);
 }
 
-/*Icon persona */
-.login-btn {
-    display: flex;
-    align-items: center;
-}
 
-ion-icon[name="person-circle"] {
-    font-size: 1.2em;
-    margin-right: 5px;
-}
 
 /*----------------------- Content -----------------------*/
 .content {
@@ -158,14 +153,30 @@ ion-icon[name="person-circle"] {
 }
 
 /*----------------------- Footer -----------------------*/
-.footContainer{
-    padding-top: 1em ;
+
+footer {
+    background-color: var(--color4);
+    color: var(--color4);
+    font-size: 14px;
+    bottom: 0;
+    position: relative;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 999;
+    width: 100%;
+    margin-top: auto;
+}
+
+.footContainer {
+    padding-top: 1em;
     text-align: center;
     margin-top: auto;
     bottom: 0;
 }
 
 .footerRow {
+    color: var(--color4);
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -194,5 +205,50 @@ ion-icon[name="person-circle"] {
         width: 100%;
         margin-top: 0;
         height: 80px;
+    }
+}
+
+/* Pantallas pequeñas (1 tarjeta por línea) */
+@media screen and (max-width: 767px) {
+    .card-wrapper {
+        flex: 0 0 calc(100% - 20px);
+        max-width: calc(100% - 20px);
+    }
+}
+
+/* Pantallas medianas (2 tarjetas por línea) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .card-wrapper {
+        flex: 0 0 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+    }
+}
+
+/* Pantallas grandes (3 tarjetas por línea) */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .card-wrapper {
+        flex: 0 0 calc(33.33% - 20px);
+        max-width: calc(33.33% - 20px);
+    }
+}
+
+/* Pantallas extra grandes (4 tarjetas por línea) */
+@media screen and (min-width: 1200px) {
+    .card-wrapper {
+        flex: 0 0 calc(25% - 20px);
+        max-width: calc(25% - 20px);
+    }
+}
+
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1056px) {
+    .hamburger-menu {
+        display: inline-flex;
+        margin-left: 30px;
     }
 }
