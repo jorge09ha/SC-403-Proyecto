@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 
-<head th:replace="plantilla/Template::head"></head>
+    <head th:replace="plantilla/Template::head"></head>
 
-<body>
-    <!---Header-->
-    <header th:replace="plantilla/Template::header"></header>
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/Template::header"></header>
 
-    <!---Contenido-->
-    <div class="bg">
-        <div class=" product-container">
-            <div class="card-header bg-black text-white"></div>
-            <div class="container">
-                <h1 class="mb-3"><strong> </strong><span th:text="${producto.nombre}"></span></h1>
-                <h2 class="mb-3"><strong> </strong><span th:text="${producto.modelo}"></span></h2>
-                <div class="text-center">
-                    <img id="preview" th:src="${producto.getImagen}" alt="imagen" class="product-image">
-                </div>
-                <h4 class="mb-3"><strong>Talla: </strong><span th:text="${producto.talla}"></span></h4>
-                <h4 class="mb-3"><strong>Tamaño: </strong><span th:text="${producto.tamanio}"></span></h4>
-                <h4 class="mb-3"><strong>Detalle: </strong><span th:text="${producto.detalle}"></span></h4>
-                <h4 class="mb-3"><strong>Año: </strong><span th:text="${producto.anio}"></span></h4>
-                <h4 class="mb-3"><strong>Precio: </strong>₡<span th:text="${producto.precio}"></span></h4>
-                <h4 class="mb-3"><strong>Stock: </strong><span th:text="${producto.stock}"></span></h4>
-                <h4 class="mb-3"><strong>Tipo de Producto: </strong><span
-                        th:text="${producto.tipoProducto.tipo}"></span></h4>
-                <h4 class="mb-3"><strong>Marca: </strong><span th:text="${producto.marca.nombre}"></span></h4>
-                <div class="d-flex increment-decrement-container" th:if="${producto.stock > 0}">
-                    <div class="input-group increment-decrement-input-group">
-                        <button type="button" class="btn btn-2" onclick="decrementValue(this)"><ion-icon name="remove-circle"></ion-icon></button>
-                        <input type="number" class="form-control text-center" min="1" th:max="${producto.stock}"
-                            value="1" readonly>
-                        <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
+        <!---Contenido-->
+        <div class="bg">
+            <div class=" product-container">
+                <div class="card-header bg-black text-white"></div>
+                <div class="container">
+                    <h1 class="mb-3"><strong> </strong><span th:text="${producto.nombre}"></span></h1>
+                    <h2 class="mb-3"><strong> </strong><span th:text="${producto.modelo}"></span></h2>
+                    <div class="text-center">
+                        <img id="preview" th:src="${producto.getImagen}" alt="imagen" class="product-image">
                     </div>
-                    <a href="#" class="btn btn-1 ml-auto">Agregar<ion-icon name="cart"></ion-icon></a>
+                    <h4 class="mb-3"><strong th:text="#{tienda.talla}">Talla: </strong><span th:text="${producto.talla}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.tamanio}">Tamaño: </strong><span th:text="${producto.tamanio}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.detalle}">Detalle: </strong><span th:text="${producto.detalle}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.anio}">Año: </strong><span th:text="${producto.anio}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.precio}">Precio: </strong>₡<span th:text="${producto.precio}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.stock}">Stock: </strong><span th:text="${producto.stock}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.tipo}">Tipo de Producto: </strong><span
+                            th:text="${producto.tipoProducto.tipo}"></span></h4>
+                    <h4 class="mb-3"><strong th:text="#{tienda.marca}">Marca: </strong><span th:text="${producto.marca.nombre}"></span></h4>
+                    <div class="d-flex increment-decrement-container" th:if="${producto.stock > 0}">
+                        <div class="input-group increment-decrement-input-group">
+                            <button type="button" class="btn btn-2" onclick="decrementValue(this)"><ion-icon name="remove-circle"></ion-icon></button>
+                            <input type="number" class="form-control text-center" min="1" th:max="${producto.stock}"
+                                   value="1" readonly>
+                            <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
+                        </div>
+                        <a th:text="#{btn.agregar}" href="#" class="btn btn-1 ml-auto">Agregar</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <footer th:replace="plantilla/Template::footer"></footer>
+        <footer th:replace="plantilla/Template::footer"></footer>
 
-    <script>
-        function incrementValue(button) {
-            let input = button.previousElementSibling;
-            let maxValue = parseInt(input.max);
-            let currentValue = parseInt(input.value);
+        <script>
+            function incrementValue(button) {
+                let input = button.previousElementSibling;
+                let maxValue = parseInt(input.max);
+                let currentValue = parseInt(input.value);
 
-            if (currentValue < maxValue) {
-                input.value = currentValue + 1;
+                if (currentValue < maxValue) {
+                    input.value = currentValue + 1;
+                }
             }
-        }
 
-        function decrementValue(button) {
-            let input = button.nextElementSibling;
-            let minValue = parseInt(input.min);
-            let currentValue = parseInt(input.value);
+            function decrementValue(button) {
+                let input = button.nextElementSibling;
+                let minValue = parseInt(input.min);
+                let currentValue = parseInt(input.value);
 
-            if (currentValue > minValue) {
-                input.value = currentValue - 1;
+                if (currentValue > minValue) {
+                    input.value = currentValue - 1;
+                }
             }
-        }
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

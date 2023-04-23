@@ -14,10 +14,10 @@
                 <div class="container">
                     <form th:object="${producto}" th:action="@{/editar/producto/{id}(id=${producto.getId})}" method="POST" enctype="multipart/form-data">
                         <!---Titulo-->
-                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{editar.producto}"></h2>
                         <!---Nombre-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="nombre">NOMBRE</label>
+                            <label th:text="#{tabla.nombre}" class="col-md-2 col-form-label" for="nombre">NOMBRE</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
                                        placeholder="Nombre" id="nombre" aria-describedby="emailHelp">
@@ -25,7 +25,7 @@
                         </div>
                         <!---Modelo-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="modelo">Modelo</label>
+                            <label th:text="#{tabla.modelo}" class="col-md-2 col-form-label" for="modelo">Modelo</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{modelo}"
                                        placeholder="Modelo" id="modelo" aria-describedby="emailHelp">
@@ -33,20 +33,19 @@
                         </div>
                         <!---Talla-->
                         <div class="form-group mb-4 row col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="talla">Talla</label>
+                            <label th:text="#{tabla.talla}" class="col-md-2 col-form-label" for="talla">Talla</label>
                             <div class="col-sm-10">
                                 <select class="form-control form-control-sm col-md-6" th:field="*{talla}" id="talla">
                                     <option value="">Seleccionar talla</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
                                     <option value="L">L</option>
-                                    <option value="XL">XL</option>
                                 </select>
                             </div>
                         </div>
                         <!---Tamanio-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="tamanio">Tamaño</label>
+                            <label th:text="#{tabla.tamanio}" class="col-md-2 col-form-label" for="tamanio">Tamaño</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{tamanio}"
                                        placeholder="Tamanio" id="tamanio" aria-describedby="emailHelp">
@@ -54,7 +53,7 @@
                         </div>
                         <!---Detalle-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="detalle">Detalle</label>
+                            <label th:text="#{tabla.detalle}" class="col-md-2 col-form-label" for="detalle">Detalle</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{detalle}"
                                        placeholder="Detalle" id="detalle" aria-describedby="emailHelp">
@@ -62,7 +61,7 @@
                         </div>
                         <!---Anio-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="anio">Año</label>
+                            <label th:text="#{tabla.anio}" class="col-md-2 col-form-label" for="anio">Año</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{anio}"
                                        placeholder="Anio" id="anio" aria-describedby="emailHelp">
@@ -70,7 +69,7 @@
                         </div>
                         <!---Precio-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="precio">Precio</label>
+                            <label th:text="#{tabla.precio}" class="col-md-2 col-form-label" for="precio">Precio</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{precio}"
                                        placeholder="Precio" id="precio" aria-describedby="emailHelp">
@@ -78,7 +77,7 @@
                         </div>
                         <!---Stock-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="stock">Stock</label>
+                            <label th:text="#{tabla.stock}" class="col-md-2 col-form-label" for="stock">Stock</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{stock}"
                                        placeholder="Stock" id="stock" aria-describedby="emailHelp">
@@ -86,7 +85,7 @@
                         </div>
                         <!---Imagen-->
                         <div class="form-group mb-4 row col-8 mx-auto">
-                            <label class="control-label col-sm-2" for="imagen">Imagen:</label>
+                            <label th:text="#{tabla.imagen}" class="control-label col-sm-2" for="imagen">Imagen:</label>
                             <div class="col-sm-10">
                                 <p type="text" class="form-control form-control-sm col-md-6" th:text="*{imagen}" id="imgActual" aria-describedby="emailHelp"></p>
                                 <img id="preview" th:src="${producto.getImagen}" alt="imagen" style="max-width: 100%; height: auto;">
@@ -95,7 +94,7 @@
                         </div>
                         <!---Tipo-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="tipoproducto">Tipo Producto</label>
+                            <label th:text="#{tabla.tipo}" class="form-control-sm col-form-label col-md-2" for="tipoproducto">Tipo Producto</label>
                             <div class="col-sm-10">
                                 <select th:field="*{tipoProducto}" class="form-control form-control-sm col-md-6" id="tipoProducto" aria-describedby="emailHelp">
                                     <option th:each="x:${tipoProducto}"
@@ -106,7 +105,7 @@
                         </div>
                         <!---Marca-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="marca">Marca</label>
+                            <label th:text="#{tabla.marca}" class="form-control-sm col-form-label col-md-2" for="marca">Marca</label>
                             <div class="col-sm-10">
                                 <select th:field="*{marca}" class="form-control form-control-sm col-md-6" id="marca" aria-describedby="emailHelp">
                                     <option th:each="x:${marca}"
@@ -117,8 +116,8 @@
                         </div>
                         <!---Botones-->
                         <div class="d-grid gap-2 col-4 mx-auto">
-                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
-                            <a class="btn btn-danger " href="/admin/producto">CANCELAR</a>
+                            <button th:text="#{btn.guardar}" type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a th:text="#{btn.cancelar}" class="btn btn-danger " href="/admin/producto">CANCELAR</a>
                         </div>
                     </form>
                 </div>

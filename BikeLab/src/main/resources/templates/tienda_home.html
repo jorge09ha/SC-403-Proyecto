@@ -13,22 +13,22 @@
             <div class="carousel-item active" data-interval="3000">
                 <img class="d-block w-100 carousel-img" src="../images/banner1.jpg" alt="First slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Texto 1</h5>
-                    <p>Descubre los secretos del mundo.</p>
+                    <h5 th:text="#{home.carrusel1Titulo}"></h5>
+                    <p th:text="#{home.carrusel1Texto}"></p>
                 </div>
             </div>
             <div class="carousel-item" data-interval="3000">
                 <img class="d-block w-100 carousel-img" src="../images/banner2.jpg" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Texto 2</h5>
-                    <p>Encuentra belleza en los rincones más inesperados.</p>
+                    <h5 th:text="#{home.carrusel2Titulo}"></h5>
+                    <p th:text="#{home.carrusel2Texto}"></p>
                 </div>
             </div>
             <div class="carousel-item" data-interval="3000">
                 <img class="d-block w-100 carousel-img" src="../images/banner3.jpg" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5>Texto 3</h5>
-                    <p>Sumérgete en la naturaleza y experimenta nuevas sensaciones.</p>
+                    <h5 th:text="#{home.carrusel3Titulo}"></h5>
+                    <p th:text="#{home.carrusel3Texto}"></p>
                 </div>
             </div>
         </div>
@@ -43,7 +43,9 @@
     </div>
 
     <!--Bicicletas-->
-    <h1 style="color: white; text-align: center; margin-top: 30px;">Bicicletas</h1>
+    <h1 th:text="#{tienda.bicicletas}" style="color: white; text-align: center; margin-top: 30px;">Bicicletas</h1>
+   
+    
     <div class="card-container" style="justify-content: center;">
         <th:block th:each="producto, iterStat : ${productos}" class="card-wrapper mb-4">
             <th:block th:if="${iterStat.index < 3}">
@@ -55,15 +57,15 @@
                     <div class="card-body">
                         <h6 class="card-subtitle" th:text="${producto.getModelo}"></h6>
                         <h5 class="mb-3"><strong></strong>₡<span th:text="${producto.precio}"></span></h5>
-                        <a href="#" class="btn btn-1" th:href="@{/producto/{id}(id=${producto.getId})}">Detalles</a>
-                        <a href="#" class="btn btn-2">Agregar</a>
+                        <a th:text="#{btn.detalles}" href="#" class="btn btn-1" th:href="@{/producto/{id}(id=${producto.getId})}">Detalles</a>
+                        <a th:text="#{btn.agregar}" href="#" class="btn btn-2">Agregar</a>
                     </div>
                 </div>
             </th:block>
         </th:block>
     </div>
     <div class="button-container">
-        <a href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
+        <a th:text="#{btn.VerMas}" href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
     </div>
 
     <!-- Informativo -->
@@ -72,7 +74,7 @@
     </div>
 
     <!--Eventos-->
-    <h1 style="color: white; text-align: center; margin-top: 30px;">Eventos</h1>
+    <h1 th:text="#{tienda.eventos}" style="color: white; text-align: center; margin-top: 30px;">Eventos</h1>
     <div class="card-container" style="justify-content: center;">
         <th:block th:each="evento, iterStat : ${eventos}" class="card-wrapper mb-4">
             <th:block th:if="${iterStat.index < 3}">
@@ -92,7 +94,7 @@
         </th:block>
     </div>
     <div class="button-container">
-        <a href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
+        <a th:text="#{btn.VerMas}" href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
     </div>
 
 

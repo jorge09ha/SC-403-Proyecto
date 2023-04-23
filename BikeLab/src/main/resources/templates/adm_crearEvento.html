@@ -15,18 +15,18 @@
                     <form th:object="${evento}"th:action="@{/save/evento}"method="POST" enctype="multipart/form-data">
 
                         <!---Titulo-->
-                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>                    
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{nuevo.evento}"></h2>                    
                         <!---Nombre-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="nombre">Nombre</label>
+                            <label th:text="#{tabla.nombre}" class="col-md-2 col-form-label" for="nombre">Nombre</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
+                                <input th:placeholder="#{tabla.nombre}" type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
                                        placeholder="Nombre" id="nombre" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <!---Fecha-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="fecha">Fecha</label>
+                            <label th:text="#{tabla.fecha}" class="col-md-2 col-form-label" for="fecha">Fecha</label>
                             <div class="col-sm-10">
                                 <input type="date" class="form-control form-control-sm col-md-6" th:field="*{fecha}"
                                        placeholder="fecha" id="nombre" aria-describedby="emailHelp">
@@ -34,7 +34,7 @@
                         </div>
                         <!---Precio-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="precio">Precio</label>
+                            <label th:text="#{tabla.precio}"class="col-md-2 col-form-label" for="precio">Precio</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{precio}"
                                        placeholder="Precio" id="precio" aria-describedby="emailHelp">
@@ -42,23 +42,23 @@
                         </div>
                         <!---Detalle-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="detalle">Detalle</label>
+                            <label th:text="#{tabla.detalle}"class="col-md-2 col-form-label" for="detalle">Detalle</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{detalle}"
+                                <input th:placeholder="#{tabla.detalle}" type="text" class="form-control form-control-sm col-md-6" th:field="*{detalle}"
                                        placeholder="Detalle" id="detalle" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <!---Dirección-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="direccion">Dirección </label>
+                            <label th:text="#{tabla.direccion}"class="col-md-2 col-form-label" for="direccion">Dirección </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{direccion}"
+                                <input th:placeholder="#{tabla.direccion}" type="text" class="form-control form-control-sm col-md-6" th:field="*{direccion}"
                                        placeholder="Dirección" id="direccion" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <!---Stock-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="stock">Stock</label>
+                            <label th:text="#{tabla.stock}"class="col-md-2 col-form-label" for="stock">Stock</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{stock}"
                                        placeholder="Stock" id="stock" aria-describedby="emailHelp">
@@ -66,7 +66,7 @@
                         </div>
                         <!---Imagen-->
                         <div class="form-group mb-4 row col-8 mx-auto">
-                            <label class="control-label col-sm-2" for="imagen">Imagen:</label>
+                            <label th:text="#{tabla.imagen}"class="control-label col-sm-2" for="imagen">Imagen:</label>
                             <div class="col-sm-10">
                                 <img id="preview" src="/images/no_image.jpg" style="max-width: 100%; height: auto;"alt="no_image">
                                 <input type="file" class="form-control-file" id="file" name="file" onchange="previewImage()">
@@ -74,7 +74,7 @@
                         </div>
                         <!---Tipo-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="tipoproducto">Tipo Producto</label>
+                            <label th:text="#{tabla.tipo}" class="form-control-sm col-form-label col-md-2" for="tipoproducto">Tipo Producto</label>
                             <div class="col-sm-10">
                                 <select th:field="*{tipoProducto}" class="form-control form-control-sm col-md-6" id="tipoProducto" aria-describedby="emailHelp">
                                     <option th:each="x:${tipoProducto}"
@@ -85,7 +85,7 @@
                         </div>
                         <!---Provincia-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="provincia">Provincia</label>
+                            <label th:text="#{tabla.provincia}" class="form-control-sm col-form-label col-md-2" for="provincia">Provincia</label>
                             <div class="col-sm-10">
                                 <select th:field="*{provincia}" class="form-control form-control-sm col-md-6" id="provincia" aria-describedby="emailHelp">
                                     <option th:each="x:${provincia}"
@@ -96,7 +96,7 @@
                         </div>
                         <!---Cantones-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="canton">Canton</label>
+                            <label th:text="#{tabla.canton}" class="form-control-sm col-form-label col-md-2" for="canton">Canton</label>
                             <div class="col-sm-10">
                                 <select th:field="*{canton}" class="form-control form-control-sm col-md-6" id="canton" aria-describedby="emailHelp">
                                     <option th:each="x:${canton}"
@@ -107,7 +107,7 @@
                         </div>
                         <!---Distrito-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="distrito">Distrito</label>
+                            <label th:text="#{tabla.distrito}" class="form-control-sm col-form-label col-md-2" for="distrito">Distrito</label>
                             <div class="col-sm-10">
                                 <select th:field="*{distrito}" class="form-control form-control-sm col-md-6" id="distrito" aria-describedby="emailHelp">
                                     <option th:each="x:${distrito}"
@@ -119,8 +119,8 @@
 
                         <!---Botones-->
                         <div class="d-grid gap-2 col-4 mx-auto">
-                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
-                            <a class="btn btn-danger " href="/admin/evento">CANCELAR</a>
+                            <button th:text="#{btn.enviar}" type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a th:text="#{btn.cancelar}" class="btn btn-danger " href="/admin/evento">CANCELAR</a>
                         </div>
 
                     </form>

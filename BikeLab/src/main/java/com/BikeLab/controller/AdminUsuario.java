@@ -69,8 +69,7 @@ public class AdminUsuario {
        model.addAttribute("usuarios", rolUsuario);
         return "adm_VerUsuario";
     }
-    
-    
+      
     @GetMapping("/admin/datosLogin")
     public String indexdatosLoginRol(Model model) {
         List<DatosLogin> rolUsuario = datosLoginService.getAllUser();

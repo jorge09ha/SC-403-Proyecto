@@ -16,18 +16,18 @@
                           th:action="@{/save/distrito}"
                           method="POST">
                         <!---Titulo-->
-                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{nuevo.distrito}"></h2>
                         <!---Nombre-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="nombre">NOMBRE</label>
+                            <label th:text="#{tabla.nombre}" class="col-md-2 col-form-label" for="nombre">NOMBRE</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
+                                <input th:placeholder="#{tabla.nombre}" type="text" class="form-control form-control-sm col-md-6" th:field="*{nombre}"
                                        placeholder="Nombre" id="nombre" aria-describedby="emailHelp">
                             </div>
                         </div>
                         <!---Cantones-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="canton">CANTON</label>
+                            <label th:text="#{tabla.canton}" class="form-control-sm col-form-label col-md-2" for="canton">CANTON</label>
                             <div class="col-sm-10">
                                 <select th:field="*{canton}" class="form-control form-control-sm col-md-6" id="canton" aria-describedby="emailHelp">
                                     <option th:each="x:${canton}"
@@ -38,8 +38,8 @@
                         </div>
                         <!---Botones-->
                         <div class="d-grid gap-2 col-4 mx-auto">
-                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
-                            <a class="btn btn-danger " href="/admin/direccion_distrito">CANCELAR</a>
+                            <button th:text="#{btn.enviar}" type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a  th:text="#{btn.cancelar}" class="btn btn-danger " href="/admin/direccion_distrito">CANCELAR</a>
                         </div>
                     </form>
                 </div>

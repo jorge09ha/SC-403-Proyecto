@@ -8,30 +8,17 @@
         <header th:replace="plantilla/AdminTemplate::header"></header>
 
         <!---Title-->
-        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{admin.usuarios}"></h2>
         <div class="table-btn">
-            <!---Filtrar-->
-            <div class="filtrar">
-                <label style="color: white;">Mostrar
-                    <select id="page-length">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select> elementos
-                    <button class="btn" style="color:white; background-color: #EB2546;" type="submit">Aplicar</button>
-                </label>
-            </div>
+
             <!---Buscars-->
-            <div class="busqueda">
-            </div>
             <form role="search">
-                <input type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn" style="color:white; background-color: #EB2546;" type="submit">Buscar</button>
+                <input th:placeholder="#{btn.buscar}" type="search" placeholder="Buscar" aria-label="Buscar">
+                <button th:text="#{btn.buscar}" class="btn" style="color:white; background-color: #EB2546;" type="submit">Buscar</button>
             </form>
             <!---Agregar-->
             <div class="agregar">
-                <button class="btn btn-success" type="button"
+                <button th:text="#{btn.agregar}" class="btn btn-success" type="button"
                         onclick="window.location.href = '/admin/usuario/nuevo'">Agregar</button>
             </div>
         </div>
@@ -40,13 +27,11 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr style="color: white; background-color: #141617;">
-                        <th scope="col">NOMBRE</th>
-                        <th scope="col">APELLIDO</th>
-                        <th scope="col">TELEFONO</th>
-                        <th scope="col">CEDULA</th>
-                        <th scope="col">CORREO</th>
-                        <th scope="col">CANTON</th>
-                        <th scope="col">ROL</th>
+                        <th th:text="#{tabla.nombre}" scope="col">NOMBRE</th>
+                        <th th:text="#{tabla.apellido}" scope="col">APELLIDO</th>
+                        <th th:text="#{tabla.telefono}" scope="col">TELEFONO</th>
+                        <th th:text="#{tabla.cedula}" scope="col">CEDULA</th>
+                        <th th:text="#{tabla.canton}" scope="col">CANTON</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -58,9 +43,7 @@
                         <td th:text="${user.getTelefono}"></td>
                         <td th:text="${user.getCedula}"></td>
                         <td th:text="${user.getCorreo}"></td>
-                        <td th:text="${user.getCanton.getNombre}"></td>                          
-                       <td th:each="rol : ${user.getRoles}" th:text="${rol.getRol}"></td>                            
-                       
+                        <td th:text="${user.getCanton.getNombre}"></td>                                              
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
                             <a href="#!" style="color:yellow" th:href="@{/editar/usuario/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
                             <a href="#!" style="color:red" th:href="@{/eliminar/usuario/{id}(id=${user.getId})}" id="eliminar-${

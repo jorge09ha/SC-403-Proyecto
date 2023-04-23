@@ -8,10 +8,7 @@
     <header th:replace="plantilla/Template::header"></header>
 
     <!---Title-->
-    <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
-
-    <!---EVENTOS-->
-
+     <h2 th:text="#{tienda.eventos}" style="color: white; text-align: center; padding: 20px;"></h2>
 
     <!---PRODUCTOS-->
     <div class="bg" style="
@@ -30,8 +27,8 @@
                     <h4 class="mb-3"><strong></strong>₡<span th:text="${evento.getPrecio}"></span></h4>
                     <p th:text="${evento.tipoProducto.tipo}"></p>
                     <div class="card-actions">
-                        <a href="#" class="btn btn-1" th:href="@{/evento/{id}(id=${evento.getId})}">Detalles</a>
-                        <a href="#" class="btn btn-2">Agregar</a>
+                        <a th:text="#{btn.detalles}" href="#" class="btn btn-1" th:href="@{/evento/{id}(id=${evento.getId})}">Detalles</a>
+                        <a th:text="#{btn.agregar}" href="#" class="btn btn-2">Agregar</a>
                     </div>
                 </div>
             </div>

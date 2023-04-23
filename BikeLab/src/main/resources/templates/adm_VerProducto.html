@@ -8,30 +8,17 @@
         <header th:replace="plantilla/AdminTemplate::header"></header>
 
         <!---Title-->
-        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{admin.producto}"></h2>
         <div class="table-btn">
-            <!---Filtrar-->
-            <div class="filtrar">
-                <label style="color: white;">Mostrar
-                    <select id="page-length">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select> elementos
-                    <button class="btn" style="color:white; background-color: #EB2546;" type="submit">Aplicar</button>
-                </label>
-            </div>
+
             <!---Buscars-->
-            <div class="busqueda">
-            </div>
             <form role="search">
-                <input type="search" placeholder="Buscar" aria-label="Buscar">
-                <button class="btn" style="color:white; background-color: #EB2546;" type="submit">Buscar</button>
+                <input th:placeholder="#{btn.buscar}" type="search" placeholder="Buscar" aria-label="Buscar">
+                <button th:text="#{btn.buscar}" class="btn" style="color:white; background-color: #EB2546;" type="submit">Buscar</button>
             </form>
             <!---Agregar-->
             <div class="agregar">
-                <button class="btn btn-success" type="button"
+                <button th:text="#{btn.agregar}" class="btn btn-success" type="button"
                         onclick="window.location.href = '/admin/producto/nuevo'">Agregar</button>
             </div>
         </div>
@@ -40,15 +27,15 @@
             <table class="table">
                 <thead class="thead-dark">
                     <tr style="color: white; background-color: #141617;">
-                        <th scope="col">NOMBRE</th>
-                        <th scope="col">MODELO</th>
-                        <th scope="col">TALLA</th>
-                        <th scope="col">TAMAÑO</th>
-                        <th scope="col">AÑO</th>
-                        <th scope="col">PRECIO</th>
-                        <th scope="col">STOCK</th>
-                        <th scope="col">TIPO</th>
-                        <th scope="col">MARCA</th>
+                        <th th:text="#{tabla.nombre}" scope="col">NOMBRE</th>
+                        <th th:text="#{tabla.modelo}" scope="col">MODELO</th>
+                        <th th:text="#{tabla.talla}" scope="col">TALLA</th>
+                        <th th:text="#{tabla.tamanio}" scope="col">TAMAÑO</th>
+                        <th th:text="#{tabla.anio}" scope="col">AÑO</th>
+                        <th th:text="#{tabla.precio}" scope="col">PRECIO</th>
+                        <th th:text="#{tabla.stock}" scope="col">STOCK</th>
+                        <th th:text="#{tabla.tipo}" scope="col">TIPO</th>
+                        <th th:text="#{tabla.marca}" scope="col">MARCA</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>

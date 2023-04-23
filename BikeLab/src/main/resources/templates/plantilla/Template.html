@@ -41,19 +41,19 @@
                         <a class="navbar-logo" href="/"><img src="../images/logo1.png" alt="BikeLab"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/bicicletas">Bicicletas</a>
+                        <a th:text="#{tienda.bicicletas}" class="nav-link active" href="/bicicletas">Bicicletas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/componentes">Componentes</a>
+                        <a th:text="#{tienda.componentes}" class="nav-link active" href="/componentes">Componentes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/vestimenta">Vestimenta</a>
+                        <a th:text="#{tienda.vestimenta}" class="nav-link active" href="/vestimenta">Vestimenta</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/accesorios">Accesorios</a>
+                        <a th:text="#{tienda.accesorios}" class="nav-link active" href="/accesorios">Accesorios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/eventos">Eventos</a>
+                        <a th:text="#{tienda.eventos}" class="nav-link active" href="/eventos">Eventos</a>
                     </li>
                 </ul>
                 <ul class="nav-list">
@@ -64,13 +64,13 @@
                             <ion-icon name="person-circle"></ion-icon>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a sec:authorize="isAnonymous()" th:href="@{~/login}" class="dropdown-item"
+                            <a th:text="#{tienda.singIn}" sec:authorize="isAnonymous()" th:href="@{~/login}" class="dropdown-item"
                                 href="/login">Iniciar sesión</a>
-                            <a sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar
+                            <a th:text="#{tienda.singUp}" sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar
                                 sesión</a>
-                            <a class="dropdown-item" href="/login/nuevo">Registrarse</a>
+                            <a th:text="#{tienda.registrar}" class="dropdown-item" href="/login/nuevo">Registrarse</a>
                             <div class="dropdown-divider"></div>
-                            <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')" class="dropdown-item"
+                            <a th:text="#{tienda.admin}" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')" class="dropdown-item"
                                 href="/admin">Admin</a>
                         </div>
                     </li>
@@ -87,11 +87,11 @@
                 <!--Grid 1-->
                 <div class="grid1 col-lg-6 col-md-12 mb-4 mb-md-0">
                     <img src="../images/logo1.png" alt="BikeLab" class="d-inline-block align-text-top">
-                    <p>Lleva tu pedaleo al siguiente nivel.</p>
+                    <p th:text="#{footer.titulo}">Lleva tu pedaleo al siguiente nivel.</p>
                 </div>
                 <!--Grid 2-->
                 <div class="grid2 col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h6 class="text-uppercase">Redes Sociales</h6>
+                    <h6 th:text="#{footer.redes}" class="text-uppercase">Redes Sociales</h6>
                     <ul class="list-unstyled mb-0">
                         <li>
                             <a href="#!" class="text-white"><ion-icon name="logo-instagram"></ion-icon>Bike-Lab</a>
@@ -107,7 +107,7 @@
                 </div>
                 <!--Grid 3-->
                 <div class="grid3 col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h6 class="text-uppercase">Contáctenos</h6>
+                    <h6 th:text="#{footer.contacto}" class="text-uppercase">Contáctenos</h6>
                     <ul class="list-unstyled">
                         <li>
                             <a href="#!" class="text-white"><ion-icon name="call-sharp"></ion-icon>+506
@@ -129,9 +129,11 @@
         <!-- Grid container end-->
         <!-- Copyright -->
         <div class="copyright p-3">
-            <p>&COPY[[#{plantilla.derechos}]]
-                <a th:href="@{/(lang=es)}">ES</a>
-                <a th:href="@{/(lang=en)}">EN</a>
+            <p>&COPY[[#{footer.derechos}]]
+                <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+                    th:href="${urlBuilder.replaceQueryParam('lang','es').toUriString()}">ES</a>
+                <a th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
+                    th:href="${urlBuilder.replaceQueryParam('lang','en').toUriString()}">EN</a>
             </p>
         </div>
         <!-- Copyright end-->

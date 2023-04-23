@@ -17,7 +17,7 @@
                         <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
                         <!---Rol-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="rol">Rol</label>
+                            <label th:text="#{tabla.rol}"class="col-md-2 col-form-label" for="rol">Rol</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{rol}"
                                        placeholder="Rol" id="rol" aria-describedby="emailHelp">
@@ -25,8 +25,8 @@
                         </div>
                         <!---Botones-->
                         <div class="d-grid gap-2 col-4 mx-auto">
-                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
-                            <a class="btn btn-danger " href="/admin/roles">CANCELAR</a>
+                            <button th:text="#{btn.enviar}" type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a th:text="#{btn.cancelar}" class="btn btn-danger " href="/admin/roles">CANCELAR</a>
                         </div>
                     </form>
                 </div>

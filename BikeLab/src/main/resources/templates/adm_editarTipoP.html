@@ -14,9 +14,9 @@
                 <div class="container">
                     <form th:object="${tipo}" th:action="@{/editar/tipo/{id}(id=${tipo.getId})}" method="POST">
                         <!---Titulo-->
-                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{editar.tipo}"></h2>
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="tipo">Tipo</label>
+                            <label th:text="#{tabla.tipo}" class="col-md-2 col-form-label" for="tipo">Tipo</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{tipo}"
                                        placeholder="Tipo" id="tipo" aria-describedby="emailHelp">
@@ -24,7 +24,7 @@
                         </div>
                         <!---Detalle-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
-                            <label class="col-md-2 col-form-label" for="detalle">Detalle</label>
+                            <label th:text="#{tabla.detalle}" class="col-md-2 col-form-label" for="detalle">Detalle</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control form-control-sm col-md-6" th:field="*{detalle}"
                                        placeholder="Detalle" id="detalle" aria-describedby="emailHelp">
@@ -32,7 +32,7 @@
                         </div>
                         <!---Familia Producto-->
                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="familiaproducto">Familia</label>
+                            <label th:text="#{tabla.familia}" class="form-control-sm col-form-label col-md-2" for="familiaproducto">Familia</label>
                             <div class="col-sm-10">
                                 <select th:field="*{familiaproducto}" class="form-control form-control-sm col-md-6" id="familiaproducto" aria-describedby="emailHelp">
                                     <option th:each="x:${familiaproducto}"
@@ -43,8 +43,8 @@
                         </div>     
                         <!---Botones-->
                         <div class="d-grid gap-2 col-4 mx-auto">
-                            <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
-                            <a class="btn btn-danger " href="/admin/tipo_producto">CANCELAR</a>
+                            <button th:text="#{btn.guardar}" type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
+                            <a th:text="#{btn.cancelar}" class="btn btn-danger " href="/admin/tipo_producto">CANCELAR</a>
                         </div>
                     </form>
                 </div>

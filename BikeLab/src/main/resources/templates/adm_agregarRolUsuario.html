@@ -4,22 +4,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html>
-      <head th:replace="plantilla/AdminTemplate::head"></head>
+    <head th:replace="plantilla/AdminTemplate::head"></head>
 
     <body>
         <!---Header-->
         <header th:replace="plantilla/AdminTemplate::header"></header>  
-        
-             <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
-        <div class="card-header bg-black text-white"></div>
-        <div class="card-body">
-            <div class="container">
-                <form th:action="@{/save/rol}" method="POST" th:object="${rolUsuario}">
+
+        <div class="d-grid mx-auto mb-4 row col-10" style="background-color:  #24272B; color: white; margin: 5%;">
+            <div class="card-header bg-black text-white"></div>
+            <div class="card-body">
+                <div class="container">
+                    <form th:action="@{/save/rol}" method="POST" th:object="${rolUsuario}">
                         <!---Titulo-->
-                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="${titulo}"></h2>
-                         <!---Nombre-->
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{nuevo.rolUsuario}"></h2>
+                        <!---Nombre-->
                         <div class="form-group mb-4 row  col-8 mx-auto">    
-                             <label class="form-control-sm col-form-label col-md-2" for="rol">Email</label>
+                            <label th:text="#{tabla.correo}"  class="form-control-sm col-form-label col-md-2" for="rol">Email</label>
                             <div class="col-sm-10">
                                 <!-- th:field="*{rolDatosLogin.usuario_id}" = Es la variable que se encuentra en la clase RolDatosLoginid. -->
                                 <!-- Se jala rolDatosLogin porque se embebió la clase RolDatosLoginId ya que esa representa la tabla intermedia -->
@@ -30,9 +30,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 </select>
                             </div>
                         </div> 
-                         
-                         <div class="form-group mb-4 row  col-8 mx-auto">
-                            <label class="form-control-sm col-form-label col-md-2" for="rol">Rol de usuario</label>
+
+                        <div class="form-group mb-4 row  col-8 mx-auto">
+                            <label th:text="#{admin.rolUsuario}" class="form-control-sm col-form-label col-md-2" for="rol">Rol de usuario</label>
                             <div class="col-sm-10">
                                 <select th:field="*{rolDatosLogin.rol_id}" class="form-control form-control-sm col-md-6" id="rol" aria-describedby="emailHelp">
                                     <option th:each="x:${rol}"
@@ -41,16 +41,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 </select>
                             </div>
                         </div>
-                    <!---Botones-->
-                    <div class="d-grid gap-2 col-4 mx-auto">
-                        <button type="submit" class="btn btn-primary" value="Guardar">Agregar Rol</button>
-                        <a class="btn btn-danger " href="/admin/datosLogin">CANCELAR</a>
-                    </div>
-                </form>
+                        <!---Botones-->
+                        <div class="d-grid gap-2 col-4 mx-auto">
+                            <button th:text="#{btn.enviar}" type="submit" class="btn btn-primary" value="Guardar">Agregar Rol</button>
+                            <a th:text="#{btn.cancelar}" class="btn btn-danger " href="/admin/datosLogin">CANCELAR</a>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    
-    
-    
+
+
+        <!---Footer-->
+        <footer th:replace="plantilla/AdminTemplate::footer"></footer>
 </html>

@@ -16,14 +16,14 @@
                 <div class="text-center">
                     <img id="preview" th:src="${evento.getImagen}" alt="imagen" class="product-image">
                 </div>
-                <h4 class="mb-3"><strong>Precio: </strong>₡<span th:text="${evento.precio}"></span></h4>
-                <h4 class="mb-3"><strong>Detalle: </strong><span th:text="${evento.detalle}"></span></h4>
-                <h4 class="mb-3"><strong>Stock: </strong><span th:text="${evento.stock}"></span></h4>
-                <h4 class="mb-3"><strong>Tipo de Producto: </strong><span th:text="${evento.tipoProducto.tipo}"></span></h4>
-                <h4 class="mb-3"><strong>Provincia: </strong><span th:text="${evento.provincia.nombre}"></span></h4>
-                <h4 class="mb-3"><strong>Canton: </strong><span th:text="${evento.canton.nombre}"></span></h4>
-                <h4 class="mb-3"><strong>Distrito: </strong><span th:text="${evento.distrito.nombre}"></span></h4>
-                <h4 class="mb-3"><strong>Dirección: </strong><span th:text="${evento.direccion}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.precio}">Precio: </strong>₡<span th:text="${evento.precio}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.detalle}">Detalle: </strong><span th:text="${evento.detalle}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.stock}">Stock: </strong><span th:text="${evento.stock}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.tipo}">Tipo de Producto: </strong><span th:text="${evento.tipoProducto.tipo}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.provincia}">Provincia: </strong><span th:text="${evento.provincia.nombre}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.canton}">Canton: </strong><span th:text="${evento.canton.nombre}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.distrito}">Distrito: </strong><span th:text="${evento.distrito.nombre}"></span></h4>
+                <h4 class="mb-3"><strong th:text="#{tienda.direccion}">Dirección: </strong><span th:text="${evento.direccion}"></span></h4>
 
                 <div class="d-flex increment-decrement-container" th:if="${evento.stock > 0}">
                     <div class="input-group increment-decrement-input-group">
@@ -31,9 +31,8 @@
                         <input type="number" class="form-control text-center" min="1" th:max="${evento.stock}" value="1" readonly>
                         <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
                     </div>
-                    <a href="#" class="btn btn-1 ml-auto">Agregar <ion-icon name="cart"></ion-icon></a>
+                    <ion-icon name="cart"></ion-icon>
                 </div>
-
 
             </div>
         </div>
