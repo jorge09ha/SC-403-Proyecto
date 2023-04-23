@@ -655,4 +655,56 @@ ion-icon[name="add-circle"] {
 }
 
 
-/*********/
+/**********************************************************************************/
+
+.contenedorS {
+    display:grid;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 30px;
+}
+
+.buscador {
+    display: flex;
+    align-items: center;
+    background-color: var(--color4);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+}
+
+input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    flex-grow: 1;
+}
+
+select {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+button {
+    border: none;
+    outline: none;
+    background-color: var(--color1);
+    color: var(--color4);
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+button:hover {
+    background-color: var(--color2);
+    color: var(--color5);
+}

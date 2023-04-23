@@ -64,9 +64,9 @@ public class AdminUsuario {
 
     @GetMapping("/admin/usuario")
     public String indexUsuario(Model model) {
-        List<Usuario> rolUsuario = usuarioService.getAllUser();   
+        List<Usuario> Usuario = usuarioService.getAllUsuario();
        model.addAttribute("titulo", "USUARIOS");
-       model.addAttribute("usuarios", rolUsuario);
+       model.addAttribute("usuarios", Usuario);
         return "adm_VerUsuario";
     }
       
@@ -85,13 +85,11 @@ public class AdminUsuario {
         List<Distrito> listaD = distritoService.getAllDistrito();
         List<Canton> listaC = cantonService.getAllCanton();
         List<Provincia> listaP = provinciaService.getAllProvincia();
-        List<Rol> rol = rolesService.getAllRole();
         model.addAttribute("titulo", "Nuevo Usuario");
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("distrito", listaD);
         model.addAttribute("canton", listaC);
         model.addAttribute("provincia", listaP);
-        model.addAttribute("rol", rol);
         return "adm_crearUsuario";
     }
     
@@ -139,13 +137,11 @@ public class AdminUsuario {
     @GetMapping("/editar/usuario/{id}")
     public String editarUsuario(@PathVariable("id") Long id, Model model) {
         Usuario usuario = usuarioService.getUsuarioById(id);
-        List<Rol> listRol = rolesService.getAllRole();
         List<Distrito> listaD = distritoService.getAllDistrito();
         List<Canton> listaC = cantonService.getAllCanton();
         List<Provincia> listaP = provinciaService.getAllProvincia();
         model.addAttribute("titulo", "Editar Usuario");
         model.addAttribute("usuario", usuario);
-        model.addAttribute("rol", listRol);
         model.addAttribute("distrito", listaD);
         model.addAttribute("canton", listaC);
         model.addAttribute("provincia", listaP);

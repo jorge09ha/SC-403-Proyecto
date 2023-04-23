@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 
-    <head th:replace="plantilla/AdminTemplate::head"></head>
+<head th:replace="plantilla/AdminTemplate::head"></head>
 
-    <body>
-        <!---Header-->
-        <header th:replace="plantilla/AdminTemplate::header"></header>
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/AdminTemplate::header"></header>
 
-        <!---Title-->
-        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{admin.producto}"></h2>
-        <div class="table-btn">
+    <!---Title-->
+    <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{admin.producto}"></h2>
+    <div class="table-btn">
 
-            <!---Buscars-->
-            <form role="search">
-                <input th:placeholder="#{btn.buscar}" type="search" placeholder="Buscar" aria-label="Buscar">
-                <button th:text="#{btn.buscar}" class="btn" style="color:white; background-color: #EB2546;" type="submit">Buscar</button>
-            </form>
-            <!---Agregar-->
-            <div class="agregar">
-                <button th:text="#{btn.agregar}" class="btn btn-success" type="button"
-                        onclick="window.location.href = '/admin/producto/nuevo'">Agregar</button>
+        <!-- Buscador -->
+        <div class="contenedorS">
+            <div class="buscador">
+                <input th:placeholder="#{btn.buscar}" type="text" placeholder="Buscar..." name="search">
+                <select name="category">
+                    <option th:text="#{b.all}" value="opcion0"></option>
+                    <option th:text="#{tabla.marca}" value="opcion1"></option>
+                    <option th:text="#{tabla.tipo}" value="opcion2"></option>
+                </select>
+                <button th:text="#{btn.buscar}" type="submit">Buscar</button>
             </div>
         </div>
 
-        <div style="text-align: center; padding: 20px;">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr style="color: white; background-color: #141617;">
-                        <th th:text="#{tabla.nombre}" scope="col">NOMBRE</th>
-                        <th th:text="#{tabla.modelo}" scope="col">MODELO</th>
-                        <th th:text="#{tabla.talla}" scope="col">TALLA</th>
-                        <th th:text="#{tabla.tamanio}" scope="col">TAMAÑO</th>
-                        <th th:text="#{tabla.anio}" scope="col">AÑO</th>
-                        <th th:text="#{tabla.precio}" scope="col">PRECIO</th>
-                        <th th:text="#{tabla.stock}" scope="col">STOCK</th>
-                        <th th:text="#{tabla.tipo}" scope="col">TIPO</th>
-                        <th th:text="#{tabla.marca}" scope="col">MARCA</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
+        <!---Agregar-->
+        <div class="agregar">
+            <button th:text="#{btn.agregar}" class="btn btn-success" type="button"
+                onclick="window.location.href = '/admin/producto/nuevo'">Agregar</button>
+        </div>
+    </div>
+
+    <div style="text-align: center; padding: 20px;">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr style="color: white; background-color: #141617;">
+                    <th th:text="#{tabla.nombre}" scope="col">NOMBRE</th>
+                    <th th:text="#{tabla.modelo}" scope="col">MODELO</th>
+                    <th th:text="#{tabla.talla}" scope="col">TALLA</th>
+                    <th th:text="#{tabla.tamanio}" scope="col">TAMAÑO</th>
+                    <th th:text="#{tabla.anio}" scope="col">AÑO</th>
+                    <th th:text="#{tabla.precio}" scope="col">PRECIO</th>
+                    <th th:text="#{tabla.stock}" scope="col">STOCK</th>
+                    <th th:text="#{tabla.tipo}" scope="col">TIPO</th>
+                    <th th:text="#{tabla.marca}" scope="col">MARCA</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
                 <th:block th:each="user : ${productos}">
                     <tr style="background-color: #24272B; color: white;">
                         <td th:text="${user.getNombre}"></td>
@@ -52,7 +60,9 @@
                         <td th:text="${user.getTipoProducto.getTipo}"></td>
                         <td th:text="${user.getMarca.getNombre}"></td>
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
-                            <a href="#!" style="color:yellow" th:href="@{/editar/producto/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>
+                            <a href="#!" style="color:yellow"
+                                th:href="@{/editar/producto/{id}(id=${user.getId})}"><ion-icon
+                                    name="create-sharp"></ion-icon></a>
                             <a href="#!" style="color:red" th:href="@{/eliminar/producto/{id}(id=${user.getId})}" id="eliminar-${
                                    user.getId
                                }"><ion-icon name="trash-sharp"></ion-icon></a>
@@ -60,25 +70,25 @@
                         </td>
                     </tr>
                 </th:block>
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
+    </div>
 
-        <footer th:replace="plantilla/AdminTemplate::footer"></footer>
+    <footer th:replace="plantilla/AdminTemplate::footer"></footer>
 
-        <script>
-            const eliminarLinks = document.querySelectorAll('[id^="eliminar-"]');
-            eliminarLinks.forEach(eliminarLink => {
-                eliminarLink.addEventListener('click', e => {
-                    e.preventDefault();
-                    const confirmacion = confirm('¿Estás seguro/a de que deseas eliminar?');
-                    if (confirmacion) {
-                        window.location.href = eliminarLink.getAttribute('href');
-                    }
-                });
+    <script>
+        const eliminarLinks = document.querySelectorAll('[id^="eliminar-"]');
+        eliminarLinks.forEach(eliminarLink => {
+            eliminarLink.addEventListener('click', e => {
+                e.preventDefault();
+                const confirmacion = confirm('¿Estás seguro/a de que deseas eliminar?');
+                if (confirmacion) {
+                    window.location.href = eliminarLink.getAttribute('href');
+                }
             });
-        </script>
+        });
+    </script>
 
-    </body>
+</body>
 
 </html>

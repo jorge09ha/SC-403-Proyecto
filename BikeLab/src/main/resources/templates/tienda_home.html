@@ -42,14 +42,27 @@
         </a>
     </div>
 
+    <!-- Buscador -->
+    <div class="contenedorS">
+        <div class="buscador">
+            <input th:placeholder="#{btn.buscar}" type="text" placeholder="Buscar..." name="search">
+            <select name="category">
+                <option th:text="#{tienda.all}" value="opcion0"></option>
+                <option th:text="#{tienda.bicicletas}" value="opcion1"></option>
+                <option th:text="#{tienda.componentes}" value="opcion2"></option>
+                <option th:text="#{tienda.vestimenta}" value="opcion3"></option>
+                <option th:text="#{tienda.accesorios}" value="opcion4"></option>
+            </select>
+            <button th:text="#{btn.buscar}" type="submit">Buscar</button>
+        </div>
+    </div>
+
     <!--Bicicletas-->
     <h1 th:text="#{tienda.bicicletas}" style="color: white; text-align: center; margin-top: 30px;">Bicicletas</h1>
-   
-    
+
     <div class="card-container" style="justify-content: center;">
         <th:block th:each="producto, iterStat : ${productos}" class="card-wrapper mb-4">
             <th:block th:if="${iterStat.index < 3}">
-
                 <div class="card">
                     <h4 class="card-title" th:text="${producto.getNombre}"></h4>
                     <img th:src="${producto.getImagen}" class="card-img-top" alt="no_image"
@@ -57,7 +70,8 @@
                     <div class="card-body">
                         <h6 class="card-subtitle" th:text="${producto.getModelo}"></h6>
                         <h5 class="mb-3"><strong></strong>₡<span th:text="${producto.precio}"></span></h5>
-                        <a th:text="#{btn.detalles}" href="#" class="btn btn-1" th:href="@{/producto/{id}(id=${producto.getId})}">Detalles</a>
+                        <a th:text="#{btn.detalles}" href="#" class="btn btn-1"
+                            th:href="@{/producto/{id}(id=${producto.getId})}">Detalles</a>
                         <a th:text="#{btn.agregar}" href="#" class="btn btn-2">Agregar</a>
                     </div>
                 </div>
@@ -94,12 +108,15 @@
         </th:block>
     </div>
     <div class="button-container">
-        <a th:text="#{btn.VerMas}" href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
+        <a th:text="#{btn.VerMas}" href="/eventos" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
     </div>
 
-
-
     <footer th:replace="plantilla/Template::footer"></footer>
+
+    <script>
+
+    </script>
+
 </body>
 
 </html>

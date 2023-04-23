@@ -28,7 +28,7 @@
                 <thead class="thead-dark">
                     <tr style="color: white; background-color: #141617;">
                         <th th:text="#{tabla.nombre}" scope="col">NOMBRE</th>
-                        <th th:text="#{tabla.apellido}" scope="col">APELLIDO</th>
+                        <th th:text="#{tabla.apellido1}" scope="col">APELLIDO</th>
                         <th th:text="#{tabla.telefono}" scope="col">TELEFONO</th>
                         <th th:text="#{tabla.cedula}" scope="col">CEDULA</th>
                         <th th:text="#{tabla.canton}" scope="col">CANTON</th>
@@ -42,7 +42,6 @@
                         <td th:text="${user.getApellido1}"></td>
                         <td th:text="${user.getTelefono}"></td>
                         <td th:text="${user.getCedula}"></td>
-                        <td th:text="${user.getCorreo}"></td>
                         <td th:text="${user.getCanton.getNombre}"></td>                                              
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
                             <a href="#!" style="color:yellow" th:href="@{/editar/usuario/{id}(id=${user.getId})}"><ion-icon name="create-sharp"></ion-icon></a>

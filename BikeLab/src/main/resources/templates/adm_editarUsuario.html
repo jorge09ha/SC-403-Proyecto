@@ -14,7 +14,7 @@
                 <div class="container">
                     <form th:object="${usuario}" th:action="@{/editar/usuario/{id}(id=${usuario.getId})}" method="POST">
                         <!---Titulo-->
-                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{editar.Usuario}"></h2>                    
+                        <h2 style="color: white; text-align: center; padding: 20px;" th:text="#{editar.usuarios}"></h2>                    
                         <!---Nombre-->
                         <div class="form-group mb-4 row   col-8 mx-auto">
                             <label th:text="#{tabla.nombre}" class="col-md-2 col-form-label" for="nombre">Nombre</label>
