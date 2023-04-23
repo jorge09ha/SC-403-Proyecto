@@ -27,11 +27,11 @@
 
                 <div class="d-flex increment-decrement-container" th:if="${evento.stock > 0}">
                     <div class="input-group increment-decrement-input-group">
-                        <button type="button" class="btn btn-3" onclick="decrementValue(this)">-</button>
+                        <button type="button" class="btn btn-2" onclick="decrementValue(this)"><ion-icon name="remove-circle"></ion-icon></button>
                         <input type="number" class="form-control text-center" min="1" th:max="${evento.stock}" value="1" readonly>
-                        <button type="button" class="btn btn-3" onclick="incrementValue(this)">+</button>
+                        <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
                     </div>
-                    <a href="#" class="btn btn-2 ml-auto">Agregar <ion-icon name="cart"></ion-icon></a>
+                    <a href="#" class="btn btn-1 ml-auto">Agregar <ion-icon name="cart"></ion-icon></a>
                 </div>
 
 

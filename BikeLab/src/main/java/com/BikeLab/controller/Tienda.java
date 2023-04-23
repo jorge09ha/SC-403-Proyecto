@@ -50,8 +50,10 @@ public class Tienda {
     public String index(Model model) {
         model.addAttribute("titulo", "HOME");
         List<Evento> lista = eventoService.getAllEvento();
+        List<Producto> lista1 = productoService.findByFamilia("Bicicletas");
         model.addAttribute("titulo", "EVENTOS");
         model.addAttribute("eventos", lista);
+        model.addAttribute("productos", lista1);
         return "tienda_home";
     }
 

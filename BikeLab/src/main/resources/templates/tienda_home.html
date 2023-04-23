@@ -1,79 +1,103 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 
-    <head th:replace="plantilla/Template::head"></head>
+<head th:replace="plantilla/Template::head"></head>
 
-    <body>
-        <!---Header-->
-        <header th:replace="plantilla/Template::header"></header>
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/Template::header"></header>
 
-        <!-- Carousel  -->
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" data-interval="3000">
-                    <img class="d-block w-100 carousel-img" src="../images/banner1.jpg" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Texto 1</h5>
-                        <p>Descubre los secretos del mundo.</p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img class="d-block w-100 carousel-img" src="../images/banner2.jpg" alt="Second slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Texto 2</h5>
-                        <p>Encuentra belleza en los rincones más inesperados.</p>
-                    </div>
-                </div>
-                <div class="carousel-item" data-interval="3000">
-                    <img class="d-block w-100 carousel-img" src="../images/banner3.jpg" alt="Third slide">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Texto 3</h5>
-                        <p>Sumérgete en la naturaleza y experimenta nuevas sensaciones.</p>
-                    </div>
+    <!-- Carousel  -->
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-interval="3000">
+                <img class="d-block w-100 carousel-img" src="../images/banner1.jpg" alt="First slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Texto 1</h5>
+                    <p>Descubre los secretos del mundo.</p>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-
-        <!--Eventos Cart-->
-        <div class="card-container">
-            <div class="row card-container">
-                <th:block th:each="evento, iterStat : ${eventos}">
-                    <th:block th:if="${iterStat.index < 3}">
-                        <div class="card-wrapper mb-4">
-                            <div class="card">
-                                <img th:src="${evento.getImagen}" class="card-img-top" alt="no_image" onerror="this.src='../images/no_image.jpg';" >
-                                <div class="card-body">
-                                    <h5 class="card-title" th:text="${evento.getNombre}"></h5>
-                                    <h6 class="card-subtitle" th:text="${evento.getFecha}"></h6>
-                                    <p class="card-text" th:text="${evento.getPrecio}"></p>
-                                    <a href="#" class="btn btn-1">Ver Detalles</a>
-                                    <a href="#" class="btn btn-2">Comprar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </th:block>
-                </th:block>
+            <div class="carousel-item" data-interval="3000">
+                <img class="d-block w-100 carousel-img" src="../images/banner2.jpg" alt="Second slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Texto 2</h5>
+                    <p>Encuentra belleza en los rincones más inesperados.</p>
+                </div>
+            </div>
+            <div class="carousel-item" data-interval="3000">
+                <img class="d-block w-100 carousel-img" src="../images/banner3.jpg" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Texto 3</h5>
+                    <p>Sumérgete en la naturaleza y experimenta nuevas sensaciones.</p>
+                </div>
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only"></span>
+        </a>
+    </div>
 
-            <div class="button-container">
-                <a href="#" class="btn btn-2">Ver más</a>
-            </div>
+    <!--Bicicletas-->
+    <h1 style="color: white; text-align: center; margin-top: 30px;">Bicicletas</h1>
+    <div class="card-container" style="justify-content: center;">
+        <th:block th:each="producto, iterStat : ${productos}" class="card-wrapper mb-4">
+            <th:block th:if="${iterStat.index < 3}">
 
-            <!-- Informativo -->  
-            <div class="InfoHome">
-                <img class="d-block w-100 carousel-img" src="../images/home1.jpg" alt="Third slide">
-            </div>
+                <div class="card">
+                    <h4 class="card-title" th:text="${producto.getNombre}"></h4>
+                    <img th:src="${producto.getImagen}" class="card-img-top" alt="no_image"
+                        onerror="this.src='../images/no_image.jpg';">
+                    <div class="card-body">
+                        <h6 class="card-subtitle" th:text="${producto.getModelo}"></h6>
+                        <h5 class="mb-3"><strong></strong>₡<span th:text="${producto.precio}"></span></h5>
+                        <a href="#" class="btn btn-1" th:href="@{/producto/{id}(id=${producto.getId})}">Detalles</a>
+                        <a href="#" class="btn btn-2">Agregar</a>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+    <div class="button-container">
+        <a href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
+    </div>
 
-            <footer th:replace="plantilla/Template::footer"></footer>
-    </body>
+    <!-- Informativo -->
+    <div class="InfoHome" style="margin-bottom: 30px;">
+        <img class="d-block w-100 carousel-img" src="../images/home1.jpg" alt="Third slide">
+    </div>
+
+    <!--Eventos-->
+    <h1 style="color: white; text-align: center; margin-top: 30px;">Eventos</h1>
+    <div class="card-container" style="justify-content: center;">
+        <th:block th:each="evento, iterStat : ${eventos}" class="card-wrapper mb-4">
+            <th:block th:if="${iterStat.index < 3}">
+
+                <div class="card">
+                    <h4 class="card-title" th:text="${evento.getNombre}"></h4>
+                    <img th:src="${evento.getImagen}" class="card-img-top" alt="no_image"
+                        onerror="this.src='../images/no_image.jpg';">
+                    <div class="card-body">
+                        <h6 class="card-subtitle" th:text="${evento.getFecha}"></h6>
+                        <h5 class="mb-3"><strong></strong>₡<span th:text="${evento.precio}"></span></h5>
+                        <a href="#" class="btn btn-1" th:href="@{/evento/{id}(id=${evento.getId})}">Detalles</a>
+                        <a href="#" class="btn btn-2">Agregar</a>
+                    </div>
+                </div>
+            </th:block>
+        </th:block>
+    </div>
+    <div class="button-container">
+        <a href="/bicicletas" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
+    </div>
+
+
+
+    <footer th:replace="plantilla/Template::footer"></footer>
+</body>
 
 </html>

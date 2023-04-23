@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 
-    <head th:replace="plantilla/Template::head"></head>
+<head th:replace="plantilla/Template::head"></head>
 
-    <body>
-        <!---Header-->
-        <header th:replace="plantilla/Template::header"></header>
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/Template::header"></header>
 
-        <!---Contenido-->
+    <!---Contenido-->
+    <div class="bg">
         <div class=" product-container">
             <div class="card-header bg-black text-white"></div>
             <div class="container">
-                <h3 class="mb-3"><strong> </strong><span th:text="${producto.nombre}"></span></h3>
-                <h4 class="mb-3"><strong> </strong><span th:text="${producto.modelo}"></span></h4>
+                <h1 class="mb-3"><strong> </strong><span th:text="${producto.nombre}"></span></h1>
+                <h2 class="mb-3"><strong> </strong><span th:text="${producto.modelo}"></span></h2>
                 <div class="text-center">
                     <img id="preview" th:src="${producto.getImagen}" alt="imagen" class="product-image">
                 </div>
@@ -22,25 +23,23 @@
                 <h4 class="mb-3"><strong>Año: </strong><span th:text="${producto.anio}"></span></h4>
                 <h4 class="mb-3"><strong>Precio: </strong>₡<span th:text="${producto.precio}"></span></h4>
                 <h4 class="mb-3"><strong>Stock: </strong><span th:text="${producto.stock}"></span></h4>
-                <h4 class="mb-3"><strong>Tipo de Producto: </strong><span th:text="${producto.tipoProducto.tipo}"></span></h4>
+                <h4 class="mb-3"><strong>Tipo de Producto: </strong><span
+                        th:text="${producto.tipoProducto.tipo}"></span></h4>
                 <h4 class="mb-3"><strong>Marca: </strong><span th:text="${producto.marca.nombre}"></span></h4>
-
                 <div class="d-flex increment-decrement-container" th:if="${producto.stock > 0}">
                     <div class="input-group increment-decrement-input-group">
-                        <button type="button" class="btn btn-3" onclick="decrementValue(this)">-</button>
-                        <input type="number" class="form-control text-center" min="1" th:max="${producto.stock}" value="1" readonly>
-                        <button type="button" class="btn btn-3" onclick="incrementValue(this)">+</button>
+                        <button type="button" class="btn btn-2" onclick="decrementValue(this)"><ion-icon name="remove-circle"></ion-icon></button>
+                        <input type="number" class="form-control text-center" min="1" th:max="${producto.stock}"
+                            value="1" readonly>
+                        <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
                     </div>
-                    <a href="#" class="btn btn-2 ml-auto">Agregar <ion-icon name="cart"></ion-icon></a>
+                    <a href="#" class="btn btn-1 ml-auto">Agregar <ion-icon name="cart"></ion-icon></a>
                 </div>
-
-
             </div>
         </div>
+    </div>
 
-        <footer th:replace="plantilla/Template::footer"></footer>
-    </body>
-
+    <footer th:replace="plantilla/Template::footer"></footer>
 
     <script>
         function incrementValue(button) {
@@ -63,5 +62,6 @@
             }
         }
     </script>
+</body>
 
 </html>
