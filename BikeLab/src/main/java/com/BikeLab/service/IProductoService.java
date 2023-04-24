@@ -17,4 +17,6 @@ public interface IProductoService {
 
     List<Producto> findByFamilia(String familia);
 
+   List<Producto> findBySearch(String search);
+
 }

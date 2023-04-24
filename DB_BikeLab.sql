@@ -58,7 +58,6 @@ CREATE TABLE usuario(
   canton_id INT,
   distrito_id INT,
   PRIMARY KEY (id),
-  KEY `fk_datoslogin_rol_idx` (`rol_id`),
   KEY `fk_usuario_provincia_idx` (`provincia_id`),
   KEY `fk_usuario_canton_idx` (`canton_id`),
   KEY `fk_usuario_distrito_idx` (`distrito_id`),
@@ -159,59 +158,46 @@ CREATE TABLE metodopago(
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE carrito(
+-- Tabla carrito
+CREATE TABLE carrito (
   id INT NOT NULL AUTO_INCREMENT,
-  fecha DATE NOT NULL,
-  cantidad INT NOT NULL,
   usuario_id INT NOT NULL,
-  producto_id INT,
-  evento_id INT,
-  PRIMARY KEY (id,usuario_id),
-  KEY `fk_conciertos_usuario_idx` (`usuario_id`),
-  KEY `fk_conciertos_producto_idx` (`producto_id`),
-  KEY `fk_conciertos_evento_idx` (`evento_id`),
-  CONSTRAINT `fk_carrito_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
-  CONSTRAINT `fk_carrito_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_carrito_evento` FOREIGN KEY (`evento_id`) REFERENCES `evento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (id),
+  CONSTRAINT `fk_carrito_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE carritoproducto (
-  carrito_id INT NOT NULL,
-  producto_id INT NOT NULL,
-  PRIMARY KEY (carrito_id,producto_id),
-  KEY `fk_carritoproducto_carrito_idx` (`carrito_id`),
-  KEY `fk_carritoproducto_producto_idx` (`producto_id`),
-  CONSTRAINT `fk_carritoproducto_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_carritoproducto_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
-
-CREATE TABLE carritoevento (
-  carrito_id INT NOT NULL,
-  evento_id INT NOT NULL,
-  PRIMARY KEY (carrito_id,evento_id),
-  KEY `fk_carritoevento_carrito_idx` (`carrito_id`),
-  KEY `fk_carritoevento_evento_idx` (`evento_id`),
-  CONSTRAINT `fk_carritoevento_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_carritoevento_evento` FOREIGN KEY (`evento_id`) REFERENCES `evento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-);
-
-CREATE TABLE orden(
+-- Tabla orden
+CREATE TABLE orden (
   id INT NOT NULL AUTO_INCREMENT,
-  detalle varchar(500),
-  montototal FLOAT NOT NULL,
-  fecha DATE NOT NULL,
-  usuario_id INT NOT NULL,
+  fecha DATETIME NOT NULL,
+  monto_total FLOAT NOT NULL,
   metodo_id INT NOT NULL,
   carrito_id INT NOT NULL,
   PRIMARY KEY (id),
-  UNIQUE KEY (usuario_id,carrito_id),
-  KEY `fk_orden_usuario_idx` (`usuario_id`),
   KEY `fk_orden_metodo_idx` (`metodo_id`),
-  KEY `fk_orden_carrito_idx` (`carrito_id`),
-  CONSTRAINT `fk_orden_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,  
-  CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`metodo_id`) REFERENCES `metodopago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-); 
+  CONSTRAINT `fk_orden_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_orden_metodopago` FOREIGN KEY (`metodo_id`) REFERENCES `metodopago` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
+
+-- Tabla carrito_producto
+CREATE TABLE carritoproducto (
+  carrito_id INT NOT NULL,
+  producto_id INT NOT NULL,
+  cantidad INT NOT NULL,
+  PRIMARY KEY (carrito_id, producto_id),
+  CONSTRAINT `fk_carrito_producto_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_carrito_producto_producto` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Tabla carrito_evento
+CREATE TABLE carritoevento (
+  carrito_id INT NOT NULL,
+  evento_id INT NOT NULL,
+  cantidad INT NOT NULL,
+  PRIMARY KEY (carrito_id, evento_id),
+  CONSTRAINT `fk_carrito_evento_carrito` FOREIGN KEY (`carrito_id`) REFERENCES `carrito` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_carrito_evento_evento` FOREIGN KEY (`evento_id`) REFERENCES `evento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 Use bikelab;
 DELIMITER $$

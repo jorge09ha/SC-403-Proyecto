@@ -182,14 +182,14 @@ public class AdminTienda {
         productoEditar.setTipoProducto(producto.getTipoProducto());
 
         if (imagefile.isEmpty()) {
-            LOGGER.info("UPDATE - No se modifica la imagen. Imagen actual: "+ productoEditar.getImagen());
+            LOGGER.info("UPDATE - No se modifica la imagen. Imagen actual: " + productoEditar.getImagen());
             productoEditar.setImagen(productoEditar.getImagen());
         } else {
             upload.deleteImage(productoEditar.getImagen());
             productoEditar.setImagen(producto.getImagen());
             String nombreImagen = upload.saveImageProducto(imagefile);
             productoEditar.setImagen(nombreImagen);
-            LOGGER.info("UPDATE -  Se modifica la imagen. Imagen nueva: "+ nombreImagen);
+            LOGGER.info("UPDATE -  Se modifica la imagen. Imagen nueva: " + nombreImagen);
         }
 
         productoService.saveProducto(productoEditar);
@@ -242,5 +242,14 @@ public class AdminTienda {
         LOGGER.info("UPDATE {}", evento.toString());
         return "redirect:/admin/evento";
     }
+
+    //-------------------------- Buscador --------------------------
+    @GetMapping("/buscar")
+    public String buscar(@RequestParam("search") String search, Model model) {
+        List<Producto> productos = productoService.findBySearch(search);
+        model.addAttribute("productos", productos);
+        return "adm_VerProducto";
+    }
+  
 
 }

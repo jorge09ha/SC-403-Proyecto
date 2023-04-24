@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head th:replace="plantilla/Template::head"></head>
+
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/Template::header"></header>
+
+        <!---PRODUCTOS-->
+        <div class="bg" style="
+             background: url(../images/img4.avif) no-repeat center;
+             background-image: linear-gradient(rgba(7, 0, 0, 0.5), var(--color6)), url(../images/img4.avif);
+             background-attachment: fixed;
+             background-size: cover;
+             padding: 30px;">
+
+            <main class="container">
+                <!---Title-->
+                <h2 th:text="#{tienda.carrito}" style="color: white; text-align: center; padding: 20px;"></h2>
+
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Aquí se deben agregar los elementos del carrito dinámicamente -->
+                            <tr>
+                                <td>Bicicleta de montaña</td>
+                                <td>$500.00</td>
+                                <td>
+                                    <input type="number" class="form-control" value="1" min="1">
+                                </td>
+                                <td>$500.00</td>
+                                <td>
+                                    <button class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                    <div class="totals">
+                        <h4>Total: $500.00</h4>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="/" class="btn btn-primary">Continuar comprando</a>
+                    <a href="/checkout" class="btn btn-success">Proceder al pago</a>
+                </div>
+            </main>
+        </div>
+
+        <footer th:replace="plantilla/Template::footer"></footer>
+
+    </body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="plantilla/Template::head"></head>
+
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/Template::header"></header>
+
+    <!---Title-->
+    <h2 th:text="#{tienda.busqueda}" style="color: white; text-align: center; padding: 20px;"></h2>
+
+    <!---PRODUCTOS-->
+    <div class="bg" style="
+    background: url(../images/img4.avif) no-repeat center;
+    background-image: linear-gradient(rgba(7, 0, 0, 0.5), var(--color6)), url(../images/img4.avif);
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 30px;">
+        <div class="card-container">
+            <div th:each="producto : ${productos}" class="card-wrapper mb-4">
+                <div class="card">
+                    <h4 class="card-title" th:text="${producto.getNombre()}"></h4>
+                    <img th:src="${producto.getImagen}" class="card-img-top" alt="no_image"
+                        onerror="this.src='../images/no_image.jpg';">
+                    <h5 class="card-subtitle" th:text="${producto.getModelo()}"></h5>
+                    <h5 class="mb-3"><strong></strong>₡<span th:text="${producto.precio}"></span></h5>
+                    <p th:text="${producto.tipoProducto.tipo}"></p>
+                    <div class="card-actions">
+                        <a th:text="#{btn.detalles}" href="#" class="btn btn-1" th:href="@{/producto/{id}(id=${producto.getId})}">Detalles</a>
+                        <a th:text="#{btn.agregar}" href="#" class="btn btn-2">Agregar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="plantilla/Template::footer"></footer>
+
+</body>
+
+</html>

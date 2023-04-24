@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class Tienda {
@@ -58,7 +59,7 @@ public class Tienda {
     }
 
     @GetMapping("/bicicletas")
-    public String bicicletass(Model model) {
+    public String bicicletas(Model model) {
         List<Producto> lista = productoService.findByFamilia("Bicicletas");
         model.addAttribute("titulo", "BICICLETAS");
         model.addAttribute("productos", lista);
@@ -123,6 +124,18 @@ public class Tienda {
         model.addAttribute("tipoProducto", listaTipo);
         model.addAttribute("marca", listaMarca);
         return "tienda_verProducto";
+    }
+
+    @GetMapping("/buscar_en_tienda")
+    public String buscar(@RequestParam("search") String search, Model model) {
+        List<Producto> productos = productoService.findBySearch(search);
+        model.addAttribute("productos", productos);
+        return "tienda_buscar";
+    }
+    
+        @GetMapping("/carrito")
+    public String carrito(Model model) {
+        return "tienda_carrito";
     }
 
 }

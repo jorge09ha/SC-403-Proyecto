@@ -33,23 +33,11 @@ a {
 /*----------------------- NavBar ------------------ -----*/
 .navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     background: var(--color5);
+    padding: 0 10px;
     width: 100%;
-    z-index: 100;
-    position: relative;
-}
-
-.logo {
-    margin-left: 20px;
-}
-
-.logo a img {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 20px;
-    width: 60px;
 }
 
 .navbar-links {
@@ -57,42 +45,134 @@ a {
     justify-content: space-between;
     flex-grow: 1;
     color: var(--color1);
-    margin-top: 10px;
+    width: 100%;
+}
+
+.right-items {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
 }
 
 .nav-list {
     display: flex;
-    list-style: none;
-    margin-right: 30px;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
-.navIcon {
+.nav-item {
+    margin: 0 5px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 2px 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--color4);
+}
+
+.logo {
+    margin-left: 30px;
+}
+
+.logo a img {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    width: 50px;
+}
+
+.store-links {
     display: flex;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     justify-content: space-between;
-    margin-top: 10px;
+    width: 50%;
 }
 
-.navbar-links ul {
-    list-style: none;
-    display: inline-block;
+.store-links .nav-link {
+    font-size: 5px;
+}
+
+
+.icon-link {
+    color: var(--color4);
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 24px;
+    /* Agregar esta línea para aumentar el tamaño del icono del carrito */
+}
+
+.icon-link:hover {
+    color: var(--color1);
+}
+
+.nav-drop .dropdown-toggle {
+    font-size: 24px;
+}
+
+.nav-drop {
     position: relative;
 }
 
-.navbar-links ul li {
-    list-style: none;
-    display: inline-block;
-    position: relative;
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: var(--color5);
+    padding: 0.5rem 0;
+    min-width: 10rem;
 }
 
-.navbar-links ul li a {
+.dropdown-item {
     display: block;
-    padding: 10px 15px;
-    color: white;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: var(--color4);
+    background-color: var(--color4);
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    text-decoration: none;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    color: var(--color1);
+    text-decoration: none;
+    background-color: var(--color6);
+}
+
+.dropdown-divider {
+    height: 0;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    border-top: 1px solid var(--color3);
+}
+
+
+.store-links .nav-item a {
+    display: block;
+    padding: 5px 5px;
+    color: var(--color4);
     text-decoration: none;
     font-size: 20px;
+    position: relative;
+    /* Agregar esta línea */
 }
 
-.navbar-links .nav-item a::before {
+.store-links .nav-item a::before {
     content: "";
     height: 3px;
     width: 0%;
@@ -103,87 +183,22 @@ a {
     transition: 0.3s ease-out;
 }
 
-.navbar-links .nav-item a:hover::before {
+.store-links .nav-item a:hover::before {
     width: 100%;
+    color: var(--color1);
 }
 
-/**DropDown**/
-.nav-drop {
-    margin-left: auto;
-}
-
-
-.nav-drop .dropdown-toggle {
-    color: var(--color4);
-    margin-left: auto;
-}
-
-.nav-drop .dropdown-toggle:hover {
-    color: var(--color2);
-}
-
-.dropdown-menu {
-    background-color: var(--color6);
-    border: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-item {
-    color: var(--color4);
-    font-size: 20px;
-    padding: 10px 15px;
-}
-
-.dropdown-item:hover {
-    background-color: var(--color4);
-}
-
-.dropdown-divider {
-    border-top-color: var(--color3);
-}
-
-.nav-drop .dropdown-menu {
-    right: 0;
-    left: auto;
-}
-
-/*Icon */
-.icon-link {
-    font-size: 1.3em;
-    margin-right: 5px;
-    color: var(--color4);
-    text-decoration: none;
-}
-
-.icon-link:hover {
-    color: var(--color2);
+@media screen and (min-width: 1000px) {
+    footContainer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+        margin-top: 0;
+        height: 80px;
+    }
 }
 
 
-/*Icon persona */
-.login-btn {
-    display: flex;
-    align-items: center;
-}
-
-ion-icon[name="person-circle"] {
-    font-size: 1.2em;
-    margin-right: 5px;
-}
-
-/*----------------------- menu 2 -----------------------*/
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.hamburger-menu span {
-    width: 30px;
-    height: 2px;
-    background: white;
-    margin-bottom: 6px;
-}
 
 /*----------------------- Content -----------------------*/
 .content {
@@ -198,6 +213,8 @@ ion-icon[name="person-circle"] {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--color4);
+    background-color: #eee;
 }
 
 /*---------------------- Footer -----------------------*/
@@ -287,19 +304,6 @@ footer {
     }
 }
 
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-@media screen and (max-width: 1056px) {
-    .hamburger-menu {
-        display: inline-flex;
-        margin-left: 30px;
-    }
-}
-
 /*****************************************************************************************/
 
 /*-----------------------HOME----------------------------------*/
@@ -309,9 +313,7 @@ footer {
 .carousel-img {
     height: 600px;
     width: 100%;
-    /* Cambia a 100% para que la imagen ocupe todo el ancho del contenedor */
     object-fit: cover;
-    /* Cambia a cover para mantener la proporción de la imagen sin deformarla */
 }
 
 .carousel-item {
@@ -338,7 +340,6 @@ footer {
     margin-top: 20px;
 }
 
-/* Media queries para ajustar el diseño en función del ancho de la ventana del navegador */
 @media (max-width: 1200px) {
     .carousel-img {
         height: 500px;
@@ -628,7 +629,6 @@ h4 {
     background-color: var(--color2);
 }
 
-/* Estilos para el botón restar */
 .product-container .btn-2 {
     background-color: var(--color4);
     color: var(--color4);
@@ -658,7 +658,7 @@ ion-icon[name="add-circle"] {
 /**********************************************************************************/
 
 .contenedorS {
-    display:grid;
+    display: grid;
     justify-content: center;
     align-items: center;
 
@@ -669,7 +669,7 @@ ion-icon[name="add-circle"] {
     display: flex;
     align-items: center;
     background-color: var(--color4);
-    padding: 10px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;

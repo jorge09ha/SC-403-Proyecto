@@ -38,4 +38,9 @@ public class ProductoService implements IProductoService {
         return productoRepository.findByFamilia(familia);
     }
 
+    @Override
+    public List<Producto> findBySearch(String search) {
+        return productoRepository.findBySearch(search);
+    }
+
 }

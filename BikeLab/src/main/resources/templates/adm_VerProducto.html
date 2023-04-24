@@ -12,17 +12,17 @@
     <div class="table-btn">
 
         <!-- Buscador -->
-        <div class="contenedorS">
-            <div class="buscador">
-                <input th:placeholder="#{btn.buscar}" type="text" placeholder="Buscar..." name="search">
-                <select name="category">
-                    <option th:text="#{b.all}" value="opcion0"></option>
-                    <option th:text="#{tabla.marca}" value="opcion1"></option>
-                    <option th:text="#{tabla.tipo}" value="opcion2"></option>
-                </select>
-                <button th:text="#{btn.buscar}" type="submit">Buscar</button>
+        <form th:action="@{/buscar}" method="get">
+            <div class="contenedorS">
+                <div class="buscador">
+                    <input th:placeholder="#{btn.buscar}" type="text" placeholder="Buscar..." name="search">
+                    <button th:text="#{btn.buscar}" type="submit">Buscar</button>
+                    <div class="reload">
+                        <a href="/admin/producto"><ion-icon name="refresh-circle"></ion-icon></a>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
 
         <!---Agregar-->
         <div class="agregar">
@@ -64,8 +64,8 @@
                                 th:href="@{/editar/producto/{id}(id=${user.getId})}"><ion-icon
                                     name="create-sharp"></ion-icon></a>
                             <a href="#!" style="color:red" th:href="@{/eliminar/producto/{id}(id=${user.getId})}" id="eliminar-${
-                                   user.getId
-                               }"><ion-icon name="trash-sharp"></ion-icon></a>
+                                user.getId
+                            }"><ion-icon name="trash-sharp"></ion-icon></a>
                         </td>
                         </td>
                     </tr>

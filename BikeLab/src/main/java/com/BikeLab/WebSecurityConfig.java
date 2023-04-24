@@ -40,14 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new UserService();
     }
 
-//      @Bean
-//    AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider provider
-//                 = new DaoAuthenticationProvider();
-//        provider.setUserDetailsService(userDetailsService);
-//        provider.setPasswordEncoder(new BCryptPasswordEncoder());
-//        return  provider;
-//    }
     @Bean
     DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthneticationProvider = new DaoAuthenticationProvider();
@@ -81,17 +73,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/")
                 .permitAll()
-                .antMatchers( "/login")
+                .antMatchers("/login")
                 .hasAnyRole("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")        
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll().defaultSuccessUrl("/", true).and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login?logout");
-
-        
-
     }
 
 }

@@ -42,21 +42,6 @@
         </a>
     </div>
 
-    <!-- Buscador -->
-    <div class="contenedorS">
-        <div class="buscador">
-            <input th:placeholder="#{btn.buscar}" type="text" placeholder="Buscar..." name="search">
-            <select name="category">
-                <option th:text="#{tienda.all}" value="opcion0"></option>
-                <option th:text="#{tienda.bicicletas}" value="opcion1"></option>
-                <option th:text="#{tienda.componentes}" value="opcion2"></option>
-                <option th:text="#{tienda.vestimenta}" value="opcion3"></option>
-                <option th:text="#{tienda.accesorios}" value="opcion4"></option>
-            </select>
-            <button th:text="#{btn.buscar}" type="submit">Buscar</button>
-        </div>
-    </div>
-
     <!--Bicicletas-->
     <h1 th:text="#{tienda.bicicletas}" style="color: white; text-align: center; margin-top: 30px;">Bicicletas</h1>
 
