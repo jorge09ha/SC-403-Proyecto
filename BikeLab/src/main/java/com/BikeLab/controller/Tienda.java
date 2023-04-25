@@ -6,20 +6,26 @@ import com.BikeLab.entity.Evento;
 import com.BikeLab.entity.Marca;
 import com.BikeLab.entity.Producto;
 import com.BikeLab.entity.Provincia;
+import com.BikeLab.entity.Rol;
 import com.BikeLab.entity.TipoProducto;
+import com.BikeLab.entity.Usuario;
 import com.BikeLab.service.ICantonService;
 import com.BikeLab.service.IDistritoService;
 import com.BikeLab.service.IEventoService;
 import com.BikeLab.service.IMarcaService;
 import com.BikeLab.service.IProductoService;
 import com.BikeLab.service.IProvinciaService;
+import com.BikeLab.service.IRolService;
 import com.BikeLab.service.ITipoProductoService;
+import com.BikeLab.service.IUsuarioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -45,6 +51,12 @@ public class Tienda {
 
     @Autowired
     private IDistritoService distritoService;
+
+    @Autowired
+    private IRolService rolesService;
+
+    @Autowired
+    private IUsuarioService usuarioService;
 
     //-------------------------- List --------------------------
     @GetMapping("")
@@ -132,10 +144,40 @@ public class Tienda {
         model.addAttribute("productos", productos);
         return "tienda_buscar";
     }
-    
-        @GetMapping("/carrito")
+
+    @GetMapping("/carrito")
     public String carrito(Model model) {
         return "tienda_carrito";
+    }
+
+    @GetMapping("/perfil/usuario/{id}")
+    public String editarUsuario(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = usuarioService.getUsuarioById(id);
+        List<Distrito> listaD = distritoService.getAllDistrito();
+        List<Canton> listaC = cantonService.getAllCanton();
+        List<Provincia> listaP = provinciaService.getAllProvincia();
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("distrito", listaD);
+        model.addAttribute("canton", listaC);
+        model.addAttribute("provincia", listaP);
+        return "tienda_perfil";
+    }
+
+    @PostMapping("/perfil/usuario/{id}")
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("Usuario") Usuario usuario) {
+        Usuario editarUsuario = usuarioService.getUsuarioById(id);
+        editarUsuario.setId(id);
+        editarUsuario.setNombre(usuario.getNombre());
+        editarUsuario.setApellido1(usuario.getApellido1());
+        editarUsuario.setApellido2(usuario.getApellido2());
+        editarUsuario.setTelefono(usuario.getTelefono());
+        editarUsuario.setCedula(usuario.getCedula());
+        editarUsuario.setDireccion(usuario.getDireccion());
+        editarUsuario.setProvincia(usuario.getProvincia());
+        editarUsuario.setCanton(usuario.getCanton());
+        editarUsuario.setDistrito(usuario.getDistrito());
+        usuarioService.saveUsuario(editarUsuario);
+        return "redirect:/perfil/usuario/"+editarUsuario.getId();
     }
 
 }

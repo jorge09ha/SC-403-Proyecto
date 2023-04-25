@@ -1,4 +1,3 @@
-
 package com.BikeLab.controller;
 
 import com.BikeLab.entity.Canton;
@@ -19,15 +18,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @Controller
 public class RegistroUsuarioController {
-    
-@Autowired
-private IUsuarioService usuarioService;
 
- @Autowired
+    @Autowired
+    private IUsuarioService usuarioService;
+
+    @Autowired
     private IRolService rolesService;
+    
     @Autowired
     private IProvinciaService provinciaService;
 
@@ -36,8 +35,8 @@ private IUsuarioService usuarioService;
 
     @Autowired
     private IDistritoService distritoService;
-      
-@GetMapping("/registro/usuario/nuevo")
+
+    @GetMapping("/registro/usuario/nuevo")
     public String crearUsuario(Model model) {
         List<Distrito> listaD = distritoService.getAllDistrito();
         List<Canton> listaC = cantonService.getAllCanton();
@@ -47,17 +46,15 @@ private IUsuarioService usuarioService;
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("distrito", listaD);
         model.addAttribute("canton", listaC);
-        model.addAttribute("provincia", listaP);        
+        model.addAttribute("provincia", listaP);
         model.addAttribute("rol", rol);
         return "registroUsuario";
     }
 
-    
     @PostMapping("/guardar/usuario")
     public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario) {
         usuarioService.saveUsuario(usuario);
         return "redirect:/";
     }
-    
-    
+
 }

@@ -68,15 +68,6 @@
                         </li>
                     </ul>
                     <ul class="nav-list">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#"><ion-icon name="globe"></ion-icon></a>
-                            <ul class="dropdown">
-                                <li><a th:text="#{idioma.es}" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
-                                       th:href="${urlBuilder.replaceQueryParam('lang','es').toUriString()}">ES</a></li>
-                                <li><a th:text="#{idioma.en}" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}"
-                                       th:href="${urlBuilder.replaceQueryParam('lang','en').toUriString()}">EN</a></li>
-                            </ul>
-                        <li>
                             <a href="/" class="icon-link"><ion-icon name="bag-handle"></ion-icon></a>
                         </li>
                         </li>

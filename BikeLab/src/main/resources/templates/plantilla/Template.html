@@ -29,6 +29,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     </head>
 
@@ -87,7 +88,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a th:text="#{tienda.singIn}" sec:authorize="isAnonymous()" th:href="@{~/login}" class="dropdown-item" href="/login">Iniciar sesión</a>
-                                    <span sec:authorize="isAuthenticated()" class="dropdown-item" sec:authentication="name"></span>
+                                    <a href="/perfil/usuario/1"><span sec:authorize="isAuthenticated()" class="dropdown-item" sec:authentication="name"></span></a>
                                     <a th:text="#{tienda.singUp}" sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a>
                                     <a th:text="#{tienda.registrar}" sec:authorize="isAnonymous()" class="dropdown-item" href="/login/nuevo">Registrarse</a>
                                     <div class="dropdown-divider"></div>

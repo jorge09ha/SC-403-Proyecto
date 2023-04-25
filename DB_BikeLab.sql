@@ -57,14 +57,16 @@ CREATE TABLE usuario(
   provincia_id INT,
   canton_id INT,
   distrito_id INT,
+  iddatoslogin INT(11)
   PRIMARY KEY (id),
   KEY `fk_usuario_provincia_idx` (`provincia_id`),
   KEY `fk_usuario_canton_idx` (`canton_id`),
   KEY `fk_usuario_distrito_idx` (`distrito_id`),
   CONSTRAINT `fk_usuario_provincia` FOREIGN KEY (`provincia_id`) REFERENCES `provincia` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_usuario_canton` FOREIGN KEY (`canton_id`) REFERENCES `canton` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-); 
+  CONSTRAINT `fk_usuario_distrito` FOREIGN KEY (`distrito_id`) REFERENCES `distrito` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_usuario_DatosLogin` FOREIGN KEY (`iddatoslogin`) REFERENCES `datoslogin` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+);
 
 CREATE TABLE proveedor(
  id INT NOT NULL AUTO_INCREMENT,
