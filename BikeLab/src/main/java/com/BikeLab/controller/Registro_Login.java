@@ -95,10 +95,13 @@ public String login(HttpServletRequest request, @RequestParam String email, @Req
 
     @GetMapping("/login/nuevo")
     public String crearUsuario(Model model) {
-        List<Rol> rol = roleService.getAllRole();
+        List<Rol> rol = roleService.getAllRole();      
+        
+        for (Rol roles : rol) {
+     model.addAttribute("rol", rol.get(1));
+}
         model.addAttribute("titulo", "Nuevo Usuario");
-        model.addAttribute("usuario", new DatosLogin());
-        model.addAttribute("rol", rol);
+        model.addAttribute("usuario", new DatosLogin());      
         return "registroDatosLogin";
     }
 

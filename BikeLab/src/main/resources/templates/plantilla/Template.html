@@ -88,7 +88,7 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a th:text="#{tienda.singIn}" sec:authorize="isAnonymous()" th:href="@{~/login}" class="dropdown-item" href="/login">Iniciar sesión</a>
-                                    <a href="/perfil/usuario/1"><span sec:authorize="isAuthenticated()" class="dropdown-item" sec:authentication="name"></span></a>
+                                    <a href="/perfil/usuario/{id}"><span sec:authorize="isAuthenticated()" class="dropdown-item" sec:authentication="name"></span></a>
                                     <a th:text="#{tienda.singUp}" sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a>
                                     <a th:text="#{tienda.registrar}" sec:authorize="isAnonymous()" class="dropdown-item" href="/login/nuevo">Registrarse</a>
                                     <div class="dropdown-divider"></div>

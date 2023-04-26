@@ -17,9 +17,9 @@
                 <button th:text="#{btn.buscar}" class="btn" style="color:white; background-color: #EB2546;" type="submit">Buscar</button>
             </form>
             <!---Agregar-->
-            <div class="agregar">
+            <div class="agregar" >
                 <button th:text="#{btn.agregar}" class="btn btn-success" type="button"
-                        onclick="window.location.href = '/admin/DatosLoginRol/add'">Agregar</button>
+                        onclick="window.location.href = '/admin/DatosLoginRol/add'">Agregar Rol a Usuario</button>
             </div>
         </div>
 
@@ -41,10 +41,10 @@
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;"></td>
                         <td width="15%" style="padding-bottom: 10px; padding-top: 10px;">
                     <th:block th:each="rol : ${user.getRoles}">                               
-                        <a href="#!" style="color:yellow" th:href="@{/editar/RoldatosLogin/{id}/{rol_id}(id=${user.getId},rol_id=${rol.getId})}"><ion-icon name="create-sharp"></ion-icon></a>                    
+                        <a href="#!" style="color:greenyellow" th:href="@{/admin/DatosLoginRol/add}"><ion-icon name="add" size="large"></ion-icon></a>                                       
                         <a href="#!" style="color:red" th:href="@{/eliminar/datosLogin/{id}/{rol_id}(id=${user.getId},rol_id=${rol.getId})}" id="eliminar-${
                                user.getId
-                           }"><ion-icon name="trash-sharp"></ion-icon></a>
+                           }"><ion-icon name="trash-sharp" size="large"></ion-icon></a>
                         </tr>                                
                     </th:block>  </td>
                     </tr>
