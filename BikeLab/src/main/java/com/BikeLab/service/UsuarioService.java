@@ -1,6 +1,8 @@
 package com.BikeLab.service;
 
+import com.BikeLab.entity.DatosLogin;
 import com.BikeLab.entity.Usuario;
+import com.BikeLab.repository.DatosLoginRepository;
 import com.BikeLab.repository.UsuarioRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
     
+    @Autowired
+    private DatosLoginRepository datosLoginRepository;
   
     @Override
     public List<Usuario> getAllUsuario() {
@@ -32,5 +36,13 @@ public class UsuarioService implements IUsuarioService {
     public void deleteUsuario(long id) {
         usuarioRepository.deleteById(id);
     }
+
+    @Override
+    public DatosLogin getDatosLoginById(long id) {
+        return datosLoginRepository.findById(id).orElse(null);
+    }
+
+ 
+    
     
 }

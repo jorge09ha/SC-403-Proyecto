@@ -5,6 +5,7 @@
 package com.BikeLab.service;
 
 import com.BikeLab.entity.DatosLogin;
+import com.BikeLab.entity.Usuario;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +35,9 @@ public interface IDatosLoginService {
    public List<DatosLogin> getDistinctEmail();
    
   public DatosLogin findByEmail(String username);
+  
+  public DatosLogin getDTById(long id);
+  
+ 
     
 }
