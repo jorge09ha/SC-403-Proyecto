@@ -34,7 +34,7 @@
                             <td th:text="${item.cantidad}"></td>
                             <td th:text="${item.producto.precio * item.cantidad}">₡</td>
                             <td>
-                                <a th:href="@{/carrito/eliminar(index=${itemIndex.index})}"><ion-icon name="trash-sharp"></ion-icon></a>
+                                <a href="#!" style="color:white" th:href="@{/carrito/eliminar(index=${itemIndex.index})}" id="eliminar-${user.getId}"><ion-icon name="trash-sharp"></ion-icon></a>
                             </td>
                         </tr>
                     </tbody>
@@ -50,7 +50,18 @@
         </div>
 
         <footer th:replace="plantilla/Template::footer"></footer>
-
+        <script>
+            const eliminarLinks = document.querySelectorAll('[id^="eliminar-"]');
+            eliminarLinks.forEach(eliminarLink => {
+                eliminarLink.addEventListener('click', e => {
+                    e.preventDefault();
+                    const confirmacion = confirm('¿Estás seguro/a de que deseas eliminar?');
+                    if (confirmacion) {
+                        window.location.href = eliminarLink.getAttribute('href');
+                    }
+                });
+            });
+        </script>
     </body>
 
 </html>

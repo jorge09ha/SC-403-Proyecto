@@ -35,7 +35,7 @@
                         </div>
                         <form method="post" th:action="@{/carrito/agregar}">
                             <input type="hidden" name="productoId" th:value="${producto.id}" />
-                            <input type="hidden" name="cantidad" th:value="${producto.stock > 0 ? 1 : 0}" />
+                            <input id="cantidad" type="hidden" name="cantidad" th:value="${producto.stock > 0 ? 1 : 0}" />
                             <button type="submit" th:text="#{btn.agregar}" class="btn btn-1 ml-auto">Agregar</button>
                         </form>
                     </div>
@@ -53,6 +53,7 @@
 
                 if (currentValue < maxValue) {
                     input.value = currentValue + 1;
+                    document.getElementById("cantidad").value = currentValue + 1;
                 }
             }
 
@@ -63,8 +64,10 @@
 
                 if (currentValue > minValue) {
                     input.value = currentValue - 1;
+                    document.getElementById("cantidad").value = currentValue - 1;
                 }
             }
+
         </script>
     </body>
 

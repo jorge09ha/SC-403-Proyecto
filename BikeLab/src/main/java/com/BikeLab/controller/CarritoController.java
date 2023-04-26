@@ -56,10 +56,14 @@ public class CarritoController {
 
             if (itemExistente == null) {
                 // Si el producto no está en el carrito, crea un nuevo CartItem y lo añade a la lista
-                carrito.add(new CartItem(producto, cantidad));
+                int stockDisponible = producto.getStock();
+                int cantidadAgregada = Math.min(cantidad, stockDisponible);
+                carrito.add(new CartItem(producto, cantidadAgregada));
             } else {
                 // Si el producto ya está en el carrito, incrementa la cantidad
-                itemExistente.setCantidad(itemExistente.getCantidad() + cantidad);
+                int stockDisponible = producto.getStock() - itemExistente.getCantidad();
+                int cantidadAgregada = Math.min(cantidad, stockDisponible);
+                itemExistente.setCantidad(itemExistente.getCantidad() + cantidadAgregada);
             }
 
             session.setAttribute("carrito", carrito);
