@@ -1,0 +1,80 @@
+package com.BikeLab.controller;
+
+import com.BikeLab.entity.Producto;
+import com.BikeLab.service.IProductoService;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class CarritoController {
+
+    @Autowired
+    private IProductoService productoService;
+
+    @GetMapping("/carrito")
+    public String carrito(Model model, HttpSession session) {
+        List<CartItem> carrito = (List<CartItem>) session.getAttribute("carrito");
+        if (carrito == null) {
+            carrito = new ArrayList<>();
+        }
+        model.addAttribute("carrito", carrito);
+
+        // Calcular el total en el controlador y formatearlo con separadores de miles y decimales
+        double total = carrito.stream().mapToDouble(item -> item.getProducto().getPrecio() * item.getCantidad()).sum();
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CR"));
+        String formattedTotal = NumberFormat.getCurrencyInstance(new Locale("es", "CR")).format(total);
+        model.addAttribute("total", formattedTotal);
+        return "tienda_carrito";
+    }
+
+    @PostMapping("/carrito/agregar")
+    public String agregarProductoCarrito(@RequestParam("productoId") int productoId, @RequestParam("cantidad") int cantidad, HttpSession session) {
+        Producto producto = productoService.getProductoById(productoId);
+        if (producto != null) {
+            List<CartItem> carrito = (List<CartItem>) session.getAttribute("carrito");
+            if (carrito == null) {
+                carrito = new ArrayList<>();
+            }
+
+            // Busca si el producto ya está en el carrito
+            CartItem itemExistente = null;
+            for (CartItem item : carrito) {
+                if (item.getProducto().getId() == productoId) {
+                    itemExistente = item;
+                    break;
+                }
+            }
+
+            if (itemExistente == null) {
+                // Si el producto no está en el carrito, crea un nuevo CartItem y lo añade a la lista
+                carrito.add(new CartItem(producto, cantidad));
+            } else {
+                // Si el producto ya está en el carrito, incrementa la cantidad
+                itemExistente.setCantidad(itemExistente.getCantidad() + cantidad);
+            }
+
+            session.setAttribute("carrito", carrito);
+        }
+        return "redirect:/carrito";
+    }
+
+    @GetMapping("/carrito/eliminar")
+    public String eliminarDelCarrito(@RequestParam("index") int index, HttpSession session) {
+        List<CartItem> carrito = (List<CartItem>) session.getAttribute("carrito");
+        if (carrito != null && index >= 0 && index < carrito.size()) {
+            carrito.remove(index);
+            session.setAttribute("carrito", carrito);
+        }
+        return "redirect:/carrito";
+    }
+
+}

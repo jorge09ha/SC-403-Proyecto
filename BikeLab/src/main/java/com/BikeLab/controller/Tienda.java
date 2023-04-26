@@ -18,7 +18,9 @@ import com.BikeLab.service.IProvinciaService;
 import com.BikeLab.service.IRolService;
 import com.BikeLab.service.ITipoProductoService;
 import com.BikeLab.service.IUsuarioService;
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -145,11 +147,6 @@ public class Tienda {
         return "tienda_buscar";
     }
 
-    @GetMapping("/carrito")
-    public String carrito(Model model) {
-        return "tienda_carrito";
-    }
-
     @GetMapping("/perfil/usuario/{id}")
     public String editarUsuario(@PathVariable("id") Long id, Model model) {
         Usuario usuario = usuarioService.getUsuarioById(id);
@@ -177,7 +174,7 @@ public class Tienda {
         editarUsuario.setCanton(usuario.getCanton());
         editarUsuario.setDistrito(usuario.getDistrito());
         usuarioService.saveUsuario(editarUsuario);
-        return "redirect:/perfil/usuario/"+editarUsuario.getId();
+        return "redirect:/perfil/usuario/" + editarUsuario.getId();
     }
 
 }
