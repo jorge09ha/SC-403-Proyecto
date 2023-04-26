@@ -11,7 +11,10 @@ import com.BikeLab.entity.RolDatosLogin;
 import com.BikeLab.service.IDatosLoginService;
 import com.BikeLab.service.IRolDatosLoginService;
 import com.BikeLab.service.IRolService;
+import com.BikeLab.service.UserService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,6 +25,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,39 +58,40 @@ public class Registro_Login {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    
 
     @GetMapping("/login")
     public String index() {
         return "/login";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String email, @RequestParam String password, Model model) {
+ @PostMapping("/login")
+public String login(HttpServletRequest request, @RequestParam String email, @RequestParam String password, Model model) {
 
-        try {
+    try {
+        DatosLogin datosLogin = this.datosLoginService.findByEmail(email);
+        if (datosLogin != null) {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // Obtener la sesión HTTP del usuario autenticado
+            HttpSession session = request.getSession();
+
+            // Almacenar información en la sesión
+            session.setAttribute("userId", datosLogin.getId());
+
             return "redirect:/";
-        } catch (AuthenticationException ex) {
-            LOGGER.error("Error de autenticación: " + ex.getMessage());
+        } else {
+            LOGGER.error("Entro al else " );
             model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
             return "/login";
         }
+    } catch (AuthenticationException ex) {
+        LOGGER.error("Error de autenticación: " + ex.getMessage());
+        model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
+        return "/login";
     }
-
-    @PostMapping("/ingreso/login")
-    public String processLogin(@ModelAttribute("usuario") DatosLogin usuario, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-        DatosLogin usuarioEncontrado = datosLoginService.findAllUser(usuario.getEmail());
-        if (usuarioEncontrado != null && usuarioEncontrado.getEmail().equals(usuario.getEmail())) {
-            return "redirect:/";
-        } else {
-            bindingResult.rejectValue("username", "error.usuario", "Nombre de usuario o contraseña incorrecta");
-            return "login";
-        }
-    }
+}
 
     @GetMapping("/login/nuevo")
     public String crearUsuario(Model model) {
@@ -110,12 +115,10 @@ public class Registro_Login {
     @PostMapping("/save/login")
     public String guardarUsuario(@ModelAttribute("usuario") DatosLogin usuario, BindingResult result, RedirectAttributes attributes) {
         try {
-            datosLoginService.saveUsuario(usuario);
-            SimpleJdbcCall jdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                    .withProcedureName("eliminar_registros_sin_rol");
-            jdbcCall.execute();
+            datosLoginService.saveUsuario(usuario);            
             return "redirect:/login/nuevo?exito";
         } catch (DataIntegrityViolationException e) {
+            LOGGER.info("error de registro" +e);
             return "redirect:/login/nuevo?error";
         }
     }
@@ -147,3 +150,8 @@ public class Registro_Login {
     }
 
 }
+
+
+
+
+

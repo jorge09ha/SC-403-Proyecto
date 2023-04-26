@@ -95,7 +95,8 @@
     <div class="button-container">
         <a th:text="#{btn.VerMas}" href="/eventos" class="btn btn-2" style="margin-bottom: 30px;">Ver más</a>
     </div>
-
+  
+       <p>Tu ID de usuario es: <span th:text="${userId}"></span></p>
     <footer th:replace="plantilla/Template::footer"></footer>
 
     <script>

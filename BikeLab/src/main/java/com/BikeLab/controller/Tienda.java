@@ -1,6 +1,8 @@
 package com.BikeLab.controller;
 
+import com.BikeLab.WebSecurityConfig;
 import com.BikeLab.entity.Canton;
+import com.BikeLab.entity.DatosLogin;
 import com.BikeLab.entity.Distrito;
 import com.BikeLab.entity.Evento;
 import com.BikeLab.entity.Marca;
@@ -10,6 +12,7 @@ import com.BikeLab.entity.Rol;
 import com.BikeLab.entity.TipoProducto;
 import com.BikeLab.entity.Usuario;
 import com.BikeLab.service.ICantonService;
+import com.BikeLab.service.IDatosLoginService;
 import com.BikeLab.service.IDistritoService;
 import com.BikeLab.service.IEventoService;
 import com.BikeLab.service.IMarcaService;
@@ -19,7 +22,13 @@ import com.BikeLab.service.IRolService;
 import com.BikeLab.service.ITipoProductoService;
 import com.BikeLab.service.IUsuarioService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
+import org.jboss.logging.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,16 +66,27 @@ public class Tienda {
 
     @Autowired
     private IUsuarioService usuarioService;
+ @Autowired
+    private IDatosLoginService datosLoginService;
+ 
+ @Autowired
+private HttpServletRequest request;
+ 
+ @Autowired
+private WebSecurityConfig webSecurityConfig;
 
     //-------------------------- List --------------------------
-    @GetMapping("")
-    public String index(Model model) {
+    @GetMapping("/")
+    public String index(Model model, HttpSession session) {        
+
+     Long userId = (Long) session.getAttribute("userId"); 
         model.addAttribute("titulo", "HOME");
         List<Evento> lista = eventoService.getAllEvento();
         List<Producto> lista1 = productoService.findByFamilia("Bicicletas");
         model.addAttribute("titulo", "EVENTOS");
         model.addAttribute("eventos", lista);
         model.addAttribute("productos", lista1);
+        model.addAttribute("userId", userId);
         return "tienda_home";
     }
 
@@ -181,3 +201,5 @@ public class Tienda {
     }
 
 }
+
+

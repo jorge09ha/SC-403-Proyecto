@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,7 +22,7 @@ public class Usuario implements Serializable {
     private String apellido2;
     private int telefono;
     private String cedula;
-    private String direccion;
+    private String direccion;    
 
     @ManyToOne
     @JoinColumn(name = "provincia_id")
@@ -34,6 +35,12 @@ public class Usuario implements Serializable {
     @ManyToOne
     @JoinColumn(name = "distrito_id")
     private Distrito distrito;
+    
+    @OneToOne
+    @JoinColumn(name = "iddatoslogin")
+     private DatosLogin datoslogin;
+
+           
 
     public long getId() {
         return id;
@@ -115,9 +122,24 @@ public class Usuario implements Serializable {
         this.distrito = distrito;
     }
 
+    public DatosLogin getDatoslogin() {
+        return datoslogin;
+    }
+
+    public void setDatoslogin(DatosLogin datoslogin) {
+        this.datoslogin = datoslogin;
+    }
+
+     
+        
+    
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", telefono=" + telefono + ", cedula=" + cedula + ", direccion=" + direccion + ", provincia=" + provincia + ", canton=" + canton + ", distrito=" + distrito + '}';
     }
 
 }
+
+
+
+
