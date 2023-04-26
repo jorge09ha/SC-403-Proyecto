@@ -179,6 +179,7 @@ public class AdminTienda {
         productoEditar.setAnio(producto.getAnio());
         productoEditar.setPrecio(producto.getPrecio());
         productoEditar.setStock(producto.getStock());
+        productoEditar.setMarca(producto.getMarca());
         productoEditar.setTipoProducto(producto.getTipoProducto());
 
         if (imagefile.isEmpty()) {
