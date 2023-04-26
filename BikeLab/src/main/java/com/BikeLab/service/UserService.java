@@ -6,6 +6,7 @@ package com.BikeLab.service;
 
 import com.BikeLab.entity.DatosLogin;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,10 +34,9 @@ public class UserService implements UserDetailsService {
     @Override
 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
   LOGGER.info("Buscando usuario con correo: " + username);
-    System.out.println("username: " + username);
-    DatosLogin datosLogin = this.datosLoginService.findByEmail(username);
-    System.out.println("datosLogin: " + datosLogin);
-    if (datosLogin == null) {
+    DatosLogin datosLogin = this.datosLoginService.findByEmail(username);      
+    
+        if (datosLogin == null) {
         throw new UsernameNotFoundException("Usuario no encontrado");
     }
     Userprincipal userPrincipal = new Userprincipal(datosLogin);

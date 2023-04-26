@@ -27,7 +27,7 @@
             <div class="form-group">
                 <!---User-->
                 <label th:text="#{login.correo}" for="email">Correo</label>
-                <input id="username" name="username" type="text" class="form-control" required autofocus="autofocus"
+                <input id="username" name="email" type="text" class="form-control" required autofocus="autofocus"
                     placeholder="Correo">
             </div>
             <div class="form-group">
@@ -35,7 +35,8 @@
                 <label th:text="#{login.contrasenia}" for="password">Contraseña</label>
                 <input id="password" type="password" name="password" class="form-control" required autofocus="autofocus"
                     placeholder="Contraseña">
-            </div>
+            </div>                
+                
             <!---Btn-->
             <button th:text="#{login.btn}" type="submit" class="btn btn-success">Iniciar sesión</button>
             </form>

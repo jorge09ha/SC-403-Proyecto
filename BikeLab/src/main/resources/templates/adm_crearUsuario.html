@@ -98,7 +98,11 @@
                                 </select>
                             </div>
                         </div>
-                        <!---Botones-->
+
+                        <input class="form-control"
+                               type="hidden"
+                               th:value="${userId}" id="datoslogin" name="datoslogin" />
+
                         <div class="d-grid gap-2 col-4 mx-auto">
                             <button type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
                             <a class="btn btn-danger " href="/admin/usuario">CANCELAR</a>

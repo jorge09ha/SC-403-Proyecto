@@ -14,8 +14,11 @@ import com.BikeLab.service.IProvinciaService;
 import com.BikeLab.service.IRolDatosLoginService;
 import com.BikeLab.service.IRolService;
 import com.BikeLab.service.IUsuarioService;
+import com.BikeLab.service.UserService;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
+import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -52,6 +55,9 @@ public class AdminUsuario {
     
      @Autowired
     private IRolDatosLoginService rolDatosLoginService;
+     
+     @Autowired
+     private UserService userService;
 
     //-------------------------- List --------------------------
     @GetMapping("/admin/roles")
@@ -78,18 +84,23 @@ public class AdminUsuario {
         return "adm_VerDatosLoginRol";
     }
 
+
+
+
     //-------------------------- New --------------------------
     
     @GetMapping("/admin/usuario/nuevo")
-    public String crearUsuario(Model model) {
+    public String crearUsuario(Model model,String username,HttpSession session) {
         List<Distrito> listaD = distritoService.getAllDistrito();
         List<Canton> listaC = cantonService.getAllCanton();
         List<Provincia> listaP = provinciaService.getAllProvincia();
+        Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("titulo", "Nuevo Usuario");
         model.addAttribute("usuario", new Usuario());
         model.addAttribute("distrito", listaD);
         model.addAttribute("canton", listaC);
         model.addAttribute("provincia", listaP);
+        model.addAttribute("userId", userId);
         return "adm_crearUsuario";
     }
     

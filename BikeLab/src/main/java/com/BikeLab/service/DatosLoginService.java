@@ -5,6 +5,7 @@
 package com.BikeLab.service;
 
 import com.BikeLab.entity.DatosLogin;
+import com.BikeLab.entity.Usuario;
 import com.BikeLab.repository.DatosLoginRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,9 +80,14 @@ public class DatosLoginService implements IDatosLoginService {
     public DatosLogin findByEmail(String username) {
        return usuarioRepository.findByEmail(username);
     }
-}
 
+    @Override
+    public DatosLogin getDTById(long id) {
+         return usuarioRepository.findById(id).orElse(null);
+    }
+    }
 
-  
+   
+
 
 
