@@ -86,20 +86,22 @@ public class CarritoController {
     }
 
     @GetMapping("/carrito/checkout")
-    public String checkout(Model model, HttpSession session) {
+    public String checkout(Model model, HttpSession session) {      
+        Long userId = (Long) session.getAttribute("userId");
         List<CartItem> carrito = (List<CartItem>) session.getAttribute("carrito");
-        if (carrito == null) {
-            carrito = new ArrayList<>();
-        }
-        model.addAttribute("carrito", carrito);
-
+        if(userId==null){
+            
+            return "redirect:/login?iniciosesion";
+        } else {
+        
+         model.addAttribute("carrito", carrito);
         // Calcular el total en el controlador y formatearlo con separadores de miles y decimales
         double total = carrito.stream().mapToDouble(item -> item.getProducto().getPrecio() * item.getCantidad()).sum();
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CR"));
         String formattedTotal = NumberFormat.getCurrencyInstance(new Locale("es", "CR")).format(total);
         model.addAttribute("total", formattedTotal);
-
         return "tienda_checkout";
+        }
     }
 
 }
