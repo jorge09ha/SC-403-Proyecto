@@ -8,9 +8,11 @@ import com.BikeLab.WebSecurityConfig;
 import com.BikeLab.entity.DatosLogin;
 import com.BikeLab.entity.Rol;
 import com.BikeLab.entity.RolDatosLogin;
+import com.BikeLab.entity.Usuario;
 import com.BikeLab.service.IDatosLoginService;
 import com.BikeLab.service.IRolDatosLoginService;
 import com.BikeLab.service.IRolService;
+import com.BikeLab.service.IUsuarioService;
 import com.BikeLab.service.UserService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +51,10 @@ public class Registro_Login {
 
     @Autowired
     private IDatosLoginService datosLoginService;
-
+    
+     @Autowired
+     private IUsuarioService usuarioService;
+ 
     @Autowired
     private IRolDatosLoginService rolDatosLoginService;
 
@@ -77,18 +82,13 @@ public class Registro_Login {
                 HttpSession session = request.getSession();
 
                 // Almacenar información en la sesión
-                session.setAttribute("userId", datosLogin.getId());
+                session.setAttribute("userId", datosLogin.getId());                 
                 
-
                 return "redirect:/";
             } else {
-                LOGGER.error("Entro al else ");
-                model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
                 return "/login";
             }
         } catch (AuthenticationException ex) {
-            LOGGER.error("Error de autenticación: " + ex.getMessage());
-            model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
             return "/login";
         }
     }

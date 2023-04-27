@@ -42,7 +42,10 @@ public class UsuarioService implements IUsuarioService {
         return datosLoginRepository.findById(id).orElse(null);
     }
 
- 
-    
+    @Override
+    public Usuario getUserById(Long userId) {
+    return usuarioRepository.getUserById(userId);
+    }
+
     
 }

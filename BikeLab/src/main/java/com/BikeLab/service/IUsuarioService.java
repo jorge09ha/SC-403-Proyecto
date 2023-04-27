@@ -15,8 +15,9 @@ public interface IUsuarioService {
     public void saveUsuario(Usuario usuario);
 
     public void deleteUsuario(long id);
+
+    public DatosLogin getDatosLoginById(long id);
     
-      public DatosLogin getDatosLoginById(long id);      
-    
-    
+     public Usuario getUserById(Long userId);
+ 
 }

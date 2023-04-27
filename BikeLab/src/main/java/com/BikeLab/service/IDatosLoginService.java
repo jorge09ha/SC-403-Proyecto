@@ -34,7 +34,7 @@ public interface IDatosLoginService {
   
    public List<DatosLogin> getDistinctEmail();
    
-  public DatosLogin findByEmail(String username);
+  public DatosLogin findByEmail(String email);
   
   public DatosLogin getDTById(long id);
   
