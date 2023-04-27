@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <label th:text="#{tabla.apellido2}" for="apellido1">Apellido 2</label>
                         <input type="text" class="form-control" th:field="*{apellido2}"
-                               placeholder="Apellido 2" id="apellido1" aria-describedby="emailHelp">
+                               placeholder="Apellido 2" id="apellido2" aria-describedby="emailHelp">
                     </div>
                     <!---Telefono-->
                     <div class="form-group">
@@ -83,7 +83,12 @@
                             </select>
                         </div>
                     </div>
-
+                    
+                    <!-- <input class="form-control"
+                               type="hidden"
+                               th:value="${userId}" id="datoslogin" name="datoslogin" /> -->
+                    
+                    
                     <!---Btn-->
                     <button th:text="#{btn.guardar}" type="submit" class="btn btn-primary" value="Guardar">ENVIAR</button>
                 </form>

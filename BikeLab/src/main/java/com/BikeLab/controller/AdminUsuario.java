@@ -145,36 +145,36 @@ public class AdminUsuario {
 
     //-------------------------- UpDate --------------------------
     //*Usuario
-    @GetMapping("/editar/usuario/{id}")
-    public String editarUsuario(@PathVariable("id") Long id, Model model) {
-        Usuario usuario = usuarioService.getUsuarioById(id);
-        List<Distrito> listaD = distritoService.getAllDistrito();
-        List<Canton> listaC = cantonService.getAllCanton();
-        List<Provincia> listaP = provinciaService.getAllProvincia();
-        model.addAttribute("titulo", "Editar Usuario");
-        model.addAttribute("usuario", usuario);
-        model.addAttribute("distrito", listaD);
-        model.addAttribute("canton", listaC);
-        model.addAttribute("provincia", listaP);
-        return "adm_editarUsuario";
-    }
-
-    @PostMapping("/editar/usuario/{id}")
-    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("Usuario") Usuario usuario) {
-        Usuario editarUsuario = usuarioService.getUsuarioById(id);
-        editarUsuario.setId(id);
-        editarUsuario.setNombre(usuario.getNombre());
-        editarUsuario.setApellido1(usuario.getApellido1());
-        editarUsuario.setApellido2(usuario.getApellido2());
-        editarUsuario.setTelefono(usuario.getTelefono());
-        editarUsuario.setCedula(usuario.getCedula());
-        editarUsuario.setDireccion(usuario.getDireccion());      
-        editarUsuario.setProvincia(usuario.getProvincia());
-        editarUsuario.setCanton(usuario.getCanton());
-        editarUsuario.setDistrito(usuario.getDistrito());
-        usuarioService.saveUsuario(editarUsuario);
-        return "redirect:/admin/usuario";
-    }
+//    @GetMapping("/editar/usuario/{id}")
+//    public String editarUsuario(@PathVariable("id") Long id, Model model) {
+//        Usuario usuario = usuarioService.getUsuarioById(id);
+//        List<Distrito> listaD = distritoService.getAllDistrito();
+//        List<Canton> listaC = cantonService.getAllCanton();
+//        List<Provincia> listaP = provinciaService.getAllProvincia();
+//        model.addAttribute("titulo", "Editar Usuario");
+//        model.addAttribute("usuario", usuario);
+//        model.addAttribute("distrito", listaD);
+//        model.addAttribute("canton", listaC);
+//        model.addAttribute("provincia", listaP);
+//        return "adm_editarUsuario";
+//    }
+//
+//    @PostMapping("/editar/usuario/{id}")
+//    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("Usuario") Usuario usuario) {
+//        Usuario editarUsuario = usuarioService.getUsuarioById(id);
+//        editarUsuario.setId(id);
+//        editarUsuario.setNombre(usuario.getNombre());
+//        editarUsuario.setApellido1(usuario.getApellido1());
+//        editarUsuario.setApellido2(usuario.getApellido2());
+//        editarUsuario.setTelefono(usuario.getTelefono());
+//        editarUsuario.setCedula(usuario.getCedula());
+//        editarUsuario.setDireccion(usuario.getDireccion());      
+//        editarUsuario.setProvincia(usuario.getProvincia());
+//        editarUsuario.setCanton(usuario.getCanton());
+//        editarUsuario.setDistrito(usuario.getDistrito());
+//        usuarioService.saveUsuario(editarUsuario);
+//        return "redirect:/admin/usuario";
+//    }
     
     @GetMapping("/editar/RoldatosLogin/{id}/{rol_id}")
     public String editarDatosLogin(@PathVariable("id") Long id, @PathVariable("rol_id") Long rol_id,Model model) {

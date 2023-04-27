@@ -62,6 +62,7 @@
                                 <li class="nav-item">
                                     <a th:text="#{tienda.eventos}" class="nav-link active" href="/eventos">Eventos</a>
                                 </li>
+                                
                             </ul>
                         </li>
                     </ul>
@@ -86,13 +87,17 @@
                                    aria-haspopup="true" aria-expanded="false">
                                     <ion-icon name="person-circle"></ion-icon>
                                 </a>
+
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a th:text="#{tienda.singIn}" sec:authorize="isAnonymous()" th:href="@{~/login}" class="dropdown-item" href="/login">Iniciar sesión</a>
-                                    <a href="/perfil/usuario/{id}"><span sec:authorize="isAuthenticated()" class="dropdown-item" sec:authentication="name"></span></a>
+                                    <a th:text="#{tienda.singIn}" sec:authorize="isAnonymous()" class="dropdown-item" href="/login">Iniciar sesión</a>                                   
+                                    <th:block th:each="user : ${usuario}" >
+                                    <a href="@{/perfil/usuario/{id}(id=${user.getId})}"><span  sec:authentication="name"></span></a> 
+                                    </th:block>
                                     <a th:text="#{tienda.singUp}" sec:authorize="isAuthenticated()" class="dropdown-item" th:href="@{/logout}">Cerrar sesión</a>
                                     <a th:text="#{tienda.registrar}" sec:authorize="isAnonymous()" class="dropdown-item" href="/login/nuevo">Registrarse</a>
                                     <div class="dropdown-divider"></div>
                                     <a th:text="#{tienda.admin}" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_VENDEDOR')" class="dropdown-item" href="/admin">Admin</a>
+
                                 </div>
                             </li>
                         </ul>

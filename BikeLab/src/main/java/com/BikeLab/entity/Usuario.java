@@ -16,7 +16,7 @@ public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nombre;
     private String apellido1;
     private String apellido2;
@@ -40,16 +40,15 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "iddatoslogin")
      private DatosLogin datoslogin;
 
-           
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
+             
     public String getNombre() {
         return nombre;
     }

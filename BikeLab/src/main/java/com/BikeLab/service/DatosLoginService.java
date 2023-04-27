@@ -77,8 +77,8 @@ public class DatosLoginService implements IDatosLoginService {
     }
 
     @Override
-    public DatosLogin findByEmail(String username) {
-       return usuarioRepository.findByEmail(username);
+    public DatosLogin findByEmail(String email) {
+       return usuarioRepository.findByEmail(email);
     }
 
     @Override

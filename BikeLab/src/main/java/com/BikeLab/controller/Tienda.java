@@ -26,6 +26,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import static org.hibernate.bytecode.BytecodeLogging.LOGGER;
 import org.jboss.logging.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,20 +69,19 @@ public class Tienda {
 
     @Autowired
     private IUsuarioService usuarioService;
- @Autowired
+    @Autowired
     private IDatosLoginService datosLoginService;
- 
- @Autowired
-private HttpServletRequest request;
- 
- @Autowired
-private WebSecurityConfig webSecurityConfig;
+
+    @Autowired
+    private HttpServletRequest request;
+
+    @Autowired
+    private WebSecurityConfig webSecurityConfig;
 
     //-------------------------- List --------------------------
-    @GetMapping("/")
-    public String index(Model model, HttpSession session) {        
-
-     Long userId = (Long) session.getAttribute("userId"); 
+    @GetMapping("/{id}")
+    public String index(Model model, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("titulo", "HOME");
         List<Evento> lista = eventoService.getAllEvento();
         List<Producto> lista1 = productoService.findByFamilia("Bicicletas");
@@ -168,21 +168,25 @@ private WebSecurityConfig webSecurityConfig;
     }
 
     @GetMapping("/perfil/usuario/{id}")
-    public String editarUsuario(@PathVariable("id") Long id, Model model) {
-        Usuario usuario = usuarioService.getUsuarioById(id);
+    public String editarUsuario(@PathVariable("id") Long id, Model model, HttpSession session) {
+         Long userId = (Long) session.getAttribute("userId");
+        Usuario usuario = usuarioService.getUserById(userId);   
         List<Distrito> listaD = distritoService.getAllDistrito();
         List<Canton> listaC = cantonService.getAllCanton();
         List<Provincia> listaP = provinciaService.getAllProvincia();
+        LOGGER.info("infousuario" + usuario);
         model.addAttribute("usuario", usuario);
         model.addAttribute("distrito", listaD);
         model.addAttribute("canton", listaC);
         model.addAttribute("provincia", listaP);
+        model.addAttribute("userId", userId);
         return "tienda_perfil";
     }
 
     @PostMapping("/perfil/usuario/{id}")
-    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("Usuario") Usuario usuario) {
-        Usuario editarUsuario = usuarioService.getUsuarioById(id);
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute("Usuario") Usuario usuario,HttpSession session) {
+       Long userId = (Long) session.getAttribute("userId");
+        Usuario editarUsuario = usuarioService.getUserById(userId);
         editarUsuario.setId(id);
         editarUsuario.setNombre(usuario.getNombre());
         editarUsuario.setApellido1(usuario.getApellido1());
@@ -193,10 +197,9 @@ private WebSecurityConfig webSecurityConfig;
         editarUsuario.setProvincia(usuario.getProvincia());
         editarUsuario.setCanton(usuario.getCanton());
         editarUsuario.setDistrito(usuario.getDistrito());
+        editarUsuario.setDatoslogin(editarUsuario.getDatoslogin());
         usuarioService.saveUsuario(editarUsuario);
-        return "redirect:/perfil/usuario/" + editarUsuario.getId();
+        return "redirect:/perfil/usuario/{id}";
     }
 
 }
-
-
