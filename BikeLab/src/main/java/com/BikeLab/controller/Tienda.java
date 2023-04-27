@@ -194,7 +194,7 @@ private WebSecurityConfig webSecurityConfig;
         editarUsuario.setCanton(usuario.getCanton());
         editarUsuario.setDistrito(usuario.getDistrito());
         usuarioService.saveUsuario(editarUsuario);
-        return "redirect:/perfil/usuario/" + editarUsuario.getId();
+        return "redirect:/perfil/usuario/";
     }
 
 }

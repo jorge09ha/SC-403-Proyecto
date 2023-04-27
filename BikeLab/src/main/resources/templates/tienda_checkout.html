@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="plantilla/Template::head"></head>
+
+<body>
+    <!---Header-->
+    <header th:replace="plantilla/Template::header"></header>
+
+    <!---PRODUCTOS-->
+    <div class="bg" style="
+             background: url(../images/img4.avif) no-repeat center;
+             background-image: linear-gradient(rgba(7, 0, 0, 0.5), var(--color6)), url(../images/img4.avif);
+             background-attachment: fixed;
+             background-size: cover;
+             padding: 30px;">
+
+        <!---Vista Card datos-->
+        <div class='credit-info contenedor'>
+            <div class='credit-info-content'>
+                <table class='half-input-table'>
+                    <tr>
+                        <h3>Please select your card: </h3>
+                    </tr>
+                </table>
+                <div class="icono-contenedor">
+                    <ion-icon name="card-outline" class="icono-tarjeta"></ion-icon>
+                </div>
+                Card Number
+                <input class='input-field'></input>
+                Card Holder
+                <input class='input-field'></input>
+                <table class='half-input-table'>
+                    <tr>
+                        <td> Expires
+                            <input class='input-field'></input>
+                        </td>
+                        <td class="cvc-cell">CVC
+                            <input class='input-field'></input>
+                        </td>
+                    </tr>
+                </table>
+                <button class='pay-btn'>Checkout</button>
+            </div>
+        </div>
+
+        <!---Vista de items-->
+        <div class="contenedor">
+            <div class="ventana">
+                <div class="info-orden">
+                    <div class="contenido-info-orden">
+                        <h2 th:text="#{tienda.carrito}">Resumen de la orden</h2>
+                        <div class="linea"></div>
+                        <table class="tabla-orden">
+                            <tbody>
+                                <tr th:each="item, itemIndex : ${carrito}">
+                                    <td>
+                                        <img th:src="${item.producto.imagen}"
+                                            class="ancho-completo imagen-producto"></img>
+                                    </td>
+                                    <td>
+                                        <br> <span style="font-weight: bold;"
+                                            th:text="${item.producto.nombre}">Nombre</span>
+                                        <br> <span class="delgada" th:text="${item.producto.modelo}">Modelo</span>
+                                        <br> <span class="delgada" th:text="${item.producto.marca.nombre}">Marca</span>
+                                    </td>
+                                    <td>
+                                        <br> <span class="delgada" th:text="${item.cantidad}">Cantidad</span>
+                                    </td>
+                                    <td>
+                                        <div class="delgada" th:text="${item.producto.precio}">₡</div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="linea"></div>
+                        <div class="total">
+                            <span style="float:left;">TOTAL:</span>
+                            <span style="float:right; text-align:right;">
+                                <span th:text="${total}"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!---Cierro-->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <footer th:replace="plantilla/Template::footer"></footer>
+    <script>
+        const eliminarLinks = document.querySelectorAll('[id^="eliminar-"]');
+        eliminarLinks.forEach(eliminarLink => {
+            eliminarLink.addEventListener('click', e => {
+                e.preventDefault();
+                const confirmacion = confirm('¿Estás seguro/a de que deseas eliminar?');
+                if (confirmacion) {
+                    window.location.href = eliminarLink.getAttribute('href');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -199,7 +199,6 @@ a {
 }
 
 
-
 /*----------------------- Content -----------------------*/
 .content {
     padding: 50px;
@@ -560,8 +559,6 @@ input[type="password"] {
     color: var(--color4);
 }
 
-
-
 /*----------------------- Vista detalle -----------------------*/
 
 /* Estilos para la sección de producto */
@@ -654,14 +651,12 @@ ion-icon[name="add-circle"] {
     margin-right: 5px;
 }
 
-
-/**********************************************************************************/
+/*----------------------- Buscador -----------------------*/
 
 .contenedorS {
     display: grid;
     justify-content: center;
     align-items: center;
-
     padding: 30px 30px;
 }
 
@@ -707,4 +702,185 @@ button {
 button:hover {
     background-color: var(--color2);
     color: var(--color5);
+}
+
+/*----------------------- Vista checkout -----------------------*/
+
+/* Estilos generales */
+.contenedor {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 30px;
+}
+
+.ventana {
+    background-color: var(--color4);
+    border-radius: 4px;
+    padding: 20px;
+    border-radius: 30px;
+}
+
+
+/* Estilos para la información de la orden */
+.info-orden {
+    width: 100%;
+}
+
+.contenido-info-orden {
+    width: 100%;
+}
+
+.linea {
+    width: 100%;
+    height: 1px;
+    background-color: #d2d2d2;
+    margin: 20px 0;
+}
+
+/* Estilos para las imágenes de los productos */
+.imagen-producto {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+
+/* Estilos para la tabla */
+.tabla-orden {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-orden tbody tr {
+    border-bottom: 1px solid var(--color4);
+}
+
+.tabla-orden td {
+    padding: 10px;
+}
+
+.ancho-completo {
+    width: 100%;
+}
+
+.delgada {
+    font-weight: normal;
+}
+
+.densa {
+    line-height: 1.5;
+}
+
+.precio {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Estilos para el resumen total */
+.total {
+    overflow: auto;
+    width: 100%;
+}
+
+.total span {
+    display: block;
+    font-size: 16px;
+}
+
+.total span div {
+    margin-bottom: 5px;
+}
+
+/***Pago card****/
+
+.pay-btn {
+    border: none;
+    background: var(--color1);
+    line-height: 2em;
+    border-radius: 10px;
+    font-size: 19px;
+    font-size: 1.2rem;
+    color: var(--color4);
+    cursor: pointer;
+    bottom: 25px;
+    width: calc(100% - 50px);
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.pay-btn:hover {
+    background: var(--color2);
+    color: var(--color4);
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+}
+
+.input-field {
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+    margin-top: 3px;
+    line-height: 1.5em;
+    font-size: 20px;
+    font-size: 1.3rem;
+    border: none;
+    padding: 5px 10px 5px 10px;
+    color: #fff;
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.credit-info {
+    background: var(--color6);
+    /* width:auto; (elimina esta línea) */
+    color: var(--color4);
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 14px;
+    font-size: .9rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 30px;
+    position: relative;
+    margin: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icono-contenedor {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.icono-tarjeta {
+    font-size: 48px;
+}
+
+.cvc-cell {
+    padding-left: 20px;
+}
+
+.credit-info-content {
+    margin-top: 25px;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
 }

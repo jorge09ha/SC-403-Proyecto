@@ -1,6 +1,7 @@
 package com.BikeLab.controller;
 
 import com.BikeLab.entity.Producto;
+import com.BikeLab.service.IMetodoPagoService;
 import com.BikeLab.service.IProductoService;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -19,6 +20,9 @@ public class CarritoController {
 
     @Autowired
     private IProductoService productoService;
+
+    @Autowired
+    private IMetodoPagoService metodoPagoService;
 
     @GetMapping("/carrito")
     public String carrito(Model model, HttpSession session) {
@@ -79,6 +83,23 @@ public class CarritoController {
             session.setAttribute("carrito", carrito);
         }
         return "redirect:/carrito";
+    }
+
+    @GetMapping("/carrito/checkout")
+    public String checkout(Model model, HttpSession session) {
+        List<CartItem> carrito = (List<CartItem>) session.getAttribute("carrito");
+        if (carrito == null) {
+            carrito = new ArrayList<>();
+        }
+        model.addAttribute("carrito", carrito);
+
+        // Calcular el total en el controlador y formatearlo con separadores de miles y decimales
+        double total = carrito.stream().mapToDouble(item -> item.getProducto().getPrecio() * item.getCantidad()).sum();
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CR"));
+        String formattedTotal = NumberFormat.getCurrencyInstance(new Locale("es", "CR")).format(total);
+        model.addAttribute("total", formattedTotal);
+
+        return "tienda_checkout";
     }
 
 }
