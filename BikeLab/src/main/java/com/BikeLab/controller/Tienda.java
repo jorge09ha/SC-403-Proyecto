@@ -92,6 +92,7 @@ public class Tienda {
         return "tienda_home";
     }
 
+    
     @GetMapping("/bicicletas")
     public String bicicletas(Model model) {
         List<Producto> lista = productoService.findByFamilia("Bicicletas");
@@ -170,6 +171,7 @@ public class Tienda {
     
     @GetMapping("/perfil/usuario")
     public String verUsuario(Model model, HttpSession session) {
+        
          Long userId = (Long) session.getAttribute("userId");
         Usuario usuario = usuarioService.getUserById(userId);   
         List<Distrito> listaD = distritoService.getAllDistrito();
@@ -183,8 +185,7 @@ public class Tienda {
         model.addAttribute("userId", userId);
         return "tienda_perfil";
     }
-    
-        
+          
 
     @GetMapping("/perfil/usuario/{id}")
     public String editarUsuario(@PathVariable("id") Long id, Model model, HttpSession session) {
