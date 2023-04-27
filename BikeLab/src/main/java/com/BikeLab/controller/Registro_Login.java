@@ -86,10 +86,10 @@ public class Registro_Login {
                 
                 return "redirect:/";
             } else {
-                return "/login";
+                return  "redirect:/login?error";
             }
         } catch (AuthenticationException ex) {
-            return "/login";
+            return  "redirect:/login?error";
         }
     }
 

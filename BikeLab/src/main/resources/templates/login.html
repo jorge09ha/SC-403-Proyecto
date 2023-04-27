@@ -22,6 +22,10 @@
             <div th:if=${param.logout}>
                 <p class="alert alert-info">Ha cerrado sesión exitosamente</p>
             </div>
+            
+            <div th:if=${param.iniciosesion}>
+                <p class="alert alert-danger">Favor de iniciar sesión para continuar con su compra</p>
+            </div>
 
             <form th:action="@{/login}" method="post">
             <div class="form-group">
