@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+    <head th:replace="plantilla/Template::head"></head>
+
+    <body>
+        <!---Header-->
+        <header th:replace="plantilla/Template::header"></header>
+
+        <!---PRODUCTOS-->
+        <div class="bg" style="
+             background: url(../images/img4.avif) no-repeat center;
+             background-image: linear-gradient(rgba(7, 0, 0, 0.5), var(--color6)), url(../images/img4.avif);
+             background-attachment: fixed;
+             background-size: cover;
+             padding: 30px;">
+
+            <div id="loader" style="display:none;">
+                <img src="../images/logo1.png" alt="Loading...">
+            </div>
+
+        </div>
+
+        <footer th:replace="plantilla/Template::footer"></footer>
+
+    </body>
+
+</html>
