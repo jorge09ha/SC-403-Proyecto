@@ -58,50 +58,50 @@ public class Registro_Login {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    
 
     @GetMapping("/login")
     public String index() {
         return "/login";
     }
 
- @PostMapping("/login")
-public String login(HttpServletRequest request, @RequestParam String email, @RequestParam String password, Model model) {
+    @PostMapping("/login")
+    public String login(HttpServletRequest request, @RequestParam String email, @RequestParam String password, Model model) {
 
-    try {
-        DatosLogin datosLogin = this.datosLoginService.findByEmail(email);
-        if (datosLogin != null) {
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            DatosLogin datosLogin = this.datosLoginService.findByEmail(email);
+            if (datosLogin != null) {
+                Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            // Obtener la sesión HTTP del usuario autenticado
-            HttpSession session = request.getSession();
+                // Obtener la sesión HTTP del usuario autenticado
+                HttpSession session = request.getSession();
 
-            // Almacenar información en la sesión
-            session.setAttribute("userId", datosLogin.getId());
+                // Almacenar información en la sesión
+                session.setAttribute("userId", datosLogin.getId());
+                
 
-            return "redirect:/";
-        } else {
-            LOGGER.error("Entro al else " );
+                return "redirect:/";
+            } else {
+                LOGGER.error("Entro al else ");
+                model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
+                return "/login";
+            }
+        } catch (AuthenticationException ex) {
+            LOGGER.error("Error de autenticación: " + ex.getMessage());
             model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
             return "/login";
         }
-    } catch (AuthenticationException ex) {
-        LOGGER.error("Error de autenticación: " + ex.getMessage());
-        model.addAttribute("error", "Correo electrónico o contraseña incorrectos.");
-        return "/login";
     }
-}
 
     @GetMapping("/login/nuevo")
     public String crearUsuario(Model model) {
-        List<Rol> rol = roleService.getAllRole();      
-        
+        List<Rol> rol = roleService.getAllRole();
+
         for (Rol roles : rol) {
-     model.addAttribute("rol", rol.get(1));
-}
+            model.addAttribute("rol", rol.get(1));
+        }
         model.addAttribute("titulo", "Nuevo Usuario");
-        model.addAttribute("usuario", new DatosLogin());      
+        model.addAttribute("usuario", new DatosLogin());
         return "registroDatosLogin";
     }
 
@@ -118,10 +118,10 @@ public String login(HttpServletRequest request, @RequestParam String email, @Req
     @PostMapping("/save/login")
     public String guardarUsuario(@ModelAttribute("usuario") DatosLogin usuario, BindingResult result, RedirectAttributes attributes) {
         try {
-            datosLoginService.saveUsuario(usuario);            
+            datosLoginService.saveUsuario(usuario);
             return "redirect:/login/nuevo?exito";
         } catch (DataIntegrityViolationException e) {
-            LOGGER.info("error de registro" +e);
+            LOGGER.info("error de registro" + e);
             return "redirect:/login/nuevo?error";
         }
     }
@@ -153,8 +153,3 @@ public String login(HttpServletRequest request, @RequestParam String email, @Req
     }
 
 }
-
-
-
-
-

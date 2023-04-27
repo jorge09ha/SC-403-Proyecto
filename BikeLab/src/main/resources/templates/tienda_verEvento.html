@@ -25,42 +25,11 @@
                 <h4 class="mb-3"><strong th:text="#{tienda.distrito}">Distrito: </strong><span th:text="${evento.distrito.nombre}"></span></h4>
                 <h4 class="mb-3"><strong th:text="#{tienda.direccion}">Dirección: </strong><span th:text="${evento.direccion}"></span></h4>
 
-                <div class="d-flex increment-decrement-container" th:if="${evento.stock > 0}">
-                    <div class="input-group increment-decrement-input-group">
-                        <button type="button" class="btn btn-2" onclick="decrementValue(this)"><ion-icon name="remove-circle"></ion-icon></button>
-                        <input type="number" class="form-control text-center" min="1" th:max="${evento.stock}" value="1" readonly>
-                        <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
-                    </div>
-                    <ion-icon name="cart"></ion-icon>
-                </div>
 
             </div>
         </div>
 
         <footer th:replace="plantilla/Template::footer"></footer>
     </body>
-
-
-    <script>
-        function incrementValue(button) {
-            let input = button.previousElementSibling;
-            let maxValue = parseInt(input.max);
-            let currentValue = parseInt(input.value);
-
-            if (currentValue < maxValue) {
-                input.value = currentValue + 1;
-            }
-        }
-
-        function decrementValue(button) {
-            let input = button.nextElementSibling;
-            let minValue = parseInt(input.min);
-            let currentValue = parseInt(input.value);
-
-            if (currentValue > minValue) {
-                input.value = currentValue - 1;
-            }
-        }
-    </script>
 
 </html>

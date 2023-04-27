@@ -18,7 +18,7 @@
              background-size: cover;
              padding: 30px;">
             <div class="card-container">
-                <div th:each="producto : ${productos}" class="card-wrapper mb-4">
+                <div th:each="producto : ${productos}" th:if="${producto.stock > 0}" class="card-wrapper mb-4">
                     <div class="card">
                         <h4 class="card-title" th:text="${producto.getNombre()}"></h4>
                         <img th:src="${producto.getImagen}" class="card-img-top" alt="no_image"

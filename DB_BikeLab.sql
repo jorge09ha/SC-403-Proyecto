@@ -44,8 +44,6 @@ CREATE TABLE roldatoslogin (
   primary key (rol_id,usuario_id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-INSERT INTO `rol` VALUES (1,'ROLE_ADMIN'), (2,'ROLE_USER'),(3,'ROLE_VENDEDOR');
-
 CREATE TABLE usuario(
   id INT NOT NULL AUTO_INCREMENT,
   nombre varchar(30) NOT NULL,
@@ -202,6 +200,33 @@ CREATE TABLE carritoevento (
 );
 
 Use bikelab;
+
+DELIMITER //
+CREATE TRIGGER create_usuario_after_datoslogin_insert
+AFTER INSERT
+ON datoslogin FOR EACH ROW
+BEGIN
+  -- Crear un usuario con valores nulos y la referencia al id de datoslogin
+  INSERT INTO usuario (nombre, apellido1, apellido2, telefono, cedula, direccion, provincia_id, canton_id, distrito_id, iddatoslogin)
+  VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NEW.id);
+END;
+//
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER create_roldatoslogin_after_usuario_insert
+AFTER INSERT
+ON usuario FOR EACH ROW
+BEGIN
+  -- Crear la relación entre el usuario y el rol 2 en la tabla roldatoslogin
+  INSERT INTO roldatoslogin (rol_id, usuario_id) VALUES (2, NEW.id);
+END;
+//
+DELIMITER ;
+
+DROP TRIGGER create_usuario_after_datoslogin_insert;
+
+
 DELIMITER $$
 CREATE PROCEDURE eliminar_registros_sin_rol()
 BEGIN
@@ -219,6 +244,7 @@ BEGIN
    DELETE FROM bikelab.datoslogin WHERE id = idEliminar;
 END $$
 DELIMITER ;
+
 
 
 /*----------------------------------------------------- INSERT -----------------------------------------------------*/
@@ -248,7 +274,7 @@ INSERT INTO `canton` VALUES
 
 INSERT INTO `distrito` VALUES
 (10101,'Carmen',101), (10102,'Merced',101), (10103,'Hospital',101), (10104,'Catedral',101), (10105,'Zapote',101), (10106,'San Francisco de Dos Ríos',101), (10107,'Uruca',101), (10108,'Mata Redonda',101), (10109,'Pavas',101), (10110,'Hatillo',101), (10111,'San Sebastián',101), (10201,'Escazú',102), (10202,'San Antonio',102), (10203,'San Rafael',102), (10301,'Desamparados',103),
-(10302,'San Miguel',103), (10303,'San Juan de Dios',103), (10304,'San Rafael Arriba',103), (10305,'San Antonio',103), (10306,'Frailes',103), (10307,'Patarrá',103), (10308,'San Cristóbal',103), (10309,'Rosario',103), (10310,'Damas',103), (10311,'San Rafael Abajo',103), (10312,'Gravilias',103), (10313,'Los Guido',103), (10401,'Santiago',104), (10402,'Mercedes Sur',104), (10403,'Barbacoas',104), (10404,'Grifo Alto',104),
+(10302,'San Miguel',103), (10303,'San Juan de Dios',103), (10304,'San Rafael Arriba',103), (10305,'San Antonio',103), (10306,'Frailes',103), (10307,'Patarrá',103), (10308,'San Cristóbal',b), (10309,'Rosario',103), (10310,'Damas',103), (10311,'San Rafael Abajo',103), (10312,'Gravilias',103), (10313,'Los Guido',103), (10401,'Santiago',104), (10402,'Mercedes Sur',104), (10403,'Barbacoas',104), (10404,'Grifo Alto',104),
 (10405,'San Rafael',104), (10406,'Candelarita',104), (10407,'Desamparaditos',104), (10408,'San Antonio',104), (10409,'Chires',104), (10501,'San Marcos',105), (10502,'San Lorenzo',105), (10503,'San Carlos',105), (10601,'Aserrí',106), (10602,'Tarbaca',106), (10603,'Vuelta de Jorco',106), (10604,'San Gabriel',106), (10605,'Legua',106), (10606,'Monterrey',106), (10607,'Salitrillos',106), (10701,'Colón',107),
 (10702,'Guayabo',107), (10703,'Tabarcia',107), (10704,'Piedras Negras',107), (10705,'Picagres',107), (10706,'Jaris',107), (10707,'Quitirrisí',107), (10801,'Guadalupe',108), (10802,'San Francisco',108), (10803,'Calle Blancos',108), (10804,'Mata de Plátano',108), (10805,'Ipís',108), (10806,'Rancho Redondo',108), (10807,'Purral',108), (10901,'Santa Ana',109), (10902,'Salitral',109),
 (10903,'Pozos',109), (10904,'Uruca',109), (10905,'Piedades',109), (10906,'Brasil',109), (11001,'Alajuelita',110), (11002,'San Josecito',110), (11003,'San Antonio',110), (11004,'Concepción',110), (11005,'San Felipe',110), (11101,'San Isidro',111), (11102,'San Rafael',111), (11103,'Dulce Nombre de Jesús',111), (11104,'Patalillo',111), (11105,'Cascajal',111), (11201,'San Ignacio',112),

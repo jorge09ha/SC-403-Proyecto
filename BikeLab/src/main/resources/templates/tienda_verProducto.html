@@ -33,10 +33,10 @@
                                    value="1" readonly>
                             <button type="button" class="btn btn-2" onclick="incrementValue(this)"><ion-icon name="add-circle"></ion-icon></button>
                         </div>
-                        <form method="post" th:action="@{/carrito/agregar}">
+                        <form method="post" th:action="@{/carrito/agregar}" th:if="${producto.stock > 0}">
                             <input type="hidden" name="productoId" th:value="${producto.id}" />
                             <input id="cantidad" type="hidden" name="cantidad" th:value="${producto.stock > 0 ? 1 : 0}" />
-                            <button type="submit" th:text="#{btn.agregar}" class="btn btn-1 ml-auto">Agregar</button>
+                            <button type="submit" th:text="#{btn.agregar}" class="btn btn-1">Agregar</button>
                         </form>
                     </div>
                 </div>
