@@ -79,7 +79,7 @@ public class Tienda {
     private WebSecurityConfig webSecurityConfig;
 
     //-------------------------- List --------------------------
-    @GetMapping("/{id}")
+    @GetMapping("/")
     public String index(Model model, HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
         model.addAttribute("titulo", "HOME");
@@ -166,6 +166,25 @@ public class Tienda {
         model.addAttribute("productos", productos);
         return "tienda_buscar";
     }
+    
+    
+    @GetMapping("/perfil/usuario")
+    public String verUsuario(Model model, HttpSession session) {
+         Long userId = (Long) session.getAttribute("userId");
+        Usuario usuario = usuarioService.getUserById(userId);   
+        List<Distrito> listaD = distritoService.getAllDistrito();
+        List<Canton> listaC = cantonService.getAllCanton();
+        List<Provincia> listaP = provinciaService.getAllProvincia();
+        LOGGER.info("infousuario" + usuario);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("distrito", listaD);
+        model.addAttribute("canton", listaC);
+        model.addAttribute("provincia", listaP);
+        model.addAttribute("userId", userId);
+        return "tienda_perfil";
+    }
+    
+        
 
     @GetMapping("/perfil/usuario/{id}")
     public String editarUsuario(@PathVariable("id") Long id, Model model, HttpSession session) {
