@@ -884,3 +884,31 @@ button:hover {
     display: flex;
     width: 100%;
 }
+/****/
+.gracias {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.gracias h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--color4);
+}
+
+.gracias p {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: var(--color4);
+}
+
+.gracias a {
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--color4);
+}

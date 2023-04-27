@@ -47,8 +47,8 @@
                             </tr>
                         </table>
                         <form id="formulario-tarjeta" onsubmit="validarFormulario(event)">
-                            <!-- Contenido del formulario aquí -->
                             <button th:text="#{tarjeta.btn}" class='pay-btn' type="submit">Checkout</button>
+                            <a th:text="#{tarjeta.btn}" href="/carrito/checkout/procesar" class='pay-btn' ></a>
                         </form>
                     </form>
                 </div>
@@ -142,6 +142,8 @@
             }
 
             alert('Pago realizado con éxito!');
+
+            window.location.href = "tienda_pagado.html";
         }
 
         function validarCardNumber(cardNumber) {
