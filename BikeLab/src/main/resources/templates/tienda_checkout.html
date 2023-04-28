@@ -18,39 +18,36 @@
             <!---Vista Card datos-->
             <div class='credit-info contenedor'>
                 <div class='credit-info-content'>
-                    <form id="formulario-tarjeta" onsubmit="validarFormulario(event)">
-                        <table class='half-input-table'>
-                            <tr>
-                            <h2 th:text="#{tarjeta.titulo}"></h2>
-                            <div id="loader" style="display:none;">
-                                <img src="../images/loader.gif" alt="Loading...">
+                        <form id="formulario-tarjeta" action="/carrito/checkout/procesar" method="POST" onsubmit="validarFormulario(event)">
+                            <table class='half-input-table'>
+                                <tr>
+                                <h2 th:text="#{tarjeta.titulo}"></h2>
+                                <div id="loader" style="display:none;">
+                                    <img src="../images/loader.gif" alt="Loading...">
+                                </div>
+                                </tr>
+                            </table>
+                            <div class="icono-contenedor">
+                                <ion-icon name="card-outline" class="icono-tarjeta"></ion-icon>
                             </div>
-                            </tr>
-                        </table>
-                        <div class="icono-contenedor">
-                            <ion-icon name="card-outline" class="icono-tarjeta"></ion-icon>
-                        </div>
-                        <h6 th:text="#{tarjeta.num}"></h6>
-                        <input placeholder="0000 0000 0000 0000" class='input-field' name="cardNumber" required></input>
-                        <h6 th:text="#{tarjeta.holdCard}"></h6>
-                        <input th:placeholder="#{tarjeta.persona}" class='input-field' name="cardHolder" required></input>
-                        <table class='half-input-table'>
-                            <tr>
-                                <td> 
-                                    <h6 th:text="#{tarjeta.date}"></h6>
-                                    <input placeholder="MM/AA" class='input-field' name="expires" required></input>
-                                </td>
-                                <td class="cvc-cell">                        
-                                    <h6 th:text="#{tarjeta.cvc}"></h6>
-                                    <input placeholder="000" class='input-field' name="cvc" required></input>
-                                </td>
-                            </tr>
-                        </table>
-                        <form id="formulario-tarjeta" onsubmit="validarFormulario(event)">
+                            <h6 th:text="#{tarjeta.num}"></h6>
+                            <input placeholder="0000 0000 0000 0000" class='input-field' name="cardNumber" required></input>
+                            <h6 th:text="#{tarjeta.holdCard}"></h6>
+                            <input th:placeholder="#{tarjeta.persona}" class='input-field' name="cardHolder" required></input>
+                            <table class='half-input-table'>
+                                <tr>
+                                    <td> 
+                                        <h6 th:text="#{tarjeta.date}"></h6>
+                                        <input placeholder="MM/AA" class='input-field' name="expires" required></input>
+                                    </td>
+                                    <td class="cvc-cell">                        
+                                        <h6 th:text="#{tarjeta.cvc}"></h6>
+                                        <input placeholder="000" class='input-field' name="cvc" required></input>
+                                    </td>
+                                </tr>
+                            </table>
                             <button th:text="#{tarjeta.btn}" class='pay-btn' type="submit">Checkout</button>
-                            <a th:text="#{tarjeta.btn}" href="/carrito/checkout/procesar" class='pay-btn' ></a>
                         </form>
-                    </form>
                 </div>
             </div>
 
@@ -120,6 +117,7 @@
             const cardHolder = form.cardHolder.value;
             const expires = form.expires.value;
             const cvc = form.cvc.value;
+            const alerta = 0;
 
             if (!validarCardNumber(cardNumber)) {
                 alert('El número de tarjeta es inválido.');
@@ -140,10 +138,14 @@
                 alert('El código CVC es inválido.');
                 return;
             }
+            
+            document.getElementById("loader").style.display = "block";
 
-            alert('Pago realizado con éxito!');
-
-            window.location.href = "tienda_pagado.html";
+            setTimeout(function () {
+                alert('Pago realizado con éxito!');
+                window.location.href = "/carrito/checkout/procesar";
+            }, 3000);
+            
         }
 
         function validarCardNumber(cardNumber) {
@@ -166,15 +168,6 @@
             return regex.test(cvc);
         }
 
-        function validarFormulario(event) {
-            event.preventDefault();
-
-            document.getElementById("loader").style.display = "block";
-
-            setTimeout(function () {
-                event.target.submit();
-            }, 3000);
-        }
     </script>
 
 </body>

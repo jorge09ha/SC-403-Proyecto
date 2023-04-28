@@ -104,11 +104,16 @@ public class CarritoController {
         }
     }
 
-    @GetMapping("/carrito/checkout/procesar")
+    @PostMapping("/carrito/checkout/procesar")
     public String checkoutProcesar(Model model, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
         List<CartItem> carrito = (List<CartItem>) session.getAttribute("carrito");
-        model.addAttribute("carrito", carrito);
+        session.removeAttribute("carrito");
+        return "tienda_pagado";
+    }
+
+    @GetMapping("/carrito/checkout/procesar")
+    public String debugGetMethod(Model model, HttpSession session) {
+        System.out.println("GET request to /carrito/checkout/procesar");
         return "tienda_pagado";
     }
 
