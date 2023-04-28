@@ -33,17 +33,18 @@ public class OrdenPDF extends AbstractPdfView {
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CR"));
         String formattedTotal = NumberFormat.getCurrencyInstance(new Locale("es", "CR")).format(total);
 
-        PdfPTable carritoLista = new PdfPTable(5);     
+        PdfPTable carritoLista = new PdfPTable(6);     
 
         carrito.forEach(carritolist -> {
              int cantidad = carritolist.getCantidad();
             String cantidadStr = Integer.toString(cantidad);
-             float precio = carritolist.getCantidad();
+             float precio = carritolist.getProducto().getPrecio();
             String precioStr = Float.toString(precio);
             carritoLista.addCell(carritolist.getProducto().getNombre());
             carritoLista.addCell(carritolist.getProducto().getModelo());
              carritoLista.addCell(precioStr);
             carritoLista.addCell(cantidadStr);
+             carritoLista.addCell(precioStr);
             carritoLista.addCell(formattedTotal);
             
         });
